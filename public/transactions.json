@@ -1,0 +1,53 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "type": "deposito",
+      "value": 4500.00,
+      "date": "2026-03-19T09:15:00",
+      "description": "Salário Mensal",
+      "status": "concluído"
+    },
+    {
+      "id": 2,
+      "type": "transferencia",
+      "value": 120.50,
+      "date": "2026-03-18T14:30:45",
+      "description": "Pagamento Restaurante",
+      "status": "concluído"
+    },
+    {
+      "id": 3,
+      "type": "saque",
+      "value": 200.00,
+      "date": "2026-03-18T10:05:00",
+      "description": "Saque Banco 24h",
+      "status": "concluído"
+    },
+    {
+      "id": 4,
+      "type": "transferencia",
+      "value": 85.00,
+      "date": "2026-03-17T19:42:10",
+      "description": "Assinatura Streaming",
+      "status": "pendente"
+    },
+    {
+      "id": 5,
+      "type": "deposito",
+      "value": 350.00,
+      "date": "2026-03-15T11:20:00",
+      "description": "Venda de Teclado Usado",
+      "status": "concluído"
+    },
+    {
+      "id": 6,
+      "type": "transferencia",
+      "value": 1500.00,
+      "date": "2026-03-14T08:00:00",
+      "description": "Aluguel",
+      "status": "concluído"
+    }
+  ],
+  "balance": 2844.50
+}
