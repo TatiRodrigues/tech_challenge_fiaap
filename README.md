@@ -22,7 +22,7 @@ Uma aplicação front-end desenvolvida em **Next.js** para gerenciamento de tran
 
 ```bash
 # Clone o repositório
-git clone https://github.com/TatiRodrigues/tech_challenge_fase_um.git
+git clone https://github.com/TatiRodrigues/tech_challenge_fiaap.git
 
 # Instale as dependências
 npm install
