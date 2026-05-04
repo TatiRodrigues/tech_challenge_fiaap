@@ -1,0 +1,29 @@
+{
+  "id": "governanca",
+  "title": "Governança",
+  "description": "Decisões e processos",
+  "source": "@site/docs/governanca.md",
+  "sourceDirName": ".",
+  "slug": "/governanca",
+  "permalink": "/docs/governanca",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/governanca.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3,
+    "title": "Governança",
+    "description": "Decisões e processos"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Guia de Contribuição",
+    "permalink": "/docs/guia-contribuicao"
+  },
+  "next": {
+    "title": "Changelog",
+    "permalink": "/docs/changelog"
+  }
+}

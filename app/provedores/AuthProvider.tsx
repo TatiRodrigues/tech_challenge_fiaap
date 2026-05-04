@@ -11,6 +11,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Carregar usuário ao inicializar (apenas no cliente)
   useEffect(() => {
+    authStorage.initializeDefaultUser();
     const currentUser = authStorage.getCurrentUser();
     setUser(currentUser);
     setIsHydrated(true);

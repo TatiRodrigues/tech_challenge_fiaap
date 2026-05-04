@@ -1,0 +1,29 @@
+{
+  "id": "componentes/melhores-praticas",
+  "title": "📋 Melhores Práticas",
+  "description": "Melhores práticas para usar componentes",
+  "source": "@site/docs/componentes/melhores-praticas.md",
+  "sourceDirName": "componentes",
+  "slug": "/componentes/melhores-praticas",
+  "permalink": "/docs/componentes/melhores-praticas",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/melhores-praticas.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 9,
+  "frontMatter": {
+    "sidebar_position": 9,
+    "title": "📋 Melhores Práticas",
+    "description": "Melhores práticas para usar componentes"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Table",
+    "permalink": "/docs/componentes/table/"
+  },
+  "next": {
+    "title": "🗺️ Mapa Visual",
+    "permalink": "/docs/componentes/mapa-visual"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "design-system/componentes-avancados",
+  "title": "Componentes Avançados",
+  "description": "Forms, Modals, Tables, Navbars",
+  "source": "@site/docs/design-system/componentes-avancados.md",
+  "sourceDirName": "design-system",
+  "slug": "/design-system/componentes-avancados",
+  "permalink": "/docs/design-system/componentes-avancados",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/design-system/componentes-avancados.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "sidebar_position": 4,
+    "title": "Componentes Avançados",
+    "description": "Forms, Modals, Tables, Navbars"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Componentes Básicos",
+    "permalink": "/docs/design-system/componentes-basicos"
+  },
+  "next": {
+    "title": "Padrões de Uso",
+    "permalink": "/docs/design-system/padroes-uso"
+  }
+}

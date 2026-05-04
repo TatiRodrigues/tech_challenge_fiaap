@@ -1,0 +1,29 @@
+{
+  "id": "LEIA_PRIMEIRO",
+  "title": "Leia Primeiro",
+  "description": "Informações essenciais",
+  "source": "@site/docs/LEIA_PRIMEIRO.md",
+  "sourceDirName": ".",
+  "slug": "/LEIA_PRIMEIRO",
+  "permalink": "/docs/LEIA_PRIMEIRO",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/LEIA_PRIMEIRO.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2,
+    "title": "Leia Primeiro",
+    "description": "Informações essenciais"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Primeiro Uso",
+    "permalink": "/docs/primeiro-uso"
+  },
+  "next": {
+    "title": "Solução Rápida",
+    "permalink": "/docs/SOLUCAO_RAPIDA"
+  }
+}

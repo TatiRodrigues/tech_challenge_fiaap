@@ -1,0 +1,29 @@
+{
+  "id": "componentes-layout",
+  "title": "Componentes Layout",
+  "description": "Componentes de layout",
+  "source": "@site/docs/componentes-layout.md",
+  "sourceDirName": ".",
+  "slug": "/componentes-layout",
+  "permalink": "/docs/componentes-layout",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes-layout.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_position": 5,
+    "title": "Componentes Layout",
+    "description": "Componentes de layout"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Referência de Código",
+    "permalink": "/docs/REFERENCIA_CODIGO"
+  },
+  "next": {
+    "title": "Componentes Recursos",
+    "permalink": "/docs/componentes-recursos"
+  }
+}

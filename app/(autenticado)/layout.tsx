@@ -1,4 +1,4 @@
-import AppHeader from "@/componentes/app-header/AppHeader";
+import Header from "@/componentes/header/Header";
 import MenuLateral from "@/componentes/menu-lateral/MenuLateral";
 import Rodape from "@/componentes/rodape/Rodape";
 
@@ -9,7 +9,7 @@ export default function LayoutAutenticado({
 }) {
   return (
     <div className="app">
-      <AppHeader />
+      <Header />
 
       <div id="app-sidepanel" className="app-sidepanel">
         <div id="sidepanel-drop" className="sidepanel-drop"></div>

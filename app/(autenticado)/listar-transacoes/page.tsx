@@ -30,6 +30,8 @@ export default function PaginaListarTransacoes() {
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
+  const [transactionToDelete, setTransactionToDelete] = useState<number | null>(null);
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
   const [filters, setFilters] = useState<Filters>({
@@ -201,10 +203,17 @@ export default function PaginaListarTransacoes() {
   };
 
   const deleteTransactions = (id: number) => {
-    if (confirm('Tem certeza que deseja deletar esta transação?')) {
-      const updated = transactions.filter(t => t.id !== id);
+    setTransactionToDelete(id);
+    setShowDeleteConfirmModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (transactionToDelete !== null) {
+      const updated = transactions.filter(t => t.id !== transactionToDelete);
       setTransactions(updated);
       localStorage.setItem('transactions', JSON.stringify(updated));
+      setShowDeleteConfirmModal(false);
+      setTransactionToDelete(null);
     }
   };
 
@@ -754,6 +763,49 @@ export default function PaginaListarTransacoes() {
             setSelectedTransaction(null);
           }}
         />
+      )}
+
+      {/* Modal de Confirmação de Deleção */}
+      {showDeleteConfirmModal && (
+        <div className="modal d-block" style={{ backgroundColor: 'rgba(0,0,0,.5)' }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Deletar Transação</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => {
+                    setShowDeleteConfirmModal(false);
+                    setTransactionToDelete(null);
+                  }}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <p>Tem certeza que deseja deletar esta transação?</p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    setShowDeleteConfirmModal(false);
+                    setTransactionToDelete(null);
+                  }}
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={confirmDelete}
+                >
+                  Deletar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

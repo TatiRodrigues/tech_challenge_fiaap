@@ -1,0 +1,29 @@
+{
+  "id": "design-system/index",
+  "title": "Design System",
+  "description": "Sistema de Design Alecrim Finance",
+  "source": "@site/docs/design-system/index.md",
+  "sourceDirName": "design-system",
+  "slug": "/design-system/",
+  "permalink": "/docs/design-system/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/design-system/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "title": "Design System",
+    "description": "Sistema de Design Alecrim Finance"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Solução Rápida",
+    "permalink": "/docs/SOLUCAO_RAPIDA"
+  },
+  "next": {
+    "title": "Fundamentos",
+    "permalink": "/docs/design-system/fundamentos"
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "api-servicos",
+              "path": "/docs/api-servicos",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "arquitetura",
+              "path": "/docs/arquitetura",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "boas-praticas",
+              "path": "/docs/boas-praticas",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "changelog",
+              "path": "/docs/changelog",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes-layout",
+              "path": "/docs/componentes-layout",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes-recursos",
+              "path": "/docs/componentes-recursos",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/alert/index",
+              "path": "/docs/componentes/alert/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/button/index",
+              "path": "/docs/componentes/button/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/card/index",
+              "path": "/docs/componentes/card/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/form/index",
+              "path": "/docs/componentes/form/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/guia-rapido",
+              "path": "/docs/componentes/guia-rapido",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/index",
+              "path": "/docs/componentes/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/input/index",
+              "path": "/docs/componentes/input/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/mapa-visual",
+              "path": "/docs/componentes/mapa-visual",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/melhores-praticas",
+              "path": "/docs/componentes/melhores-praticas",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/modal/index",
+              "path": "/docs/componentes/modal/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "componentes/table/index",
+              "path": "/docs/componentes/table/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "contribuicoes",
+              "path": "/docs/contribuicoes",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "design-system/acessibilidade",
+              "path": "/docs/design-system/acessibilidade",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "design-system/componentes-avancados",
+              "path": "/docs/design-system/componentes-avancados",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "design-system/componentes-basicos",
+              "path": "/docs/design-system/componentes-basicos",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "design-system/fundamentos",
+              "path": "/docs/design-system/fundamentos",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "design-system/grid-layout",
+              "path": "/docs/design-system/grid-layout",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "design-system/index",
+              "path": "/docs/design-system/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "design-system/padroes-uso",
+              "path": "/docs/design-system/padroes-uso",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "governanca",
+              "path": "/docs/governanca",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "guia-contribuicao",
+              "path": "/docs/guia-contribuicao",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/docs/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "LEIA_PRIMEIRO",
+              "path": "/docs/LEIA_PRIMEIRO",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "primeiro-uso",
+              "path": "/docs/primeiro-uso",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "REFERENCIA_CODIGO",
+              "path": "/docs/REFERENCIA_CODIGO",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "SOLUCAO_RAPIDA",
+              "path": "/docs/SOLUCAO_RAPIDA",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "SUMARIO_EXECUTIVO",
+              "path": "/docs/SUMARIO_EXECUTIVO"
+            },
+            {
+              "id": "versionamento",
+              "path": "/docs/versionamento",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/docs/intro",
+                "label": "intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

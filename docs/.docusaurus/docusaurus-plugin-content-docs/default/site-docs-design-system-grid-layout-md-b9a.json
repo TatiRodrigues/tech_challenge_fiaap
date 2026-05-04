@@ -1,0 +1,29 @@
+{
+  "id": "design-system/grid-layout",
+  "title": "Grid & Layout",
+  "description": "Sistema responsivo 12-colunas",
+  "source": "@site/docs/design-system/grid-layout.md",
+  "sourceDirName": "design-system",
+  "slug": "/design-system/grid-layout",
+  "permalink": "/docs/design-system/grid-layout",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/design-system/grid-layout.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 7,
+  "frontMatter": {
+    "sidebar_position": 7,
+    "title": "Grid & Layout",
+    "description": "Sistema responsivo 12-colunas"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Acessibilidade",
+    "permalink": "/docs/design-system/acessibilidade"
+  },
+  "next": {
+    "title": "Componentes",
+    "permalink": "/docs/componentes/"
+  }
+}

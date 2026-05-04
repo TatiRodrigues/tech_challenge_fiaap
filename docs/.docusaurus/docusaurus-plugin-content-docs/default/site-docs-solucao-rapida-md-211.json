@@ -1,0 +1,29 @@
+{
+  "id": "SOLUCAO_RAPIDA",
+  "title": "Solução Rápida",
+  "description": "Comece em 5 minutos",
+  "source": "@site/docs/SOLUCAO_RAPIDA.md",
+  "sourceDirName": ".",
+  "slug": "/SOLUCAO_RAPIDA",
+  "permalink": "/docs/SOLUCAO_RAPIDA",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/SOLUCAO_RAPIDA.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3,
+    "title": "Solução Rápida",
+    "description": "Comece em 5 minutos"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Leia Primeiro",
+    "permalink": "/docs/LEIA_PRIMEIRO"
+  },
+  "next": {
+    "title": "Design System",
+    "permalink": "/docs/design-system/"
+  }
+}

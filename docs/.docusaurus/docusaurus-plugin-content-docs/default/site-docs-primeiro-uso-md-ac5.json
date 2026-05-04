@@ -1,0 +1,29 @@
+{
+  "id": "primeiro-uso",
+  "title": "Primeiro Uso",
+  "description": "Guia de primeiro uso da Alecrim Finance",
+  "source": "@site/docs/primeiro-uso.md",
+  "sourceDirName": ".",
+  "slug": "/primeiro-uso",
+  "permalink": "/docs/primeiro-uso",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/primeiro-uso.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "title": "Primeiro Uso",
+    "description": "Guia de primeiro uso da Alecrim Finance"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "👋 Bem-vindo à Alecrim Finance",
+    "permalink": "/docs/intro"
+  },
+  "next": {
+    "title": "Leia Primeiro",
+    "permalink": "/docs/LEIA_PRIMEIRO"
+  }
+}

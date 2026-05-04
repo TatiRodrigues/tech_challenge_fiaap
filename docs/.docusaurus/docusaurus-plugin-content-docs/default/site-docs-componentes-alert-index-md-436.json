@@ -1,0 +1,29 @@
+{
+  "id": "componentes/alert/index",
+  "title": "Alert",
+  "description": "Componente Alert - Mensagens de alerta",
+  "source": "@site/docs/componentes/alert/index.md",
+  "sourceDirName": "componentes/alert",
+  "slug": "/componentes/alert/",
+  "permalink": "/docs/componentes/alert/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/alert/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 7,
+  "frontMatter": {
+    "sidebar_position": 7,
+    "title": "Alert",
+    "description": "Componente Alert - Mensagens de alerta"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Form",
+    "permalink": "/docs/componentes/form/"
+  },
+  "next": {
+    "title": "Modal",
+    "permalink": "/docs/componentes/modal/"
+  }
+}

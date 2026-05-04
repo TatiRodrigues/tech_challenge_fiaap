@@ -1,0 +1,29 @@
+{
+  "id": "componentes/guia-rapido",
+  "title": "🚀 Guia Rápido",
+  "description": "Referência rápida de componentes",
+  "source": "@site/docs/componentes/guia-rapido.md",
+  "sourceDirName": "componentes",
+  "slug": "/componentes/guia-rapido",
+  "permalink": "/docs/componentes/guia-rapido",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/guia-rapido.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "sidebar_position": 0,
+    "title": "🚀 Guia Rápido",
+    "description": "Referência rápida de componentes"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Componentes",
+    "permalink": "/docs/componentes/"
+  },
+  "next": {
+    "title": "Button",
+    "permalink": "/docs/componentes/button/"
+  }
+}

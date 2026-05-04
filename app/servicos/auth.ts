@@ -80,4 +80,23 @@ export const authStorage = {
       console.error('Erro ao limpar usuário atual:', error);
     }
   },
+
+  // Inicializar com usuário padrão
+  initializeDefaultUser: (): void => {
+    try {
+      const users = authStorage.getUsers();
+      // Se não há usuários, adicionar o usuário padrão
+      if (users.length === 0) {
+        const defaultUser: User = {
+          name: 'Fiap Pós Tech',
+          email: 'fiap@alecrimfinance.com.br',
+          password: 'Senha1234',
+        };
+        users.push(defaultUser);
+        localStorage.setItem('users', JSON.stringify(users));
+      }
+    } catch (error) {
+      console.error('Erro ao inicializar usuário padrão:', error);
+    }
+  },
 };

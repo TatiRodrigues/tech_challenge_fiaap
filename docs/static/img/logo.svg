@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="400" height="400">
+  <!-- Fundo branco circular -->
+  <circle cx="100" cy="100" r="95" fill="#FFFFFF" stroke="#E8E8E8" stroke-width="1"/>
+  
+  <!-- Folha de alecrim - Design mais sólido e visível -->
+  
+  <!-- Tronco principal (mais espesso) -->
+  <path d="M 100 40 Q 98 70 98 100 Q 98 130 100 160" stroke="#2D7A3E" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Folhas superiores (lado esquerdo) -->
+  <g fill="#2D7A3E" opacity="0.9">
+    <!-- Folha 1 -->
+    <ellipse cx="72" cy="65" rx="12" ry="8" transform="rotate(-35 72 65)"/>
+    <!-- Folha 2 -->
+    <ellipse cx="62" cy="82" rx="12" ry="8" transform="rotate(-50 62 82)"/>
+    <!-- Folha 3 -->
+    <ellipse cx="58" cy="100" rx="12" ry="8" transform="rotate(-65 58 100)"/>
+    <!-- Folha 4 -->
+    <ellipse cx="62" cy="118" rx="12" ry="8" transform="rotate(-50 62 118)"/>
+    <!-- Folha 5 -->
+    <ellipse cx="72" cy="135" rx="12" ry="8" transform="rotate(-35 72 135)"/>
+  </g>
+  
+  <!-- Folhas superiores (lado direito) -->
+  <g fill="#2D7A3E" opacity="0.95">
+    <!-- Folha 1 -->
+    <ellipse cx="128" cy="65" rx="12" ry="8" transform="rotate(35 128 65)"/>
+    <!-- Folha 2 -->
+    <ellipse cx="138" cy="82" rx="12" ry="8" transform="rotate(50 138 82)"/>
+    <!-- Folha 3 -->
+    <ellipse cx="142" cy="100" rx="12" ry="8" transform="rotate(65 142 100)"/>
+    <!-- Folha 4 -->
+    <ellipse cx="138" cy="118" rx="12" ry="8" transform="rotate(50 138 118)"/>
+    <!-- Folha 5 -->
+    <ellipse cx="128" cy="135" rx="12" ry="8" transform="rotate(35 128 135)"/>
+  </g>
+</svg>

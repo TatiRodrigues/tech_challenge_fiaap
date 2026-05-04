@@ -1,0 +1,25 @@
+{
+  "id": "versionamento",
+  "title": "Versionamento",
+  "description": "Política de versioning",
+  "source": "@site/docs/versionamento.md",
+  "sourceDirName": ".",
+  "slug": "/versionamento",
+  "permalink": "/docs/versionamento",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/versionamento.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_position": 5,
+    "title": "Versionamento",
+    "description": "Política de versioning"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Changelog",
+    "permalink": "/docs/changelog"
+  }
+}

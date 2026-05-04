@@ -1,0 +1,29 @@
+{
+  "id": "componentes/table/index",
+  "title": "Table",
+  "description": "Componente Table - Tabelas de dados",
+  "source": "@site/docs/componentes/table/index.md",
+  "sourceDirName": "componentes/table",
+  "slug": "/componentes/table/",
+  "permalink": "/docs/componentes/table/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/table/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6,
+    "title": "Table",
+    "description": "Componente Table - Tabelas de dados"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Card",
+    "permalink": "/docs/componentes/card/"
+  },
+  "next": {
+    "title": "📋 Melhores Práticas",
+    "permalink": "/docs/componentes/melhores-praticas"
+  }
+}

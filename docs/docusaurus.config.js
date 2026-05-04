@@ -4,12 +4,12 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-import {themes as prismThemes} from 'prism-react-renderer';
+const {themes: prismThemes} = require('prism-react-renderer');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Tech Challenge FIAAP',
-  tagline: 'Documentação do Projeto',
+  title: 'Alecrim Finance',
+  tagline: 'Seu gerenciador de transações inteligente',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -45,12 +45,7 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -75,11 +70,6 @@ const config = {
             sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'Documentação',
-          },
-          {
-            to: '/blog',
-            label: 'Blog',
-            position: 'left'
           },
           {
             href: 'https://github.com/TatiRodrigues/tech_challenge_fiaap',
@@ -127,7 +117,7 @@ const config = {
             ],
           },
         ],
-        copyright: \`Copyright © \${new Date().getFullYear()} Tech Challenge FIAAP. Built with Docusaurus.\`,
+        copyright: `Copyright © ${new Date().getFullYear()} Tech Challenge FIAAP. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,
@@ -136,4 +126,4 @@ const config = {
     }),
 };
 
-export default config;
+module.exports = config;

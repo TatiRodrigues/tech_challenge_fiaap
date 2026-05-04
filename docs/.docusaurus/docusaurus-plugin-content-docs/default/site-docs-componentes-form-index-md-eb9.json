@@ -1,0 +1,29 @@
+{
+  "id": "componentes/form/index",
+  "title": "Form",
+  "description": "Componente Form - Agrupamento de formulários",
+  "source": "@site/docs/componentes/form/index.md",
+  "sourceDirName": "componentes/form",
+  "slug": "/componentes/form/",
+  "permalink": "/docs/componentes/form/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/form/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 8,
+  "frontMatter": {
+    "sidebar_position": 8,
+    "title": "Form",
+    "description": "Componente Form - Agrupamento de formulários"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Input",
+    "permalink": "/docs/componentes/input/"
+  },
+  "next": {
+    "title": "Alert",
+    "permalink": "/docs/componentes/alert/"
+  }
+}

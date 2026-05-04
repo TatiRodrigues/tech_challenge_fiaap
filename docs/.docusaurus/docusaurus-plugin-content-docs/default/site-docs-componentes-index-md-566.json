@@ -1,0 +1,29 @@
+{
+  "id": "componentes/index",
+  "title": "Componentes",
+  "description": "Biblioteca de componentes da aplicação Alecrim Finance",
+  "source": "@site/docs/componentes/index.md",
+  "sourceDirName": "componentes",
+  "slug": "/componentes/",
+  "permalink": "/docs/componentes/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "title": "Componentes",
+    "description": "Biblioteca de componentes da aplicação Alecrim Finance"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Grid & Layout",
+    "permalink": "/docs/design-system/grid-layout"
+  },
+  "next": {
+    "title": "🚀 Guia Rápido",
+    "permalink": "/docs/componentes/guia-rapido"
+  }
+}

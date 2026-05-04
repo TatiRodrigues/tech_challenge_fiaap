@@ -1,0 +1,29 @@
+{
+  "id": "componentes/modal/index",
+  "title": "Modal",
+  "description": "Componente Modal - Diálogos e caixas de diálogo",
+  "source": "@site/docs/componentes/modal/index.md",
+  "sourceDirName": "componentes/modal",
+  "slug": "/componentes/modal/",
+  "permalink": "/docs/componentes/modal/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/modal/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_position": 5,
+    "title": "Modal",
+    "description": "Componente Modal - Diálogos e caixas de diálogo"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Alert",
+    "permalink": "/docs/componentes/alert/"
+  },
+  "next": {
+    "title": "Card",
+    "permalink": "/docs/componentes/card/"
+  }
+}

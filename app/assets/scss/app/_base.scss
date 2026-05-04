@@ -200,3 +200,53 @@ button.close {
 	}
 }
 
+// Garantir que todos os buttons tenham color: #fff no hover
+.btn-success {
+	--bs-btn-hover-color: #fff !important;
+	&:hover, &:active, &:focus {
+		color: #fff !important;
+	}
+}
+
+.btn-success.btn-lg {
+	--bs-btn-hover-color: #fff !important;
+	&:hover, &:active, &:focus {
+		color: #fff !important;
+	}
+}
+
+.btn-danger {
+	--bs-btn-hover-color: #fff !important;
+	&:hover, &:active, &:focus {
+		color: #fff !important;
+	}
+}
+
+.btn-secondary {
+	--bs-btn-hover-color: #fff !important;
+	&:hover, &:active, &:focus {
+		color: #fff !important;
+	}
+}
+
+.btn-outline-secondary {
+	--bs-btn-hover-color: #fff !important;
+	&:hover, &:active, &:focus {
+		color: #fff !important;
+	}
+}
+
+.btn-outline-danger {
+	--bs-btn-hover-color: #fff !important;
+	&:hover, &:active, &:focus {
+		color: #fff !important;
+	}
+}
+
+.btn-primary {
+	--bs-btn-hover-color: #fff !important;
+	&:hover, &:active, &:focus {
+		color: #fff !important;
+	}
+}
+

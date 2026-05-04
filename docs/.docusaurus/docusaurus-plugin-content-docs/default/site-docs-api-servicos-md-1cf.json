@@ -1,0 +1,29 @@
+{
+  "id": "api-servicos",
+  "title": "API e Serviços",
+  "description": "Endpoints e serviços disponíveis",
+  "source": "@site/docs/api-servicos.md",
+  "sourceDirName": ".",
+  "slug": "/api-servicos",
+  "permalink": "/docs/api-servicos",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/api-servicos.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2,
+    "title": "API e Serviços",
+    "description": "Endpoints e serviços disponíveis"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Arquitetura",
+    "permalink": "/docs/arquitetura"
+  },
+  "next": {
+    "title": "Boas Práticas",
+    "permalink": "/docs/boas-praticas"
+  }
+}

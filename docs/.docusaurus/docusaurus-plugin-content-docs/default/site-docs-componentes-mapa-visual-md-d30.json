@@ -1,0 +1,29 @@
+{
+  "id": "componentes/mapa-visual",
+  "title": "🗺️ Mapa Visual",
+  "description": "Mapa visual de componentes",
+  "source": "@site/docs/componentes/mapa-visual.md",
+  "sourceDirName": "componentes",
+  "slug": "/componentes/mapa-visual",
+  "permalink": "/docs/componentes/mapa-visual",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/mapa-visual.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 10,
+  "frontMatter": {
+    "sidebar_position": 10,
+    "title": "🗺️ Mapa Visual",
+    "description": "Mapa visual de componentes"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "📋 Melhores Práticas",
+    "permalink": "/docs/componentes/melhores-praticas"
+  },
+  "next": {
+    "title": "Arquitetura",
+    "permalink": "/docs/arquitetura"
+  }
+}

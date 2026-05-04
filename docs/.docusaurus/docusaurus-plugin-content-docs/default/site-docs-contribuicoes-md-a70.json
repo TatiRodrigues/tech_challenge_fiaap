@@ -1,0 +1,29 @@
+{
+  "id": "contribuicoes",
+  "title": "Contribuições",
+  "description": "Como contribuir",
+  "source": "@site/docs/contribuicoes.md",
+  "sourceDirName": ".",
+  "slug": "/contribuicoes",
+  "permalink": "/docs/contribuicoes",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/contribuicoes.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "title": "Contribuições",
+    "description": "Como contribuir"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Componentes Recursos",
+    "permalink": "/docs/componentes-recursos"
+  },
+  "next": {
+    "title": "Guia de Contribuição",
+    "permalink": "/docs/guia-contribuicao"
+  }
+}

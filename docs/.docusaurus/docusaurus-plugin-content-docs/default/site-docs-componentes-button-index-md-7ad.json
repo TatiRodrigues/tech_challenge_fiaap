@@ -1,0 +1,29 @@
+{
+  "id": "componentes/button/index",
+  "title": "Button",
+  "description": "Componente Button - Botões para ações",
+  "source": "@site/docs/componentes/button/index.md",
+  "sourceDirName": "componentes/button",
+  "slug": "/componentes/button/",
+  "permalink": "/docs/componentes/button/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/button/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2,
+    "title": "Button",
+    "description": "Componente Button - Botões para ações"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "🚀 Guia Rápido",
+    "permalink": "/docs/componentes/guia-rapido"
+  },
+  "next": {
+    "title": "Input",
+    "permalink": "/docs/componentes/input/"
+  }
+}

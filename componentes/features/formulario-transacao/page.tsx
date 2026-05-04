@@ -25,13 +25,31 @@ export default function FormularioTransacao() {
     description: '',
   });
 
+  const formatCurrencyInput = (value: string): string => {
+    // Remove tudo que não é número
+    const numericValue = value.replace(/\D/g, '');
+    
+    // Converte para número e divide por 100 para trabalhar com centavos
+    const numberValue = parseInt(numericValue, 10) / 100;
+    
+    // Formata como moeda
+    return isNaN(numberValue) ? '' : numberValue.toFixed(2);
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+    
+    // Aplicar máscara de dinheiro apenas para o campo de valor
+    let finalValue = value;
+    if (name === 'value') {
+      finalValue = formatCurrencyInput(value);
+    }
+    
     setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: finalValue,
     }));
   };
 
@@ -127,9 +145,8 @@ export default function FormularioTransacao() {
                 </label>
                 <input
                   id="value"
-                  type="number"
-                  step="0.01"
-                  min="0"
+                  type="text"
+                  inputMode="decimal"
                   name="value"
                   className="form-control form-control-lg"
                   placeholder="0,00"

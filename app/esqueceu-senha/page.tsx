@@ -127,7 +127,7 @@ export default function ForgotPasswordPage() {
           <footer className="app-auth-footer">
             <div className="container text-center py-3">
               <small className="copyright">
-                © 2026 Gerenciador de Transações. Todos os direitos reservados.
+                © 2026 Alecrim Finance - Seu gerenciador de transações inteligente. Todos os direitos reservados.
               </small>
             </div>
           </footer>

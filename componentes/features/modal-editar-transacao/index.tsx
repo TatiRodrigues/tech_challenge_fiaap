@@ -44,11 +44,34 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
     }
   }, [transaction]);
 
+  const formatCurrencyInput = (value: string | number): string => {
+    // Converter para string se for número
+    const strValue = typeof value === 'number' ? value.toString() : value;
+    
+    // Remove tudo que não é número
+    const numericValue = strValue.replace(/\D/g, '');
+    
+    // Converte para número e divide por 100 para trabalhar com centavos
+    const numberValue = parseInt(numericValue, 10) / 100;
+    
+    // Retorna o valor formatado
+    return isNaN(numberValue) ? '' : numberValue.toFixed(2);
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    
+    // Aplicar máscara de dinheiro apenas para o campo de valor
+    let finalValue: any = value;
+    if (name === 'value') {
+      finalValue = parseFloat(formatCurrencyInput(value));
+    } else if (name !== 'value' && typeof value === 'string') {
+      finalValue = value;
+    }
+    
     setFormData({
       ...formData,
-      [name]: name === 'value' ? parseFloat(value) : value,
+      [name]: finalValue,
     });
   };
 
@@ -86,8 +109,8 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
               <div className="mb-3">
                 <label className="form-label">Valor</label>
                 <input
-                  type="number"
-                  step="0.01"
+                  type="text"
+                  inputMode="decimal"
                   name="value"
                   value={formData.value}
                   onChange={handleChange}

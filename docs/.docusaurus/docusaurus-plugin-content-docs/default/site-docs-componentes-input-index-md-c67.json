@@ -1,0 +1,29 @@
+{
+  "id": "componentes/input/index",
+  "title": "Input",
+  "description": "Componente Input - Campo de entrada de texto",
+  "source": "@site/docs/componentes/input/index.md",
+  "sourceDirName": "componentes/input",
+  "slug": "/componentes/input/",
+  "permalink": "/docs/componentes/input/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/input/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3,
+    "title": "Input",
+    "description": "Componente Input - Campo de entrada de texto"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Button",
+    "permalink": "/docs/componentes/button/"
+  },
+  "next": {
+    "title": "Form",
+    "permalink": "/docs/componentes/form/"
+  }
+}

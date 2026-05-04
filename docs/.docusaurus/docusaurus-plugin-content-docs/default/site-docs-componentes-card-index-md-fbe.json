@@ -1,0 +1,29 @@
+{
+  "id": "componentes/card/index",
+  "title": "Card",
+  "description": "Componente Card - Contêiner de conteúdo",
+  "source": "@site/docs/componentes/card/index.md",
+  "sourceDirName": "componentes/card",
+  "slug": "/componentes/card/",
+  "permalink": "/docs/componentes/card/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes/card/index.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "sidebar_position": 4,
+    "title": "Card",
+    "description": "Componente Card - Contêiner de conteúdo"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Modal",
+    "permalink": "/docs/componentes/modal/"
+  },
+  "next": {
+    "title": "Table",
+    "permalink": "/docs/componentes/table/"
+  }
+}

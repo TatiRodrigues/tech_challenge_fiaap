@@ -1,0 +1,29 @@
+{
+  "id": "design-system/padroes-uso",
+  "title": "Padrões de Uso",
+  "description": "Estados, animações, interações",
+  "source": "@site/docs/design-system/padroes-uso.md",
+  "sourceDirName": "design-system",
+  "slug": "/design-system/padroes-uso",
+  "permalink": "/docs/design-system/padroes-uso",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/design-system/padroes-uso.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_position": 5,
+    "title": "Padrões de Uso",
+    "description": "Estados, animações, interações"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Componentes Avançados",
+    "permalink": "/docs/design-system/componentes-avancados"
+  },
+  "next": {
+    "title": "Acessibilidade",
+    "permalink": "/docs/design-system/acessibilidade"
+  }
+}

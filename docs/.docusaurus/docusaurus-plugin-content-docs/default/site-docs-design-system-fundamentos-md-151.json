@@ -1,0 +1,29 @@
+{
+  "id": "design-system/fundamentos",
+  "title": "Fundamentos",
+  "description": "Cores, tipografia, espaçamento",
+  "source": "@site/docs/design-system/fundamentos.md",
+  "sourceDirName": "design-system",
+  "slug": "/design-system/fundamentos",
+  "permalink": "/docs/design-system/fundamentos",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/design-system/fundamentos.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2,
+    "title": "Fundamentos",
+    "description": "Cores, tipografia, espaçamento"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Design System",
+    "permalink": "/docs/design-system/"
+  },
+  "next": {
+    "title": "Componentes Básicos",
+    "permalink": "/docs/design-system/componentes-basicos"
+  }
+}

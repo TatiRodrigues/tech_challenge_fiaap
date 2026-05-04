@@ -1,0 +1,29 @@
+{
+  "id": "boas-praticas",
+  "title": "Boas Práticas",
+  "description": "Padrões de código",
+  "source": "@site/docs/boas-praticas.md",
+  "sourceDirName": ".",
+  "slug": "/boas-praticas",
+  "permalink": "/docs/boas-praticas",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/boas-praticas.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3,
+    "title": "Boas Práticas",
+    "description": "Padrões de código"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "API e Serviços",
+    "permalink": "/docs/api-servicos"
+  },
+  "next": {
+    "title": "Referência de Código",
+    "permalink": "/docs/REFERENCIA_CODIGO"
+  }
+}

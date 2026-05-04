@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/app/provedores/AuthProvider';
+import { AlecrimLogo } from '@/componentes/AlecrimLogo';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -41,13 +42,18 @@ export default function LoginPage() {
       <div className="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
         <div className="d-flex flex-column align-content-end">
           <div className="app-auth-body mx-auto">
-            <div className="app-auth-branding mb-4">
-              <a className="app-logo" href="/">
-                <i className="bi bi-wallet2 me-2" style={{ fontSize: '2rem', color: '#667eea' }}></i>
-                <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#667eea' }}>
-                  Transações
-                </span>
-              </a>
+            <div className="app-auth-branding mb-4 text-center">
+              <div className="d-flex flex-column align-items-center justify-content-center">
+                <AlecrimLogo size={80} />
+                <div className="mt-3">
+                  <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0 }}>
+                    Alecrim Finance
+                  </h3>
+                  <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.25rem', margin: 0 }}>
+                    Seu gerenciador de transações
+                  </p>
+                </div>
+              </div>
             </div>
             <h2 className="auth-heading text-center mb-5">Login</h2>
 
@@ -123,7 +129,7 @@ export default function LoginPage() {
                   <button
                     type="submit"
                     className="btn app-btn-primary w-100 theme-btn mx-auto"
-                    disabled={isLoading}
+                    disabled={isLoading || !!error}
                   >
                     {isLoading ? 'Entrando...' : 'Entrar'}
                   </button>
@@ -143,7 +149,7 @@ export default function LoginPage() {
           <footer className="app-auth-footer">
             <div className="container text-center py-3">
               <small className="copyright">
-                © 2026 Gerenciador de Transações. Todos os direitos reservados.
+                © 2026 Alecrim Finance - Seu gerenciador de transações inteligente. Todos os direitos reservados.
               </small>
             </div>
           </footer>
@@ -158,9 +164,9 @@ export default function LoginPage() {
           <div className="d-flex flex-column align-content-end h-100">
             <div className="h-100"></div>
             <div className="overlay-content p-3 p-lg-4 rounded">
-              <h5 className="mb-3 overlay-title">Controle Financeiro Pessoal</h5>
+              <h5 className="mb-3 overlay-title">Alecrim Finance</h5>
               <div>
-                Gerencie suas transações, acompanhe seus gastos e ganhos, e tenha uma visão clara da sua situação financeira.
+                Seu companheiro financeiro inteligente. Controle, monitore e compreenda cada transação do seu dia a dia.
               </div>
             </div>
           </div>

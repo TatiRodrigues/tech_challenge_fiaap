@@ -1,0 +1,23 @@
+{
+  "id": "intro",
+  "title": "👋 Bem-vindo à Alecrim Finance",
+  "description": "Bem-vindo à documentação oficial da Alecrim Finance - seu gerenciador de transações inteligente.",
+  "source": "@site/docs/intro.md",
+  "sourceDirName": ".",
+  "slug": "/intro",
+  "permalink": "/docs/intro",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/intro.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Primeiro Uso",
+    "permalink": "/docs/primeiro-uso"
+  }
+}

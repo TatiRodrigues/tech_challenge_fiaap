@@ -1,0 +1,29 @@
+{
+  "id": "design-system/componentes-basicos",
+  "title": "Componentes Básicos",
+  "description": "Button, Input, Card, Badge, Alert",
+  "source": "@site/docs/design-system/componentes-basicos.md",
+  "sourceDirName": "design-system",
+  "slug": "/design-system/componentes-basicos",
+  "permalink": "/docs/design-system/componentes-basicos",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/design-system/componentes-basicos.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3,
+    "title": "Componentes Básicos",
+    "description": "Button, Input, Card, Badge, Alert"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Fundamentos",
+    "permalink": "/docs/design-system/fundamentos"
+  },
+  "next": {
+    "title": "Componentes Avançados",
+    "permalink": "/docs/design-system/componentes-avancados"
+  }
+}

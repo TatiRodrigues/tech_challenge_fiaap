@@ -1,0 +1,29 @@
+{
+  "id": "changelog",
+  "title": "Changelog",
+  "description": "Histórico de versões",
+  "source": "@site/docs/changelog.md",
+  "sourceDirName": ".",
+  "slug": "/changelog",
+  "permalink": "/docs/changelog",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/changelog.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "sidebar_position": 4,
+    "title": "Changelog",
+    "description": "Histórico de versões"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Governança",
+    "permalink": "/docs/governanca"
+  },
+  "next": {
+    "title": "Versionamento",
+    "permalink": "/docs/versionamento"
+  }
+}

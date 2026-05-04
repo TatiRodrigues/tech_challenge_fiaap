@@ -1,0 +1,29 @@
+{
+  "id": "guia-contribuicao",
+  "title": "Guia de Contribuição",
+  "description": "Processo de pull request",
+  "source": "@site/docs/guia-contribuicao.md",
+  "sourceDirName": ".",
+  "slug": "/guia-contribuicao",
+  "permalink": "/docs/guia-contribuicao",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/guia-contribuicao.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2,
+    "title": "Guia de Contribuição",
+    "description": "Processo de pull request"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Contribuições",
+    "permalink": "/docs/contribuicoes"
+  },
+  "next": {
+    "title": "Governança",
+    "permalink": "/docs/governanca"
+  }
+}

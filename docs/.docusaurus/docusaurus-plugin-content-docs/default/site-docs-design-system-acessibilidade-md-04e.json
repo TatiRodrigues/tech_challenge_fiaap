@@ -1,0 +1,29 @@
+{
+  "id": "design-system/acessibilidade",
+  "title": "Acessibilidade",
+  "description": "WCAG 2.1 AA, navegação, leitores de tela",
+  "source": "@site/docs/design-system/acessibilidade.md",
+  "sourceDirName": "design-system",
+  "slug": "/design-system/acessibilidade",
+  "permalink": "/docs/design-system/acessibilidade",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/design-system/acessibilidade.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6,
+    "title": "Acessibilidade",
+    "description": "WCAG 2.1 AA, navegação, leitores de tela"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Padrões de Uso",
+    "permalink": "/docs/design-system/padroes-uso"
+  },
+  "next": {
+    "title": "Grid & Layout",
+    "permalink": "/docs/design-system/grid-layout"
+  }
+}

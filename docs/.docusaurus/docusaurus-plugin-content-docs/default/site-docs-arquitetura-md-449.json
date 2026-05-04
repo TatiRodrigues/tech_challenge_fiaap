@@ -1,0 +1,29 @@
+{
+  "id": "arquitetura",
+  "title": "Arquitetura",
+  "description": "Arquitetura da aplicação",
+  "source": "@site/docs/arquitetura.md",
+  "sourceDirName": ".",
+  "slug": "/arquitetura",
+  "permalink": "/docs/arquitetura",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/arquitetura.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "title": "Arquitetura",
+    "description": "Arquitetura da aplicação"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "🗺️ Mapa Visual",
+    "permalink": "/docs/componentes/mapa-visual"
+  },
+  "next": {
+    "title": "API e Serviços",
+    "permalink": "/docs/api-servicos"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "componentes-recursos",
+  "title": "Componentes Recursos",
+  "description": "Componentes de funcionalidade",
+  "source": "@site/docs/componentes-recursos.md",
+  "sourceDirName": ".",
+  "slug": "/componentes-recursos",
+  "permalink": "/docs/componentes-recursos",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/componentes-recursos.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6,
+    "title": "Componentes Recursos",
+    "description": "Componentes de funcionalidade"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Componentes Layout",
+    "permalink": "/docs/componentes-layout"
+  },
+  "next": {
+    "title": "Contribuições",
+    "permalink": "/docs/contribuicoes"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "REFERENCIA_CODIGO",
+  "title": "Referência de Código",
+  "description": "Estrutura de arquivos e padrões",
+  "source": "@site/docs/REFERENCIA_CODIGO.md",
+  "sourceDirName": ".",
+  "slug": "/REFERENCIA_CODIGO",
+  "permalink": "/docs/REFERENCIA_CODIGO",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/REFERENCIA_CODIGO.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "sidebar_position": 4,
+    "title": "Referência de Código",
+    "description": "Estrutura de arquivos e padrões"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Boas Práticas",
+    "permalink": "/docs/boas-praticas"
+  },
+  "next": {
+    "title": "Componentes Layout",
+    "permalink": "/docs/componentes-layout"
+  }
+}

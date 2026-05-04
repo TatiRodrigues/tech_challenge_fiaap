@@ -129,7 +129,7 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 	return (
 		<div className="container-xl">
 			{/* Título */}
-			<h1 className="app-page-title mb-4">Bem-vindo, <span className="fw-bold text-primary">{user.name}</span>! Aqui está o resumo de suas transações</h1>
+			<p className="app-page-title text-muted mb-4">Bem-vindo(a), <span className="text-success">{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</span>!<br/>Aqui está o resumo de suas transações</p>
 
 			{/* Cards de Resumo */}
 			<CardsResumo transactions={transactions} />

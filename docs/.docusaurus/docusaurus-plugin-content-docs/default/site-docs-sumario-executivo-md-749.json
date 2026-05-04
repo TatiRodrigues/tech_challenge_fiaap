@@ -1,0 +1,20 @@
+{
+  "id": "SUMARIO_EXECUTIVO",
+  "title": "📋 Sumário Executivo",
+  "description": "Resumo completo da documentação",
+  "source": "@site/docs/SUMARIO_EXECUTIVO.md",
+  "sourceDirName": ".",
+  "slug": "/SUMARIO_EXECUTIVO",
+  "permalink": "/docs/SUMARIO_EXECUTIVO",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/TatiRodrigues/tech_challenge_fiaap/tree/main/docs/SUMARIO_EXECUTIVO.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "sidebar_position": 0,
+    "title": "📋 Sumário Executivo",
+    "description": "Resumo completo da documentação"
+  }
+}
