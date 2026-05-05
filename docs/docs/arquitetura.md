@@ -6,20 +6,20 @@ description: Arquitetura da aplicação
 
 # 🏛️ Arquitetura
 
-Arquitetura geral do Alecrim Finance - seu gerenciador de transações inteligente.
+Arquitetura geral do Alecrim Wallet - seu gerenciador de transações inteligente.
 
 ## Stack Tecnológico
 
 - **Frontend**: Next.js 16 + React 19 + TypeScript
 - **Styling**: Tailwind CSS + Bootstrap 5
-- **Design System**: Baseado em [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley, com customizações para Alecrim Finance
+- **Design System**: Baseado em [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley, com customizações para Alecrim Wallet
 - **Documentação**: Docusaurus 3
 - **Runtime**: Node.js 18+
 
 ## Estrutura de Diretórios
 
 ```
-alecrim-finance/
+alecrim-wallet/
 ├── app/              # Next.js App Router
 ├── componentes/      # Componentes reutilizáveis
 ├── hooks/            # Custom React hooks

@@ -4,7 +4,7 @@
  * Modify the docusaurus.config.js file at your site's root instead.
  */
 export default {
-  "title": "Alecrim Finance",
+  "title": "Alecrim wallet",
   "tagline": "Seu gerenciador de transações inteligente",
   "favicon": "img/favicon.ico",
   "url": "https://your-docusaurus-test-site.com",

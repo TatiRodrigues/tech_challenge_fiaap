@@ -19,7 +19,6 @@ export const authStorage = {
     try {
       const users = localStorage.getItem('users');
       const parsedUsers = users ? JSON.parse(users) : [];
-      console.log('DEBUG - getUsers() retornando:', parsedUsers);
       return parsedUsers;
     } catch (error) {
       console.error('Erro ao obter usuários:', error);
@@ -50,11 +49,7 @@ export const authStorage = {
       const cleanEmail = email.trim().toLowerCase();
       const cleanPassword = password.trim();
       
-      console.log('DEBUG - Usuários no storage:', users);
-      console.log('DEBUG - Procurando por:', { email: cleanEmail, password: cleanPassword });
-      
       const foundUser = users.find(u => u.email.toLowerCase() === cleanEmail && u.password === cleanPassword);
-      console.log('DEBUG - Usuário encontrado:', foundUser);
       
       return foundUser || null;
     } catch (error) {
@@ -66,9 +61,7 @@ export const authStorage = {
   // Salvar usuário autenticado
   setCurrentUser: (user: User): void => {
     try {
-      console.log('DEBUG - setCurrentUser chamado com:', user);
       localStorage.setItem('currentUser', JSON.stringify(user));
-      console.log('DEBUG - Usuário salvo no currentUser:', localStorage.getItem('currentUser'));
     } catch (error) {
       console.error('Erro ao salvar usuário atual:', error);
     }
@@ -104,23 +97,18 @@ export const authStorage = {
         password: '1234',
       };
       
-      console.log('DEBUG - Inicializando usuário padrão. Usuários existentes:', users.length);
-      
       // Procurar se já existe um usuário padrão com esse email
       const existingUserIndex = users.findIndex(u => u.email === 'fiap@alecrimwallet.com.br');
       
       if (existingUserIndex >= 0) {
         // Atualizar usuário existente
         users[existingUserIndex] = defaultUser;
-        console.log('DEBUG - Atualizando usuário padrão existente');
       } else {
         // Adicionar se não existir
         users.push(defaultUser);
-        console.log('DEBUG - Adicionando novo usuário padrão');
       }
       
       localStorage.setItem('users', JSON.stringify(users));
-      console.log('DEBUG - Usuários salvos no storage:', users);
     } catch (error) {
       console.error('Erro ao inicializar usuário padrão:', error);
     }

@@ -79,8 +79,6 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 		stats.transfers = isNaN(stats.transfers) ? 0 : stats.transfers;
 		stats.withdrawals = isNaN(stats.withdrawals) ? 0 : stats.withdrawals;
 
-		console.log('DEBUG - monthlyData calculado:', stats);
-
 		return {
 			monthlyData: stats,
 			monthlyTransactions: filtered.sort((a, b) => 

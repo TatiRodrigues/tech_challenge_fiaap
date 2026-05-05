@@ -11,7 +11,7 @@ Visualização completa de todos os componentes disponíveis.
 ## Arquitetura de Componentes
 
 ```
-📦 Componentes Alecrim Finance
+📦 Componentes Alecrim Wallet
 │
 ├─ 📥 Entrada de Dados
 │  ├─ Button
@@ -60,7 +60,7 @@ Visualização completa de todos os componentes disponíveis.
 
 ```
 ┌─────────────────────────────────┐
-│         ALECRIM FINANCE      │ ← Header
+│         ALECRIM WALLET      │ ← Header
 ├─────────────────────────────────┤
 │                                 │
 │  ┌──────────────────────────┐  │

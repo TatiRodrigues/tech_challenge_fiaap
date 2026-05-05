@@ -69,7 +69,7 @@ import { Button, ButtonProps } from '@/components/ui/Button';
 ```
 
 ### 🎨 Design Baseado e Customizado
-Utilizamos o template [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley como referência técnica, adaptando a estrutura HTML/CSS e customizando o design das páginas para a Alecrim Finance.
+Utilizamos o template [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley como referência técnica, adaptando a estrutura HTML/CSS e customizando o design das páginas para a Alecrim Wallet.
 
 ## 📊 Estrutura da Documentação
 

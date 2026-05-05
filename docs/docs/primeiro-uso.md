@@ -18,8 +18,8 @@ Seu guia para começar com o Alecrim Wallet - seu gerenciador de transações in
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/alecrim-finance.git
-cd alecrim-finance
+git clone https://github.com/TatiRodrigues/tech_challenge_fiaap.git
+cd alecrim-wallet
 
 # Instale dependências
 npm install
@@ -31,7 +31,7 @@ npm run dev
 ## 2️⃣ Estrutura do Projeto
 
 ```
-alecrim-finance/
+alecrim-wallet/
 ├── app/                      # Aplicação Next.js
 │   ├── (autenticado)/       # Rotas protegidas
 │   ├── login/               # Página de login

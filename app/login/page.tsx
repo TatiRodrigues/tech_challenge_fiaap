@@ -26,23 +26,17 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      console.log('DEBUG - handleSubmit chamado com:', { email, password });
-      
       if (!email || !password) {
         setError('Por favor, preencha todos os campos');
         setIsLoading(false);
         return;
       }
 
-      console.log('DEBUG - Chamando login...');
       await login(email, password);
-      console.log('DEBUG - Login bem-sucedido, redirecionando...');
       router.push('/resumo-transacao');
     } catch (err: any) {
-      console.error('DEBUG - Erro no handleSubmit:', err);
-      console.error('DEBUG - Erro message:', err.message);
-      console.error('DEBUG - Erro full:', err);
       setError(err.message || 'Erro ao fazer login. Tente novamente.');
+      console.error(err);
     } finally {
       setIsLoading(false);
     }

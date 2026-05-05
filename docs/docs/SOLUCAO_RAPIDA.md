@@ -12,8 +12,8 @@ Começe a usar o Alecrim Wallet - seu gerenciador de transações inteligente em
 
 ```bash
 # 1. Clone
-git clone <repo-url>
-cd alecrim-finance
+git clone https://github.com/TatiRodrigues/tech_challenge_fiaap.git
+cd alecrim-wallet
 
 # 2. Instale
 npm install

@@ -83,12 +83,12 @@ Acesse a documentação: **http://localhost:3000** (depois que a documentação 
 
 ## 🎨 Design System
 
-Utilizamos o template [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley como referência técnica, adaptando a estrutura HTML/CSS e customizando o design das páginas para a Alecrim Finance.
+Utilizamos o template [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley como referência técnica, adaptando a estrutura HTML/CSS e customizando o design das páginas para a Alecrim wallet.
 
 ## 📁 Estrutura do Projeto
 
 ```
-alecrim-finance/
+alecrim-wallet/
 ├── app/                          # Next.js App Router
 │   ├── layout.tsx               # Layout principal
 │   ├── not-found.tsx            # Página 404

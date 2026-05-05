@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Componentes
-description: Biblioteca de componentes da aplicação Alecrim Finance
+description: Biblioteca de componentes da aplicação Alecrim Wallet
 ---
 
 # Componentes
 
-Biblioteca completa de componentes reutilizáveis para a Alecrim Finance, seguindo os padrões de Design System Porsche.
+Biblioteca completa de componentes reutilizáveis para a Alecrim Wallet, seguindo os padrões de Design System Porsche.
 
 ## Estrutura de Componentes
 

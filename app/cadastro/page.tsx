@@ -77,7 +77,7 @@ export default function RegisterPage() {
                 <AlecrimLogo size={60} />
                 <div className="mt-2">
                   <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0, fontSize: '1.1rem' }}>
-                    Alecrim Finance
+                    Alecrim wallet
                   </h3>
                   <p style={{ fontSize: '0.75rem', color: '#666', margin: '0.15rem 0 0 0' }}>
                     Seu gerenciador de transações
@@ -215,7 +215,7 @@ export default function RegisterPage() {
           <footer className="app-auth-footer">
             <div className="container text-center py-3">
               <small className="copyright">
-                © 2026 Alecrim Finance - Seu gerenciador de transações inteligente. Todos os direitos reservados.
+                © 2026 Alecrim wallet - Seu gerenciador de transações inteligente. Todos os direitos reservados.
               </small>
             </div>
           </footer>

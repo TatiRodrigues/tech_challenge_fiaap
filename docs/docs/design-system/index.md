@@ -1,16 +1,16 @@
 ---
 sidebar_position: 1
 title: Design System
-description: Sistema de Design Alecrim Finance
+description: Sistema de Design Alecrim Wallet
 ---
 
 # 🎨 Design System
 
-Sistema completo de design da Alecrim Finance com padrões visuais, componentes e guidelines.
+Sistema completo de design da Alecrim Wallet com padrões visuais, componentes e guidelines.
 
 ## 🎨 Baseado e Customizado
 
-Utilizamos o template [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley como referência técnica, adaptando a estrutura HTML/CSS e customizando o design das páginas para a Alecrim Finance.
+Utilizamos o template [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley como referência técnica, adaptando a estrutura HTML/CSS e customizando o design das páginas para a Alecrim Wallet.
 
 ## 📋 Conteúdo
 

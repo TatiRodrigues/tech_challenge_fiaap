@@ -8,7 +8,7 @@ const {themes: prismThemes} = require('prism-react-renderer');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Alecrim Finance',
+  title: 'Alecrim wallet',
   tagline: 'Seu gerenciador de transações inteligente',
   favicon: 'img/favicon.ico',
 
@@ -62,7 +62,7 @@ const config = {
         title: 'Tech Challenge',
         logo: {
           alt: 'Tech Challenge Logo',
-          src: 'img/logo.svg',
+          src: 'img/logo.jpg',
         },
         items: [
           {

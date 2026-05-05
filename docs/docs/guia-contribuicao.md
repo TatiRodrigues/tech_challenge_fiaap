@@ -12,7 +12,7 @@ Processo detalhado para contribuições.
 
 ```bash
 # 1. Fork e clone
-git clone https://github.com/seu-usuario/alecrim-finance.git
+git clone https://github.com/TatiRodrigues/tech_challenge_fiaap.git
 
 # 2. Instale dependências
 npm install

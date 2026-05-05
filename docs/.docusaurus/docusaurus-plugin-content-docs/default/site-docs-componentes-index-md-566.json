@@ -1,7 +1,7 @@
 {
   "id": "componentes/index",
   "title": "Componentes",
-  "description": "Biblioteca de componentes da aplicação Alecrim Finance",
+  "description": "Biblioteca de componentes da aplicação Alecrim Wallet",
   "source": "@site/docs/componentes/index.md",
   "sourceDirName": "componentes",
   "slug": "/componentes/",
@@ -15,7 +15,7 @@
   "frontMatter": {
     "sidebar_position": 1,
     "title": "Componentes",
-    "description": "Biblioteca de componentes da aplicação Alecrim Finance"
+    "description": "Biblioteca de componentes da aplicação Alecrim Wallet"
   },
   "sidebar": "tutorialSidebar",
   "previous": {
