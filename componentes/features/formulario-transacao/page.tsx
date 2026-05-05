@@ -110,7 +110,7 @@ export default function FormularioTransacao() {
       setSuccess('Transação criada com sucesso! Redirecionando...');
       
       setTimeout(() => {
-        router.push('/listar-transacoes');
+        router.push('/resumo-transacao');
       }, 1500);
     } catch (err: any) {
       setError(err.message || 'Erro ao criar transação. Tente novamente.');
