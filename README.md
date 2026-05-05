@@ -1,4 +1,4 @@
-# 💰 Alecrim Finance - Gerenciador de Transações Inteligente
+# 💰 Alecrim Wallet - Gerenciador de Transações Inteligente
 
 Uma aplicação front-end desenvolvida em **Next.js** para gerenciamento de transações financeiras com interface moderna e intuitiva.
 
