@@ -90,7 +90,7 @@ export const authStorage = {
         const defaultUser: User = {
           name: 'Fiap Pós Tech',
           email: 'fiap@alecrimfinance.com.br',
-          password: 'Senha1234',
+          password: '123456',
         };
         users.push(defaultUser);
         localStorage.setItem('users', JSON.stringify(users));
