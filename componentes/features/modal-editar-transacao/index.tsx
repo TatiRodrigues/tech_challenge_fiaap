@@ -54,8 +54,17 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
     // Converte para número e divide por 100 para trabalhar com centavos
     const numberValue = parseInt(numericValue, 10) / 100;
     
-    // Retorna o valor formatado
-    return isNaN(numberValue) ? '' : numberValue.toFixed(2);
+    // Retorna o valor formatado em Real Brasileiro
+    return isNaN(numberValue) ? '' : numberValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
+  const formatDisplayValue = (value: number): string => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -64,7 +73,9 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
     // Aplicar máscara de dinheiro apenas para o campo de valor
     let finalValue: any = value;
     if (name === 'value') {
-      finalValue = parseFloat(formatCurrencyInput(value));
+      // Remove formatação e converte para número
+      const numericValue = value.replace(/\D/g, '');
+      finalValue = parseInt(numericValue, 10) / 100 || 0;
     } else if (name !== 'value' && typeof value === 'string') {
       finalValue = value;
     }
@@ -72,6 +83,14 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
     setFormData({
       ...formData,
       [name]: finalValue,
+    });
+  };
+
+  const handleValueBlur = () => {
+    // Formatar o valor quando o usuário sai do campo
+    setFormData({
+      ...formData,
+      value: formData.value,
     });
   };
 
@@ -107,13 +126,14 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
                 </select>
               </div>
               <div className="mb-3">
-                <label className="form-label">Valor</label>
+                <label className="form-label">Valor (R$)</label>
                 <input
                   type="text"
                   inputMode="decimal"
                   name="value"
-                  value={formData.value}
+                  value={formatDisplayValue(formData.value)}
                   onChange={handleChange}
+                  onBlur={handleValueBlur}
                   className="form-control"
                   required
                 />
