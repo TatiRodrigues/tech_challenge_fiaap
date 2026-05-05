@@ -29,7 +29,7 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
     value: 0,
     date: '',
     description: '',
-    status: 'Concluída',
+    status: 'Concluído',
   });
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
       setFormData({
         type: transaction.type,
         value: transaction.value,
-        date: transaction.date,
+        date: transaction.date.split('T')[0],
         description: transaction.description,
         status: transaction.status,
       });
@@ -76,6 +76,9 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
       // Remove formatação e converte para número
       const numericValue = value.replace(/\D/g, '');
       finalValue = parseInt(numericValue, 10) / 100 || 0;
+    } else if (name === 'date') {
+      // Manter a data no formato YYYY-MM-DD para permitir edição
+      finalValue = value;
     } else if (name !== 'value' && typeof value === 'string') {
       finalValue = value;
     }
@@ -96,7 +99,18 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    
+    const dataFormatada = { ...formData };
+    
+    // Se a data foi alterada (está em formato YYYY-MM-DD), converter com ajuste de timezone
+    if (typeof formData.date === 'string' && formData.date.length === 10) {
+      const now = new Date();
+      const [year, month, day] = formData.date.split('-');
+      const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), now.getHours(), now.getMinutes(), now.getSeconds());
+      dataFormatada.date = date.toISOString();
+    }
+    
+    onSave(dataFormatada);
     onClose();
   };
 
@@ -167,7 +181,7 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
                   onChange={handleChange}
                   className="form-select"
                 >
-                  <option value="Concluída">Concluída</option>
+                  <option value="Concluído">Concluído</option>
                   <option value="Pendente">Pendente</option>
                   <option value="Cancelada">Cancelada</option>
                 </select>

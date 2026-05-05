@@ -6,7 +6,7 @@ description: Resumo completo da documentação
 
 # 📋 Sumário Executivo
 
-Visão geral completa da documentação Alecrim Finance.
+Visão geral completa da documentação Alecrim Wallet.
 
 ## 📊 Estrutura da Documentação
 
@@ -192,7 +192,7 @@ Todos os componentes e documentação seguem:
 ## 📊 Mapa da Documentação
 
 ```
-📖 Documentação Alecrim Finance
+📖 Documentação Alecrim Wallet
 ├── 🎨 Design System (7 arquivos)
 │   ├── Fundamentos
 │   ├── Componentes Básicos

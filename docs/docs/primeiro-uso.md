@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Primeiro Uso
-description: Guia de primeiro uso da Alecrim Finance
+description: Guia de primeiro uso da Alecrim Wallet
 ---
 
 # 📚 Primeiro Uso
 
-Seu guia para começar com o Alecrim Finance - seu gerenciador de transações inteligente.
+Seu guia para começar com o Alecrim Wallet - seu gerenciador de transações inteligente.
 
 ## 1️⃣ Instalação
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/app/provedores/AuthProvider';
@@ -14,23 +14,35 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  useEffect(() => {
+    // Limpar os campos ao montar o componente
+    setEmail('');
+    setPassword('');
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
     try {
+      console.log('DEBUG - handleSubmit chamado com:', { email, password });
+      
       if (!email || !password) {
         setError('Por favor, preencha todos os campos');
         setIsLoading(false);
         return;
       }
 
+      console.log('DEBUG - Chamando login...');
       await login(email, password);
+      console.log('DEBUG - Login bem-sucedido, redirecionando...');
       router.push('/resumo-transacao');
     } catch (err: any) {
+      console.error('DEBUG - Erro no handleSubmit:', err);
+      console.error('DEBUG - Erro message:', err.message);
+      console.error('DEBUG - Erro full:', err);
       setError(err.message || 'Erro ao fazer login. Tente novamente.');
-      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -47,7 +59,7 @@ export default function LoginPage() {
                 <AlecrimLogo size={60} />
                 <div className="mt-2">
                   <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0, fontSize: '1.1rem' }}>
-                    Alecrim Finance
+                    Alecrim Wallet
                   </h3>
                   <p style={{ fontSize: '0.75rem', color: '#666', margin: '0.15rem 0 0 0' }}>
                     Seu gerenciador de transações
@@ -75,6 +87,7 @@ export default function LoginPage() {
                     disabled={isLoading}
                     autoComplete="off"
                     required
+                    suppressHydrationWarning
                   />
                 </div>
 
@@ -92,8 +105,9 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isLoading}
-                    autoComplete="current-password"
+                    autoComplete="off"
                     required
+                    suppressHydrationWarning
                   />
                   <div className="extra mt-3 row justify-content-between">
                     <div className="col-6">
@@ -128,7 +142,7 @@ export default function LoginPage() {
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="btn app-btn-primary w-100 theme-btn mx-auto"
+                    className={`btn w-100 theme-btn mx-auto ${isLoading || !!error ? 'app-btn-secondary' : 'app-btn-primary'}`}
                     disabled={isLoading || !!error}
                   >
                     {isLoading ? 'Entrando...' : 'Entrar'}
@@ -137,7 +151,7 @@ export default function LoginPage() {
               </form>
 
               <div className="auth-option text-center pt-5">
-                Não tem conta? Cadastre-se{' '}
+                Não tem uma conta? Cadastre-se aqui{' '}
                 <Link className="text-link" href="/cadastro">
                   aqui
                 </Link>
@@ -149,7 +163,7 @@ export default function LoginPage() {
           <footer className="app-auth-footer">
             <div className="container text-center py-3">
               <small className="copyright">
-                © 2026 Alecrim Finance - Seu gerenciador de transações inteligente. Todos os direitos reservados.
+                © 2026 Alecrim Wallet - Seu gerenciador de transações inteligente. Todos os direitos reservados.
               </small>
             </div>
           </footer>
@@ -164,7 +178,7 @@ export default function LoginPage() {
           <div className="d-flex flex-column align-content-end h-100">
             <div className="h-100"></div>
             <div className="overlay-content p-3 p-lg-4 rounded">
-              <h5 className="mb-3 overlay-title">Alecrim Finance</h5>
+              <h5 className="mb-3 overlay-title">Alecrim Wallet</h5>
               <div>
                 Seu companheiro financeiro inteligente. Controle, monitore e compreenda cada transação do seu dia a dia.
               </div>

@@ -10,6 +10,7 @@ interface Transaction {
   date: string;
   description: string;
   createdAt: string;
+  status: string;
 }
 
 export default function FormularioTransacao() {
@@ -94,13 +95,18 @@ export default function FormularioTransacao() {
       const transactions: Transaction[] = existing ? JSON.parse(existing) : [];
 
       // Criar nova transação
+      const now = new Date();
+      const [year, month, day] = formData.date.split('-');
+      const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), now.getHours(), now.getMinutes(), now.getSeconds());
+      
       const newTransaction: Transaction = {
         id: Date.now().toString(),
         type: formData.type as 'deposito' | 'transferencia' | 'saque',
         value: valueNum,
-        date: formData.date,
+        date: date.toISOString(),
         description: formData.description,
         createdAt: new Date().toISOString(),
+        status: 'Concluído',
       };
 
       // Salvar com as existentes
@@ -141,7 +147,7 @@ export default function FormularioTransacao() {
                 <select
                   id="type"
                   name="type"
-                  className="form-select form-select-lg"
+                  className="form-select"
                   value={formData.type}
                   onChange={handleChange}
                   disabled={isLoading}
@@ -163,7 +169,7 @@ export default function FormularioTransacao() {
                   type="text"
                   inputMode="decimal"
                   name="value"
-                  className="form-control form-control-lg"
+                  className="form-control"
                   placeholder="0,00"
                   value={formatDisplayValue(formData.value)}
                   onChange={handleChange}
@@ -181,7 +187,7 @@ export default function FormularioTransacao() {
                   id="date"
                   type="date"
                   name="date"
-                  className="form-control form-control-lg"
+                  className="form-control"
                   value={formData.date}
                   onChange={handleChange}
                   disabled={isLoading}
@@ -197,7 +203,7 @@ export default function FormularioTransacao() {
                 <textarea
                   id="description"
                   name="description"
-                  className="form-control form-control-lg"
+                  className="form-control"
                   rows={4}
                   placeholder="Descreva esta transação..."
                   value={formData.description}
@@ -227,7 +233,7 @@ export default function FormularioTransacao() {
               <div className="d-flex gap-2">
                 <button
                   type="submit"
-                  className="btn btn-success btn-lg"
+                  className="btn btn-success"
                   disabled={isLoading}
                 >
                   <i className="bi bi-check-circle me-2"></i>
@@ -235,7 +241,7 @@ export default function FormularioTransacao() {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-outline-secondary btn-lg"
+                  className="btn btn-outline-secondary"
                   onClick={() => router.back()}
                   disabled={isLoading}
                 >

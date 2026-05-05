@@ -4,8 +4,8 @@ import "@/app/portal.css";
 import { AuthProvider } from "@/app/provedores/AuthProvider";
 
 export const metadata: Metadata = {
-  title: "Alecrim Finance - Seu gerenciador de transações inteligente",
-  description: "Alecrim Finance - Seu gerenciador de transações inteligente",
+  title: "Alecrim Wallet - Seu gerenciador de transações inteligente",
+  description: "Alecrim Wallet - Seu gerenciador de transações inteligente",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <title>Alecrim Finance - o seu gerenciador de transações</title>
+        <title>Alecrim Wallet - o seu gerenciador de transações</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
         <script defer src="http://localhost:3000/assets/plugins/fontawesome/js/all.min.js"></script>
         <link id="theme-style" rel="stylesheet" href="http://localhost:3000/assets/css/portal.css" />

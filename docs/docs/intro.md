@@ -2,13 +2,13 @@
 sidebar_position: 1
 ---
 
-# 👋 Bem-vindo à Alecrim Finance
+# 👋 Bem-vindo à Alecrim Wallet
 
-Bem-vindo à documentação oficial da **Alecrim Finance** - seu gerenciador de transações inteligente.
+Bem-vindo à documentação oficial da **Alecrim Wallet** - seu gerenciador de transações inteligente.
 
-## 🎯 O que é Alecrim Finance?
+## 🎯 O que é Alecrim Wallet?
 
-Alecrim Finance é seu gerenciador de transações inteligente para:
+Alecrim Wallet é seu gerenciador de transações inteligente para:
 - ✅ Registrar e categorizar transações
 - ✅ Visualizar resumos e análises
 - ✅ Gerenciar múltiplas contas
@@ -74,7 +74,7 @@ Utilizamos o template [Portal](https://themes.3rdwavemedia.com/demo/portal/) de 
 ## 📊 Estrutura da Documentação
 
 ```
-📖 Alecrim Finance Docs
+📖 Alecrim Wallet Docs
 ├── 🚀 Comece Aqui
 ├── 🎨 Design System
 ├── 📦 Componentes (com Configuradores)

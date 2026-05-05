@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
                 <AlecrimLogo size={60} />
                 <div className="mt-2">
                   <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0, fontSize: '1.1rem' }}>
-                    Alecrim Finance
+                    Alecrim Wallet
                   </h3>
                   <p style={{ fontSize: '0.75rem', color: '#666', margin: '0.15rem 0 0 0' }}>
                     Seu gerenciador de transações
@@ -83,6 +83,7 @@ export default function ForgotPasswordPage() {
                     disabled={isLoading}
                     autoComplete="off"
                     required
+                    suppressHydrationWarning
                   />
                 </div>
 
@@ -122,10 +123,12 @@ export default function ForgotPasswordPage() {
                 .
               </div>
 
-              <div className="text-center mt-3">
-                <Link href="/cadastro" className="text-muted small text-decoration-none">
-                  Não tem conta? Cadastre-se
+              <div className="auth-option text-center pt-2">
+                Não tem uma conta? Cadastre-se aqui{' '}
+                <Link className="text-link" href="/cadastro">
+                  aqui
                 </Link>
+                .
               </div>
             </div>
           </div>
@@ -133,7 +136,7 @@ export default function ForgotPasswordPage() {
           <footer className="app-auth-footer">
             <div className="container text-center py-3">
               <small className="copyright">
-                © 2026 Alecrim Finance - Seu gerenciador de transações inteligente. Todos os direitos reservados.
+                © 2026 Alecrim Wallet - Seu gerenciador de transações inteligente. Todos os direitos reservados.
               </small>
             </div>
           </footer>

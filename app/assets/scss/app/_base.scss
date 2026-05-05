@@ -112,6 +112,14 @@ button.close {
 	box-shadow: none !important;
 }
 
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+	color: #fff;
+	pointer-events: none;
+	background-color: #495057;
+	border-color: var(--bs-btn-disabled-border-color);
+	opacity: var(--bs-btn-disabled-opacity);
+}
+
 .app-btn-primary {
     background: $theme-color-primary;
 	color: #fff;
@@ -152,10 +160,20 @@ button.close {
 	height: 2.5rem;
 	border-color: $theme-border-color;
     color: $theme-text-color-secondary;
+	background-color: white !important;
 	&:focus {
 		@include box-shadow(none);
 		outline: none;
 		color: $theme-text-color-secondary;
+		background-color: white !important;
+	}
+	&:-webkit-autofill,
+	&:-webkit-autofill:hover,
+	&:-webkit-autofill:focus {
+		-webkit-box-shadow: 0 0 0 1000px white inset !important;
+		-webkit-text-fill-color: $theme-text-color-secondary !important;
+		border-color: $theme-border-color !important;
+		background-color: white !important;
 	}
 }
 

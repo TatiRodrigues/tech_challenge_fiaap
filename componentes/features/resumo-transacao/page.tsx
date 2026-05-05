@@ -34,18 +34,18 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 			if (savedTransactions) {
 				setTransactions(JSON.parse(savedTransactions));
 			} else {
-				const defaultTransactions: Transaction[] = [
-					{
-						id: 1,
-						date: new Date().toISOString(),
-						type: 'deposito',
-						description: 'Depósito inicial',
-						value: 1000,
-						status: 'Concluída',
-					},
-				];
-				setTransactions(defaultTransactions);
-				localStorage.setItem('transactions', JSON.stringify(defaultTransactions));
+				// Carregar do arquivo JSON public/transactions.json
+				fetch('/transactions.json')
+					.then(res => res.json())
+					.then(data => {
+						const transactions = data.transactions || [];
+						setTransactions(transactions);
+						localStorage.setItem('transactions', JSON.stringify(transactions));
+					})
+					.catch(err => {
+						console.error('Erro ao carregar transações do arquivo:', err);
+						setTransactions([]);
+					});
 			}
 		} catch (error) {
 			console.error('Erro ao carregar transações:', error);
@@ -67,10 +67,19 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 		};
 
 		filtered.forEach(t => {
-			if (t.type === 'deposito') stats.deposits += t.value;
-			else if (t.type === 'transferencia') stats.transfers += t.value;
-			else if (t.type === 'saque') stats.withdrawals += t.value;
+			if (t.status === 'Concluído') {
+				if (t.type === 'deposito') stats.deposits += t.value;
+				else if (t.type === 'transferencia') stats.transfers += t.value;
+				else if (t.type === 'saque') stats.withdrawals += t.value;
+			}
 		});
+
+		// Garantir que são sempre números
+		stats.deposits = isNaN(stats.deposits) ? 0 : stats.deposits;
+		stats.transfers = isNaN(stats.transfers) ? 0 : stats.transfers;
+		stats.withdrawals = isNaN(stats.withdrawals) ? 0 : stats.withdrawals;
+
+		console.log('DEBUG - monthlyData calculado:', stats);
 
 		return {
 			monthlyData: stats,
@@ -96,10 +105,13 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 	};
 
 	const formatTime = (dateStr: string) => {
-		return new Date(dateStr).toLocaleTimeString('pt-BR', {
-			hour: '2-digit',
-			minute: '2-digit',
-		});
+		const date = new Date(dateStr);
+		const hours = date.getHours();
+		const minutes = date.getMinutes();
+		const ampm = hours >= 12 ? 'PM' : 'AM';
+		const displayHours = hours % 12 || 12;
+		const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+		return `${displayHours}:${displayMinutes} ${ampm}`;
 	};
 
 	const getTypeBadge = (type: string) => {
@@ -112,8 +124,20 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 	};
 
 	const getMonthName = (dateStr: string) => {
-		const date = new Date(dateStr + '-01');
-		return date.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+		const months = [
+			'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+			'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+		];
+		try {
+			const [year, month] = dateStr.split('-');
+			const monthIndex = parseInt(month) - 1;
+			if (monthIndex >= 0 && monthIndex < 12) {
+				return `${months[monthIndex]} de ${year}`;
+			}
+			return dateStr;
+		} catch (error) {
+			return dateStr;
+		}
 	};
 
 	if (isLoading) {
@@ -141,7 +165,7 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 						<div className="app-card-header p-4 border-bottom">
 							<h5 className="app-card-title mb-0">
 								<i className="bi bi-calendar-month me-2"></i>
-								Resumo Mensal
+							Resumo Mensal
 							</h5>
 						</div>
 						<div className="app-card-body p-4">
@@ -179,22 +203,22 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 										<i className="bi bi-arrow-left-right text-info me-2"></i>
 										Transferências:
 									</span>
-									<strong className="text-info">{formatCurrency(monthlyData.transfers)}</strong>
+									<strong className="text-info">-{formatCurrency(monthlyData.transfers)}</strong>
 								</div>
 								<div className="d-flex justify-content-between align-items-center">
 									<span className="text-muted">
 										<i className="bi bi-arrow-up-circle text-warning me-2"></i>
 										Saques:
 									</span>
-									<strong className="text-warning">{formatCurrency(monthlyData.withdrawals)}</strong>
+									<strong className="text-warning">-{formatCurrency(monthlyData.withdrawals)}</strong>
 								</div>
 
 								<hr className="my-3" />
 
 								<div className="d-flex justify-content-between align-items-center">
 									<span className="fw-500">Total do mês:</span>
-									<span className={`h5 mb-0 ${(monthlyData.deposits + monthlyData.transfers - monthlyData.withdrawals) >= 0 ? 'text-success' : 'text-danger'}`}>
-										{formatCurrency(monthlyData.deposits + monthlyData.transfers - monthlyData.withdrawals)}
+									<span className={`h5 mb-0 ${(monthlyData.deposits - monthlyData.transfers - monthlyData.withdrawals) >= 0 ? 'text-success' : 'text-danger'}`}>
+										{formatCurrency(monthlyData.deposits - monthlyData.transfers - monthlyData.withdrawals)}
 									</span>
 								</div>
 							</div>
@@ -215,7 +239,7 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 						<div className="app-card-header p-4 border-bottom">
 							<h5 className="app-card-title mb-0">
 								<i className="bi bi-clock-history me-2"></i>
-								Timeline de Transações
+								Timeline de Transações - {getMonthName(selectedMonth)}
 							</h5>
 						</div>
 						<div className="app-card-body p-4">
@@ -267,12 +291,12 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 																</small>
 															</div>
 															<div className="text-right">
-																<p className={`h6 mb-0 ${transaction.type === 'saque' ? 'text-danger' : 'text-success'}`}>
-																	{transaction.type === 'saque' ? '-' : '+'}
+																<p className={`h6 mb-0 ${(transaction.type === 'saque' || transaction.type === 'transferencia') ? 'text-danger' : 'text-success'}`}>
+																	{(transaction.type === 'saque' || transaction.type === 'transferencia') ? '-' : '+'}
 																	{' '}
 																	{formatCurrency(transaction.value)}
 																</p>
-																<small className={`badge ${transaction.status === 'Concluída' ? 'bg-success' : 'bg-warning'}`}>
+																<small className={`badge ${transaction.status === 'Concluído' ? 'bg-success' : 'bg-warning'}`}>
 																	{transaction.status}
 																</small>
 															</div>

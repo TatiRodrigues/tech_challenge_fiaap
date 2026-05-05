@@ -39,8 +39,8 @@ Use estas credenciais para acessar a aplicação:
 
 ```
 Nome: Fiap Pós Tech
-Email: fiap@alecrimfinance.com.br
-Senha: 123456
+Email: fiap@alecrimwallet.com.br
+Senha: 1234
 ```
 
 ## 📚 Documentação

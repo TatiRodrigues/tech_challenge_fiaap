@@ -1,7 +1,7 @@
 .app-login {
 	
 	.auth-background-holder {
-		background: url("/imagens/background-1.jpg") no-repeat center center;
+		background: url("/imagens/background-7.jpg?v=2") no-repeat center center;
 		@include background-size(cover);
 		height: 100vh;
 		min-height: 100%;
@@ -93,10 +93,6 @@
 	}
 	.auth-heading {
 		font-size: 1.2rem;
-	}
-	
-	.form-control {
-        @include placeholder($theme-text-color-light); 
 	}
 	
 	

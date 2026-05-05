@@ -29,12 +29,12 @@ const ListarTransacoes: React.FC<ListarTransacoesProps> = ({ transactions, editT
 
   const formatTime12h = (dateStr: string): string => {
     const date = new Date(dateStr);
-
-    return new Intl.DateTimeFormat('pt-BR', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
-    }).format(date);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+    return `${displayHours}:${displayMinutes} ${ampm}`;
   };
 
   const getTypeBadge = (type: string) => {

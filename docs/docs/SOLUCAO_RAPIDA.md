@@ -6,7 +6,7 @@ description: Comece em 5 minutos
 
 # ⚡ Solução Rápida - 5 Minutos
 
-Comece a usar o Alecrim Finance - seu gerenciador de transações inteligente em 5 minutos.
+Começe a usar o Alecrim Wallet - seu gerenciador de transações inteligente em 5 minutos.
 
 ## 🚀 Setup (2 min)
 

@@ -60,18 +60,18 @@ export default function PaginaListarTransacoes() {
       if (savedTransactions) {
         setTransactions(JSON.parse(savedTransactions));
       } else {
-        const defaultTransactions: Transaction[] = [
-          {
-            id: 1,
-            date: new Date().toISOString(),
-            type: 'deposito',
-            description: 'Depósito inicial',
-            value: 1000,
-            status: 'Concluída',
-          },
-        ];
-        setTransactions(defaultTransactions);
-        localStorage.setItem('transactions', JSON.stringify(defaultTransactions));
+        // Carregar do arquivo JSON public/transactions.json
+        fetch('/transactions.json')
+          .then(res => res.json())
+          .then(data => {
+            const transactions = data.transactions || [];
+            setTransactions(transactions);
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+          })
+          .catch(err => {
+            console.error('Erro ao carregar transações do arquivo:', err);
+            setTransactions([]);
+          });
       }
     } catch (error) {
       console.error('Erro ao carregar transações:', error);
@@ -130,22 +130,24 @@ export default function PaginaListarTransacoes() {
   // Calcular estatísticas dos filtrados
   const filteredStats = useMemo(() => {
     const deposits = filteredTransactions
-      .filter(t => t.type === 'deposito')
+      .filter(t => t.type === 'deposito' && t.status === 'Concluído')
       .reduce((sum, t) => sum + t.value, 0);
-    
+
     const transfers = filteredTransactions
-      .filter(t => t.type === 'transferencia')
+      .filter(t => t.type === 'transferencia' && t.status === 'Concluído')
       .reduce((sum, t) => sum + t.value, 0);
-    
+
     const withdrawals = filteredTransactions
-      .filter(t => t.type === 'saque')
+      .filter(t => t.type === 'saque' && t.status === 'Concluído')
       .reduce((sum, t) => sum + t.value, 0);
+
+    const total = deposits - transfers - withdrawals;
 
     return {
       deposits,
       transfers,
       withdrawals,
-      total: deposits - transfers - withdrawals,
+      total,
     };
   }, [filteredTransactions]);
 
@@ -163,13 +165,17 @@ export default function PaginaListarTransacoes() {
       return;
     }
 
+    const [year, month, day] = newTransaction.date.split('-');
+    const now = new Date();
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), now.getHours(), now.getMinutes(), now.getSeconds());
+
     const transaction: Transaction = {
       id: transactions.length > 0 ? Math.max(...transactions.map(t => t.id)) + 1 : 1,
-      date: new Date(newTransaction.date).toISOString(),
+      date: date.toISOString(),
       type: newTransaction.type,
       description: newTransaction.description,
       value: numericValue,
-      status: 'Concluída',
+      status: 'Concluído',
     };
 
     const updated = [...transactions, transaction];
@@ -271,11 +277,12 @@ export default function PaginaListarTransacoes() {
 
   const formatTime12h = (dateStr: string): string => {
     const date = new Date(dateStr);
-    return new Intl.DateTimeFormat('pt-BR', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
-    }).format(date);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+    const displayMinutes = minutes < 10 ? '0' + minutes : minutes;
+    return `${displayHours}:${displayMinutes} ${ampm}`;
   };
 
   const getTypeBadge = (type: string) => {
@@ -396,7 +403,7 @@ export default function PaginaListarTransacoes() {
                   onChange={(e) => setFilters({ ...filters, status: e.target.value })}
                 >
                   <option value="">Todos</option>
-                  <option value="Concluída">Concluída</option>
+                  <option value="Concluído">Concluído</option>
                   <option value="Pendente">Pendente</option>
                   <option value="Cancelada">Cancelada</option>
                 </select>
@@ -590,7 +597,7 @@ export default function PaginaListarTransacoes() {
                               </span>
                             </td>
                             <td className="cell">
-                              <span className={`badge ${transaction.status === 'Concluída' ? 'bg-success' : transaction.status === 'Pendente' ? 'bg-warning' : 'bg-danger'}`}>
+                              <span className={`badge ${transaction.status === 'Concluído' ? 'bg-success' : transaction.status === 'Pendente' ? 'bg-warning' : 'bg-danger'}`}>
                                 {transaction.status}
                               </span>
                             </td>
@@ -635,7 +642,7 @@ export default function PaginaListarTransacoes() {
                                   {badge.label}
                                 </span>
                               </div>
-                              <span className={`badge ${transaction.status === 'Concluída' ? 'bg-success' : transaction.status === 'Pendente' ? 'bg-warning' : 'bg-danger'}`}>
+                              <span className={`badge ${transaction.status === 'Concluído' ? 'bg-success' : transaction.status === 'Pendente' ? 'bg-warning' : 'bg-danger'}`}>
                                 {transaction.status}
                               </span>
                             </div>

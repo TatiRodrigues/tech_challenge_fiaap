@@ -11,19 +11,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Carregar usuário ao inicializar (apenas no cliente)
   useEffect(() => {
+    console.log('DEBUG - AuthProvider iniciando');
     authStorage.initializeDefaultUser();
     const currentUser = authStorage.getCurrentUser();
+    console.log('DEBUG - Usuário atual recuperado:', currentUser);
     setUser(currentUser);
     setIsHydrated(true);
   }, []);
 
   const login = async (email: string, password: string): Promise<void> => {
+    console.log('DEBUG - Iniciando login com:', { email, password });
     const foundUser = authStorage.findUser(email, password);
+    console.log('DEBUG - Usuário encontrado:', foundUser);
+    
     if (!foundUser) {
+      console.error('DEBUG - Usuário não encontrado, lançando erro');
       throw new Error('Email ou senha inválidos');
     }
+    
+    console.log('DEBUG - Salvando usuário atual...');
     authStorage.setCurrentUser(foundUser);
+    console.log('DEBUG - Atualizando state com usuário:', foundUser);
     setUser(foundUser);
+    console.log('DEBUG - Login realizado com sucesso');
   };
 
   const logout = (): void => {

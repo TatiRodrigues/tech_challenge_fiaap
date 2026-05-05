@@ -18,20 +18,15 @@ interface CardsResumoProps {
 export default function CardsResumo({ transactions }: CardsResumoProps) {
   const totals = useMemo(() => {
     const totalDeposits = transactions
-      .filter(t => t.type === 'deposito')
+      .filter(t => t.type === 'deposito' && t.status === 'Concluído')
       .reduce((sum, t) => sum + t.value, 0);
     
-    const totalTransfers = transactions
-      .filter(t => t.type === 'transferencia')
-      .reduce((sum, t) => sum + t.value, 0);
-    
-    const totalWithdrawals = transactions
-      .filter(t => t.type === 'saque')
+    const totalExpenses = transactions
+      .filter(t => (t.type === 'saque' || t.type === 'transferencia') && t.status === 'Concluído')
       .reduce((sum, t) => sum + t.value, 0);
     
     const totalIncome = totalDeposits;
-    const totalExpenses = totalTransfers + totalWithdrawals;
-    const balance = totalDeposits - totalExpenses;
+    const balance = totalDeposits - totalExpenses; // Saldo = ganhos - despesas
     
     return {
       totalIncome,

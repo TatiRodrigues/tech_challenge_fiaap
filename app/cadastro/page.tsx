@@ -104,6 +104,7 @@ export default function RegisterPage() {
                     onChange={handleChange}
                     disabled={isLoading}
                     required
+                    suppressHydrationWarning
                   />
                 </div>
 
@@ -123,6 +124,7 @@ export default function RegisterPage() {
                     disabled={isLoading}
                     autoComplete="off"
                     required
+                    suppressHydrationWarning
                   />
                 </div>
 
@@ -140,8 +142,9 @@ export default function RegisterPage() {
                     value={formData.password}
                     onChange={handleChange}
                     disabled={isLoading}
-                    autoComplete="new-password"
+                    autoComplete="off"
                     required
+                    suppressHydrationWarning
                   />
                 </div>
 
@@ -159,8 +162,9 @@ export default function RegisterPage() {
                     value={formData.passwordConfirm}
                     onChange={handleChange}
                     disabled={isLoading}
-                    autoComplete="new-password"
+                    autoComplete="off"
                     required
+                    suppressHydrationWarning
                   />
                 </div>
 

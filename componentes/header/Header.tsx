@@ -78,7 +78,7 @@ export default function Header() {
                 <div className="d-flex align-items-center gap-2">
                   <AlecrimLogo size={40} />
                   <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0, fontSize: '1rem' }}>
-                    Alecrim Finance
+                    Alecrim Wallet
                   </h3>
                 </div>
               </div>

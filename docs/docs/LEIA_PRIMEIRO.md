@@ -8,7 +8,7 @@ description: Informações essenciais
 
 Informações essenciais para começar.
 
-## 🎯 O que é a Alecrim Finance?
+## 🎯 O que é a Alecrim Wallet?
 
 Seu gerenciador de transações inteligente com:
 - Interface intuitiva e responsiva
@@ -31,7 +31,7 @@ Seu gerenciador de transações inteligente com:
 ### 1. Clone e Install
 ```bash
 git clone <repo-url>
-cd alecrim-finance
+cd alecrim-wallet
 npm install
 ```
 

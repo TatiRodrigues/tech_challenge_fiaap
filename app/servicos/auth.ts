@@ -18,7 +18,9 @@ export const authStorage = {
   getUsers: (): User[] => {
     try {
       const users = localStorage.getItem('users');
-      return users ? JSON.parse(users) : [];
+      const parsedUsers = users ? JSON.parse(users) : [];
+      console.log('DEBUG - getUsers() retornando:', parsedUsers);
+      return parsedUsers;
     } catch (error) {
       console.error('Erro ao obter usuários:', error);
       return [];
@@ -45,7 +47,16 @@ export const authStorage = {
   findUser: (email: string, password: string): User | null => {
     try {
       const users = authStorage.getUsers();
-      return users.find(u => u.email === email && u.password === password) || null;
+      const cleanEmail = email.trim().toLowerCase();
+      const cleanPassword = password.trim();
+      
+      console.log('DEBUG - Usuários no storage:', users);
+      console.log('DEBUG - Procurando por:', { email: cleanEmail, password: cleanPassword });
+      
+      const foundUser = users.find(u => u.email.toLowerCase() === cleanEmail && u.password === cleanPassword);
+      console.log('DEBUG - Usuário encontrado:', foundUser);
+      
+      return foundUser || null;
     } catch (error) {
       console.error('Erro ao buscar usuário:', error);
       return null;
@@ -55,7 +66,9 @@ export const authStorage = {
   // Salvar usuário autenticado
   setCurrentUser: (user: User): void => {
     try {
+      console.log('DEBUG - setCurrentUser chamado com:', user);
       localStorage.setItem('currentUser', JSON.stringify(user));
+      console.log('DEBUG - Usuário salvo no currentUser:', localStorage.getItem('currentUser'));
     } catch (error) {
       console.error('Erro ao salvar usuário atual:', error);
     }
@@ -85,16 +98,29 @@ export const authStorage = {
   initializeDefaultUser: (): void => {
     try {
       const users = authStorage.getUsers();
-      // Se não há usuários, adicionar o usuário padrão
-      if (users.length === 0) {
-        const defaultUser: User = {
-          name: 'Fiap Pós Tech',
-          email: 'fiap@alecrimfinance.com.br',
-          password: '123456',
-        };
+      const defaultUser: User = {
+        name: 'Fiap Pós Tech',
+        email: 'fiap@alecrimwallet.com.br',
+        password: '1234',
+      };
+      
+      console.log('DEBUG - Inicializando usuário padrão. Usuários existentes:', users.length);
+      
+      // Procurar se já existe um usuário padrão com esse email
+      const existingUserIndex = users.findIndex(u => u.email === 'fiap@alecrimwallet.com.br');
+      
+      if (existingUserIndex >= 0) {
+        // Atualizar usuário existente
+        users[existingUserIndex] = defaultUser;
+        console.log('DEBUG - Atualizando usuário padrão existente');
+      } else {
+        // Adicionar se não existir
         users.push(defaultUser);
-        localStorage.setItem('users', JSON.stringify(users));
+        console.log('DEBUG - Adicionando novo usuário padrão');
       }
+      
+      localStorage.setItem('users', JSON.stringify(users));
+      console.log('DEBUG - Usuários salvos no storage:', users);
     } catch (error) {
       console.error('Erro ao inicializar usuário padrão:', error);
     }
