@@ -1,7 +1,7 @@
 {
   "id": "primeiro-uso",
   "title": "Primeiro Uso",
-  "description": "Guia de primeiro uso da Alecrim Finance",
+  "description": "Guia de primeiro uso da Alecrim Wallet",
   "source": "@site/docs/primeiro-uso.md",
   "sourceDirName": ".",
   "slug": "/primeiro-uso",
@@ -15,11 +15,11 @@
   "frontMatter": {
     "sidebar_position": 1,
     "title": "Primeiro Uso",
-    "description": "Guia de primeiro uso da Alecrim Finance"
+    "description": "Guia de primeiro uso da Alecrim Wallet"
   },
   "sidebar": "tutorialSidebar",
   "previous": {
-    "title": "👋 Bem-vindo à Alecrim Finance",
+    "title": "👋 Bem-vindo à Alecrim Wallet",
     "permalink": "/docs/intro"
   },
   "next": {

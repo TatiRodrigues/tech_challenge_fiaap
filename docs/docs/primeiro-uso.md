@@ -79,9 +79,6 @@ npm run start
 ```
 Acesse: http://localhost:3002
 
-### Online
-Visite: https://alecrim-finance-docs.vercel.app
-
 ## 5️⃣ Próximas Etapas
 
 - ✅ Leia o [Design System](./design-system/index)

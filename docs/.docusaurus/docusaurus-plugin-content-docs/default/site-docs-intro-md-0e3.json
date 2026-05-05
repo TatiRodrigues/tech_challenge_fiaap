@@ -1,7 +1,7 @@
 {
   "id": "intro",
-  "title": "👋 Bem-vindo à Alecrim Finance",
-  "description": "Bem-vindo à documentação oficial da Alecrim Finance - seu gerenciador de transações inteligente.",
+  "title": "👋 Bem-vindo à Alecrim Wallet",
+  "description": "Bem-vindo à documentação oficial da Alecrim Wallet - seu gerenciador de transações inteligente.",
   "source": "@site/docs/intro.md",
   "sourceDirName": ".",
   "slug": "/intro",
