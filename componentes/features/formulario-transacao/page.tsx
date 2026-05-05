@@ -32,8 +32,20 @@ export default function FormularioTransacao() {
     // Converte para número e divide por 100 para trabalhar com centavos
     const numberValue = parseInt(numericValue, 10) / 100;
     
-    // Formata como moeda
-    return isNaN(numberValue) ? '' : numberValue.toFixed(2);
+    // Formata como moeda em Real Brasileiro
+    return isNaN(numberValue) ? '' : numberValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
+  const formatDisplayValue = (value: string): string => {
+    if (!value) return '';
+    const numericValue = (parseInt(value, 10) || 0) / 100;
+    if (numericValue === 0) return '';
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(numericValue);
   };
 
   const handleChange = (
@@ -44,7 +56,9 @@ export default function FormularioTransacao() {
     // Aplicar máscara de dinheiro apenas para o campo de valor
     let finalValue = value;
     if (name === 'value') {
-      finalValue = formatCurrencyInput(value);
+      // Remove formatação anterior e armazena apenas o número
+      const numericValue = value.replace(/\D/g, '');
+      finalValue = numericValue;
     }
     
     setFormData(prev => ({
@@ -67,7 +81,8 @@ export default function FormularioTransacao() {
         return;
       }
 
-      const valueNum = parseFloat(formData.value);
+      const numericValue = parseInt(formData.value, 10) || 0;
+      const valueNum = numericValue / 100;
       if (isNaN(valueNum) || valueNum <= 0) {
         setError('Valor deve ser um número positivo');
         setIsLoading(false);
@@ -141,7 +156,7 @@ export default function FormularioTransacao() {
               {/* Value */}
               <div className="mb-4">
                 <label htmlFor="value" className="form-label fw-500">
-                  Valor (R$)
+                  Valor
                 </label>
                 <input
                   id="value"
@@ -150,7 +165,7 @@ export default function FormularioTransacao() {
                   name="value"
                   className="form-control form-control-lg"
                   placeholder="0,00"
-                  value={formData.value}
+                  value={formatDisplayValue(formData.value)}
                   onChange={handleChange}
                   disabled={isLoading}
                   required

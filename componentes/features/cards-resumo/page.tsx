@@ -29,12 +29,13 @@ export default function CardsResumo({ transactions }: CardsResumoProps) {
       .filter(t => t.type === 'saque')
       .reduce((sum, t) => sum + t.value, 0);
     
-    const totalIncome = totalDeposits + totalTransfers;
-    const balance = totalIncome - totalWithdrawals;
+    const totalIncome = totalDeposits;
+    const totalExpenses = totalTransfers + totalWithdrawals;
+    const balance = totalDeposits - totalExpenses;
     
     return {
       totalIncome,
-      totalWithdrawals,
+      totalExpenses,
       balance,
       transactionCount: transactions.length
     };
@@ -62,7 +63,7 @@ export default function CardsResumo({ transactions }: CardsResumoProps) {
         <div className="app-card app-card-stat shadow-sm h-100">
           <div className="app-card-body p-3 p-lg-4">
             <h4 className="stats-type mb-1">Total de Gastos</h4>
-            <div className="stats-figure text-danger">{formatCurrency(totals.totalWithdrawals)}</div>
+            <div className="stats-figure text-danger">{formatCurrency(totals.totalExpenses)}</div>
           </div>
         </div>
       </div>

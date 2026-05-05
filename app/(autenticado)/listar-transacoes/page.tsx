@@ -145,7 +145,7 @@ export default function PaginaListarTransacoes() {
       deposits,
       transfers,
       withdrawals,
-      total: deposits + transfers - withdrawals,
+      total: deposits - transfers - withdrawals,
     };
   }, [filteredTransactions]);
 
@@ -157,12 +157,18 @@ export default function PaginaListarTransacoes() {
       return;
     }
 
+    const numericValue = (parseInt(newTransaction.value, 10) || 0) / 100;
+    if (isNaN(numericValue) || numericValue <= 0) {
+      alert('Valor deve ser um número positivo');
+      return;
+    }
+
     const transaction: Transaction = {
       id: transactions.length > 0 ? Math.max(...transactions.map(t => t.id)) + 1 : 1,
       date: new Date(newTransaction.date).toISOString(),
       type: newTransaction.type,
       description: newTransaction.description,
-      value: parseFloat(newTransaction.value),
+      value: numericValue,
       status: 'Concluída',
     };
 
@@ -234,6 +240,29 @@ export default function PaginaListarTransacoes() {
       style: 'currency',
       currency: 'BRL',
     }).format(value);
+  };
+
+  const formatCurrencyInput = (value: string): string => {
+    // Remove tudo que não é número
+    const numericValue = value.replace(/\D/g, '');
+    
+    // Converte para número e divide por 100 para trabalhar com centavos
+    const numberValue = parseInt(numericValue, 10) / 100;
+    
+    // Formata como moeda em Real Brasileiro
+    return isNaN(numberValue) ? '' : numberValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
+  const formatDisplayValue = (value: string): string => {
+    if (!value) return '';
+    const numericValue = (parseInt(value, 10) || 0) / 100;
+    if (numericValue === 0) return '';
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(numericValue);
   };
 
   const formatDate = (date: string) => {
@@ -556,8 +585,8 @@ export default function PaginaListarTransacoes() {
                               <span>{transaction.description}</span>
                             </td>
                             <td className="cell">
-                              <span className={transaction.type === 'saque' ? 'text-danger' : 'text-success'}>
-                                {transaction.type === 'saque' ? '-' : '+'} {formatCurrency(transaction.value)}
+                              <span className={transaction.type === 'saque' || transaction.type === 'transferencia' ? 'text-danger' : 'text-success'}>
+                                {transaction.type === 'saque' || transaction.type === 'transferencia' ? '-' : '+'} {formatCurrency(transaction.value)}
                               </span>
                             </td>
                             <td className="cell">
@@ -618,8 +647,8 @@ export default function PaginaListarTransacoes() {
 
                             <div className="d-flex justify-content-between align-items-center mb-3">
                               <span className="text-muted">Valor:</span>
-                              <span className={`h5 mb-0 ${transaction.type === 'saque' ? 'text-danger' : 'text-success'}`}>
-                                {transaction.type === 'saque' ? '-' : '+'} {formatCurrency(transaction.value)}
+                              <span className={`h5 mb-0 ${transaction.type === 'saque' || transaction.type === 'transferencia' ? 'text-danger' : 'text-success'}`}>
+                                {transaction.type === 'saque' || transaction.type === 'transferencia' ? '-' : '+'} {formatCurrency(transaction.value)}
                               </span>
                             </div>
 
@@ -670,7 +699,7 @@ export default function PaginaListarTransacoes() {
                 <div className="modal-body">
                   <div className="mb-3">
                     <label htmlFor="tipo" className="form-label">
-                      Tipo de transação:
+                      Tipo de transação
                     </label>
                     <select
                       id="tipo"
@@ -686,24 +715,26 @@ export default function PaginaListarTransacoes() {
 
                   <div className="mb-3">
                     <label htmlFor="valor" className="form-label">
-                      Valor (R$):
+                      Valor
                     </label>
                     <input
                       id="valor"
-                      type="number"
-                      step="0.01"
-                      min="0"
+                      type="text"
+                      inputMode="decimal"
                       className="form-control"
                       placeholder="0,00"
-                      value={newTransaction.value}
-                      onChange={(e) => setNewTransaction({ ...newTransaction, value: e.target.value })}
+                      value={formatDisplayValue(newTransaction.value)}
+                      onChange={(e) => {
+                        const numericValue = e.target.value.replace(/\D/g, '');
+                        setNewTransaction({ ...newTransaction, value: numericValue });
+                      }}
                       required
                     />
                   </div>
 
                   <div className="mb-3">
                     <label htmlFor="data" className="form-label">
-                      Data:
+                      Data
                     </label>
                     <input
                       id="data"
@@ -717,7 +748,7 @@ export default function PaginaListarTransacoes() {
 
                   <div className="mb-3">
                     <label htmlFor="descricao" className="form-label">
-                      Descrição:
+                      Descrição
                     </label>
                     <textarea
                       id="descricao"

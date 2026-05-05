@@ -126,7 +126,7 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
                 </select>
               </div>
               <div className="mb-3">
-                <label className="form-label">Valor (R$)</label>
+                <label className="form-label">Valor</label>
                 <input
                   type="text"
                   inputMode="decimal"
