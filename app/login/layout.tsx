@@ -6,7 +6,7 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="login-page-wrapper">
+    <div className="login-page-wrapper app-login">
       {children}
     </div>
   );

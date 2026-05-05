@@ -11,7 +11,7 @@ export default function LayoutAutenticado({
     <div className="app">
       <Header />
 
-      <div id="app-sidepanel" className="app-sidepanel">
+      <div id="app-sidepanel" className="app-sidepanel sidepanel-visible">
         <div id="sidepanel-drop" className="sidepanel-drop"></div>
         <MenuLateral />
       </div>

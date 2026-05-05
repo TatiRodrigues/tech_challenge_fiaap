@@ -6,7 +6,7 @@ export default function CadastroLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="login-page-wrapper">
+    <div className="login-page-wrapper app-signup">
       {children}
     </div>
   );

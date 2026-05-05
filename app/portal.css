@@ -14094,12 +14094,6 @@ button.close:focus {
     }
 }
 
-@media(min-width: 1200px) {
-    .header-inner {
-        margin-left: 250px
-    }
-}
-
 @media(max-width: 575.98px) {
     .search-mobile-trigger {
         cursor: pointer;
@@ -14949,14 +14943,14 @@ button.close:focus {
 }
 
 .app-signup .auth-background-holder {
-    background: url("/images/background/background-2.jpg") no-repeat center center;
+    background: url("/imagens/background-2.jpg") no-repeat center center;
     background-size: cover;
     height: 100vh;
     min-height: 100%
 }
 
 .app-reset-password .auth-background-holder {
-    background: url("/images/background/background-3.jpg") no-repeat center center;
+    background: url("/imagens/background-3.jpg") no-repeat center center;
     background-size: cover;
     height: 100vh;
     min-height: 100%
@@ -15011,7 +15005,8 @@ button.close:focus {
 
 .app-auth-wrapper {
     background: #fff;
-    height: 100vh
+    height: 100vh;
+    overflow: hidden
 }
 
 .app-auth-wrapper .app-auth-body {
@@ -15024,7 +15019,7 @@ button.close:focus {
 }
 
 .app-auth-wrapper .auth-heading {
-    font-size: 1.5rem
+    font-size: 1.2rem
 }
 
 .app-auth-wrapper .form-control::-webkit-input-placeholder {

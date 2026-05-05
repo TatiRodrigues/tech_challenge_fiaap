@@ -3,6 +3,7 @@
 import { useAuth } from '@/app/provedores/AuthProvider';
 import { useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
+import { AlecrimLogo } from '@/componentes/AlecrimLogo';
 
 export default function Header() {
   const { user, logout } = useAuth();
@@ -32,8 +33,8 @@ export default function Header() {
         <div className="container-fluid py-2">
           <div className="header-content">
             <div className="row justify-content-between align-items-center">
-              {/* Menu Toggle */}
-              <div className="col-auto">
+              {/* Menu Toggle and Logo */}
+              <div className="col-auto d-flex align-items-center gap-2">
                 <button
                   id="sidepanel-toggler"
                   className="sidepanel-toggler d-inline-block d-xl-none"
@@ -72,10 +73,18 @@ export default function Header() {
                     ></path>
                   </svg>
                 </button>
+
+                {/* Logo and Branding */}
+                <div className="d-flex align-items-center gap-2">
+                  <AlecrimLogo size={40} />
+                  <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0, fontSize: '1rem' }}>
+                    Alecrim Finance
+                  </h3>
+                </div>
               </div>
 
               {/* Utilities */}
-              <div className="app-utilities col-auto">
+              <div className="app-utilities col-auto d-flex align-items-center gap-3">
                 {/* Notifications */}
                 <div className="app-utility-item app-notifications-dropdown dropdown">
                   <a

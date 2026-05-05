@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { AlecrimLogo } from '@/componentes/AlecrimLogo';
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
@@ -45,13 +46,18 @@ export default function ForgotPasswordPage() {
       <div className="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
         <div className="d-flex flex-column align-content-end">
           <div className="app-auth-body mx-auto">
-            <div className="app-auth-branding mb-4">
-              <a className="app-logo" href="/">
-                <i className="bi bi-wallet2 me-2" style={{ fontSize: '2rem', color: '#667eea' }}></i>
-                <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#667eea' }}>
-                  Transações
-                </span>
-              </a>
+            <div className="app-auth-branding mb-3 text-center">
+              <div className="d-flex flex-column align-items-center justify-content-center">
+                <AlecrimLogo size={60} />
+                <div className="mt-2">
+                  <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0, fontSize: '1.1rem' }}>
+                    Alecrim Finance
+                  </h3>
+                  <p style={{ fontSize: '0.75rem', color: '#666', margin: '0.15rem 0 0 0' }}>
+                    Seu gerenciador de transações
+                  </p>
+                </div>
+              </div>
             </div>
             <h2 className="auth-heading text-center mb-3">Recuperar Senha</h2>
 
