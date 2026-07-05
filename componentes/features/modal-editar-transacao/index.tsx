@@ -44,20 +44,6 @@ export function ModalEditarTransacao({ transaction, onSave, onClose }: ModalEdit
     }
   }, [transaction]);
 
-  const formatCurrencyInput = (value: string | number): string => {
-    // Converter para string se for número
-    const strValue = typeof value === 'number' ? value.toString() : value;
-    
-    // Remove tudo que não é número
-    const numericValue = strValue.replace(/\D/g, '');
-    
-    // Converte para número e divide por 100 para trabalhar com centavos
-    const numberValue = parseInt(numericValue, 10) / 100;
-    
-    // Retorna o valor formatado em Real Brasileiro
-    return isNaN(numberValue) ? '' : numberValue.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  };
-
   const formatDisplayValue = (value: number): string => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',

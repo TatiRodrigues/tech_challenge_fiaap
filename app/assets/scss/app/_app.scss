@@ -5,6 +5,15 @@
     background: $theme-bg-light;
     padding-top: 56px;
     overflow-x: hidden;
+    box-sizing: border-box;
+    
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 575.98px) {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100vw;
+        max-width: 100vw;
+    }
 }
 
 .app-footer {

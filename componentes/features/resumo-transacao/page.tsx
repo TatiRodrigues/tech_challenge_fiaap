@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import CardsResumo from '../cards-resumo/page';
+import FinancialCharts from '../financial-charts/FinancialCharts';
+import DashboardCustomizer, { DashboardWidget } from '../dashboard-customizer/DashboardCustomizer';
 
 interface Transaction {
   id: number;
@@ -13,12 +15,12 @@ interface Transaction {
 }
 
 interface User {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
 }
 
 interface ResumoTransacaoProps {
-  user: User;
+  user: User | null;
 }
 
 export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
@@ -27,6 +29,7 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 	const [selectedMonth, setSelectedMonth] = useState<string>(
 		new Date().toISOString().slice(0, 7) // YYYY-MM
 	);
+	const [, setEnabledWidgets] = useState<DashboardWidget[]>([]);
 
 	useEffect(() => {
 		try {
@@ -151,10 +154,21 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 	return (
 		<div className="container-xl">
 			{/* Título */}
-			<p className="app-page-title text-muted mb-4">Bem-vindo(a), <span className="text-success">{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</span>!<br/>Aqui está o resumo de suas transações</p>
+			<p className="app-page-title text-muted mb-4">Bem-vindo(a), <span className="text-success">{(user?.name || 'Usuário').charAt(0).toUpperCase() + (user?.name || 'Usuário').slice(1)}</span>!<br/>Aqui está o resumo de suas transações</p>
 
 			{/* Cards de Resumo */}
 			<CardsResumo transactions={transactions} />
+
+			{/* Gráficos Financeiros */}
+			<div className="mb-4">
+				<FinancialCharts transactions={transactions.map(t => ({
+					id: t.id.toString(),
+					type: t.type as 'deposito' | 'transferencia' | 'saque',
+					value: t.value,
+					date: t.date,
+					description: t.description,
+				}))} />
+			</div>
 
 			<div className="row g-4 mb-4">
 				{/* Resumo Mensal */}
@@ -310,6 +324,9 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 					</div>
 				</div>
 			</div>
+
+			{/* Dashboard Customizer */}
+			<DashboardCustomizer onWidgetsChange={setEnabledWidgets} />
 		</div>
 	);
 };

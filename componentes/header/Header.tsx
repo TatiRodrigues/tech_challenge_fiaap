@@ -1,19 +1,29 @@
 'use client';
 
-import { useAuth } from '@/app/provedores/AuthProvider';
 import { useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { logoutUser } from '@/store/thunks';
 import { AlecrimLogo } from '@/componentes/AlecrimLogo';
 
 export default function Header() {
-  const { user, logout } = useAuth();
+  const dispatch = useAppDispatch();
   const router = useRouter();
+  const { user } = useAppSelector(state => state.auth);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
-  const handleLogout = () => {
-    logout();
-    router.push('/login');
+  const handleLogout = async () => {
+    try {
+      // Dispatch Redux Thunk para logout
+      await (dispatch as any)(logoutUser());
+      // Redireciona para login
+      router.push('/login');
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+      // Mesmo com erro, redireciona
+      router.push('/login');
+    }
   };
 
   useEffect(() => {
@@ -157,7 +167,7 @@ export default function Header() {
                         fontWeight: 'bold',
                       }}
                     >
-                      {user?.name?.charAt(0).toUpperCase()}
+                      {(user?.name || user?.username || 'U')?.charAt(0).toUpperCase()}
                     </div>
                   </button>
 
@@ -178,10 +188,10 @@ export default function Header() {
                     >
                       <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid #e9ecef' }}>
                         <p style={{ margin: '0 0 0.25rem 0', fontSize: '0.875rem', fontWeight: 'bold' }}>
-                          {user?.name}
+                          {user?.name || user?.username || 'Usuário'}
                         </p>
                         <p style={{ margin: 0, fontSize: '0.75rem', color: '#6c757d' }}>
-                          {user?.email}
+                          {user?.email || 'email@exemplo.com'}
                         </p>
                       </div>
                       <button

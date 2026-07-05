@@ -3,12 +3,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@/app/provedores/AuthProvider';
+import { useAppDispatch } from '@/store/hooks';
+import { registerUser } from '@/store/thunks';
 import { AlecrimLogo } from '@/componentes/AlecrimLogo';
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { register } = useAuth();
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -52,15 +53,34 @@ export default function RegisterPage() {
         return;
       }
 
-      await register(formData.name, formData.email, formData.password);
+      // Valida email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        setError('Por favor, insira um email válido');
+        setIsLoading(false);
+        return;
+      }
 
-      setSuccess('Cadastro realizado com sucesso! Redirecionando...');
-      setTimeout(() => {
-        router.push('/resumo-transacao');
-      }, 1500);
+      // Dispatch Redux Thunk para registrar na API
+      const resultAction = await (dispatch as any)(registerUser({
+        username: formData.name,  // API usa 'username'
+        email: formData.email,
+        password: formData.password,
+      }));
+
+      if (registerUser.fulfilled.match(resultAction)) {
+        setSuccess('Cadastro realizado com sucesso! Redirecionando...');
+        setTimeout(() => {
+          router.push('/resumo-transacao');
+        }, 1500);
+      } else {
+        throw new Error(resultAction.payload?.message || 'Erro ao realizar cadastro');
+      }
     } catch (err: any) {
-      setError(err.message || 'Erro ao realizar cadastro. Tente novamente.');
-      console.error(err);
+      const errorMessage = err?.message || err?.toString() || 'Erro ao realizar cadastro. Tente novamente.';
+      setError(errorMessage);
+      console.error('Erro no cadastro:', errorMessage);
+      console.error('Detalhes completos:', err);
     } finally {
       setIsLoading(false);
     }

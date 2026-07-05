@@ -1,27 +1,30 @@
 'use client';
 
-import { useAuth } from '@/app/provedores/AuthProvider';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
+/**
+ * Hook para proteção de rotas
+ * Redireciona para login se não estiver autenticado
+ */
 export function useProtectedRoute() {
-  const { user } = useAuth();
   const router = useRouter();
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    // Se o usuário é null, não está autenticado
-    if (user === null) {
-      // Aguarda um pouco para garantir que a hidratação foi completa
-      const checkTimer = setTimeout(() => {
-        router.push('/login');
-      }, 100);
-      return () => clearTimeout(checkTimer);
-    } else {
-      // Usuário autenticado
+    if (isAuthenticated && user) {
       setIsAuthorized(true);
+      return;
     }
-  }, [user, router]);
+
+    const timer = setTimeout(() => {
+      router.push('/login');
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [isAuthenticated, user, router]);
 
   return { isAuthorized, user };
 }

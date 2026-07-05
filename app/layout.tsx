@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "@/app/portal.css";
-import { AuthProvider } from "@/app/provedores/AuthProvider";
+import "@/app/globals.css";
+import { ReduxProvider } from "@/store/ReduxProvider";
 
 export const metadata: Metadata = {
   title: "Alecrim Wallet - Seu gerenciador de transações inteligente",
@@ -18,14 +17,13 @@ export default function RootLayout({
       <head>
         <title>Alecrim Wallet - o seu gerenciador de transações</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
-        <script defer src="http://localhost:3000/assets/plugins/fontawesome/js/all.min.js"></script>
-        <link id="theme-style" rel="stylesheet" href="http://localhost:3000/assets/css/portal.css" />
+        <link rel="stylesheet" href="/responsive-fix.css" />
       </head>
 
       <body>
-        <AuthProvider>
+        <ReduxProvider>
           {children}
-        </AuthProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

@@ -1,6 +1,14 @@
-import React from 'react';
-import { Redirect } from '@docusaurus/router';
+'use client';
 
-export default function Home(): JSX.Element {
-  return <Redirect to="/docs/intro" />;
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function Home(): React.JSX.Element {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/docs/intro');
+  }, [router]);
+
+  return <div>Redirecionando...</div>;
 }

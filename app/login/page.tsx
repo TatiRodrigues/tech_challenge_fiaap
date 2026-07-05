@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '@/app/provedores/AuthProvider';
+import { useAppDispatch } from '@/store/hooks';
+import { loginUser } from '@/store/thunks';
 import { AlecrimLogo } from '@/componentes/AlecrimLogo';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +19,7 @@ export default function LoginPage() {
     // Limpar os campos ao montar o componente
     setEmail('');
     setPassword('');
+    setError('');
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,10 +34,27 @@ export default function LoginPage() {
         return;
       }
 
-      await login(email, password);
-      router.push('/resumo-transacao');
+      // Valida email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        setError('Por favor, insira um email válido');
+        setIsLoading(false);
+        return;
+      }
+
+      // Dispatch Redux Thunk para login na API
+      console.log('[LoginPage] Dispatching loginUser thunk with email:', email);
+      const resultAction = await (dispatch as any)(loginUser({ email, password }));
+      
+      if (loginUser.fulfilled.match(resultAction)) {
+        console.log('[LoginPage] Login successful, redirecting to /resumo-transacao');
+        // Se chegou aqui, login foi bem-sucedido
+        router.push('/resumo-transacao');
+      } else {
+        throw new Error(resultAction.payload?.message || 'Erro ao fazer login');
+      }
     } catch (err: any) {
-      setError(err.message || 'Erro ao fazer login. Tente novamente.');
+      setError(err || 'Erro ao fazer login. Verifique suas credenciais.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -136,8 +155,8 @@ export default function LoginPage() {
                 <div className="text-center">
                   <button
                     type="submit"
-                    className={`btn w-100 theme-btn mx-auto ${isLoading || !!error ? 'app-btn-secondary' : 'app-btn-primary'}`}
-                    disabled={isLoading || !!error}
+                    className={`btn w-100 theme-btn mx-auto ${isLoading ? 'app-btn-secondary' : 'app-btn-primary'}`}
+                    disabled={isLoading}
                   >
                     {isLoading ? 'Entrando...' : 'Entrar'}
                   </button>

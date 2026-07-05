@@ -2,19 +2,24 @@
 
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
-import { useAuth } from '@/app/provedores/AuthProvider';
+import { useAppDispatch } from '@/store/hooks';
+import { logoutUser } from '@/store/thunks';
 
 export default function MenuLateral() {
   const pathname = usePathname();
   const router = useRouter();
-  const { logout, user } = useAuth();
+  const dispatch = useAppDispatch();
 
   const isActive = (href: string) => {
     return pathname.includes(href);
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    try {
+      await (dispatch as any)(logoutUser());
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    }
     router.push('/login');
   };
 

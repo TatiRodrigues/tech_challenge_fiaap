@@ -3,13 +3,12 @@ import { Transaction } from '@/hooks/useTransactions';
 
 interface ListarTransacoesProps {
   transactions: Transaction[];
-  editTransactions: (id: number) => void;
   deleteTransactions: (id: number) => void;
   searchTerm: string;
   setSearchTerm: (value: string) => void;
 }
 
-const ListarTransacoes: React.FC<ListarTransacoesProps> = ({ transactions, editTransactions, deleteTransactions,
+const ListarTransacoes: React.FC<ListarTransacoesProps> = ({ transactions, deleteTransactions,
   setSearchTerm }) => {
 
   const handleSearch: React.ChangeEventHandler<HTMLInputElement> = (event) => {

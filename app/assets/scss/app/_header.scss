@@ -4,10 +4,25 @@
 	border-bottom: 1px solid $theme-border-color;
 	height: 56px;
 	background: #fff;
+	box-sizing: border-box;
 }
 
 .header-inner {
 	position: relative;
+	box-sizing: border-box;
+}
+
+.header-content {
+	box-sizing: border-box;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	
+	@media (max-width: 575.98px) {
+		gap: 0.5rem;
+		padding: 0.25rem;
+	}
 }
 
 
@@ -98,6 +113,14 @@
 	
 	.dropdown-menu {
 		width: 300px;
+		max-width: 90vw;
+		overflow: hidden;
+		
+		@media (max-width: 575.98px) {
+			width: calc(100vw - 20px);
+			max-width: 280px;
+		}
+		
 		.dropdown-menu-header {
 			border-bottom: 1px solid $theme-border-color;
 		}
@@ -125,9 +148,16 @@
 		}
 		
 		.item {
-			min-width: 250px;
+			min-width: auto;
 			position: relative;
 			border-bottom: 1px solid $theme-border-color;
+			overflow: hidden;
+			
+			@media (max-width: 575.98px) {
+				min-width: auto;
+				word-break: break-word;
+			}
+			
 			&:last-child {
 				border-bottom: none;
 			}
