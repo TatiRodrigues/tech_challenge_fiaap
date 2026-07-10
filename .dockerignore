@@ -1,0 +1,84 @@
+node_modules
+.next
+.git
+.github
+.gitignore
+.env.local
+.env.*.local
+.env.example
+.env.test
+.env.production.local
+
+# Documentation & Markdown
+*.md
+README.md
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+docs
+
+# IDE & Editor
+.vscode
+.idea
+.VS
+*.swp
+*.swo
+*~
+.DS_Store
+.editorconfig
+.prettierignore
+.prettierrc*
+
+# Testing
+__tests__
+tests
+cypress
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+jest.config.js
+vitest.config.ts
+coverage
+
+# Build & Cache
+dist
+build
+.eslintcache
+.eslintignore
+.turbo
+.cache
+temp
+tmp
+
+# Package managers
+npm-debug.log
+npm-error.log
+yarn-error.log
+yarn-debug.log
+.pnpm-store
+pnpm-lock.yaml
+
+# Docker
+.dockerignore
+Dockerfile
+Dockerfile.dev
+docker-compose*.yml
+
+# CI/CD
+.vercel
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Development
+.husky
+.env
+.env.development
+.env.development.local
+node_modules/.cache
+
+# OS
+.DS_Store
+Thumbs.db
+*.log

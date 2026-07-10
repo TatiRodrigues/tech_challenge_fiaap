@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # Backend BFF - Produção
+  bff:
+    build:
+      context: ../tech-challenge-2
+      dockerfile: Dockerfile
+    container_name: tech-challenge-bff-prod
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB_URI=mongodb://admin:${MONGO_PASSWORD:-senha123}@mongo:27017/tech-challenge?authSource=admin
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: on-failure
+    networks:
+      - tech-challenge-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  # Frontend Next.js - Produção
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tech-challenge-app-prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - NEXT_PUBLIC_API_URL=http://bff:3000
+    depends_on:
+      - bff
+    restart: on-failure
+    networks:
+      - tech-challenge-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+  # Banco de dados MongoDB - Produção
+  mongo:
+    image: mongo:6.0-alpine
+    container_name: tech-challenge-mongo-prod
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-senha123}
+    volumes:
+      - mongo-data-prod:/data/db
+    restart: on-failure
+    networks:
+      - tech-challenge-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+networks:
+  tech-challenge-network:
+    driver: bridge
+
+volumes:
+  mongo-data-prod:
+    driver: local

@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -32,24 +36,47 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@/app/*": ["./app/*"],
-      "@/componentes/*": ["./componentes/*"],
-      "@/store/*": ["./store/*"],
-      "@/types/*": ["./types/*"],
-      "@/utils/*": ["./utils/*"],
-      "@/config/*": ["./config/*"],
-      "@/hooks/*": ["./hooks/*"],
-      "@/public/*": ["./public/*"]
+      "@/*": [
+        "./*"
+      ],
+      "@/app/*": [
+        "./app/*"
+      ],
+      "@/componentes/*": [
+        "./componentes/*"
+      ],
+      "@/store/*": [
+        "./store/*"
+      ],
+      "@/types/*": [
+        "./types/*"
+      ],
+      "@/utils/*": [
+        "./utils/*"
+      ],
+      "@/config/*": [
+        "./config/*"
+      ],
+      "@/hooks/*": [
+        "./hooks/*"
+      ],
+      "@/public/*": [
+        "./public/*"
+      ]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.mts",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".next", "dist", "build"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist",
+    "build"
+  ]
 }
