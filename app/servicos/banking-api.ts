@@ -79,18 +79,45 @@ class BankingApiService {
     // Extrai mensagem do erro com fallbacks
     let errorMessage: string = 'Erro desconhecido na API';
     
+    // Se não há resposta (erro de rede ou servidor não respondeu)
+    if (!error.response) {
+      const baseURL = error.config?.baseURL || 'N/A';
+      const url = error.config?.url || 'N/A';
+      errorMessage = `Erro de Rede: Não foi possível conectar ao servidor em ${baseURL}${url}. ` +
+        `Verifique se o servidor está rodando. ` +
+        `(Detalhes: ${error.code || error.message})`;
+      
+      // Log detalhado do erro de rede
+      console.error(
+        `[API Network Error] URL: ${baseURL}${url} | ` +
+        `Código: ${error.code} | ` +
+        `Mensagem: ${error.message}`
+      );
+    }
     // Se resposta é HTML, a API não está respondendo corretamente
-    if (typeof error.response?.data === 'string' && error.response.data.includes('<!DOCTYPE')) {
-      errorMessage = `Erro ${error.response?.status || 'desconhecido'}: API Backend não respondeu corretamente. ` +
+    else if (typeof error.response.data === 'string' && error.response.data.includes('<!DOCTYPE')) {
+      errorMessage = `Erro ${error.response.status || 'desconhecido'}: API Backend não respondeu corretamente. ` +
         `Verifique se o servidor está rodando em ${error.config?.baseURL}`;
+      
+      console.error(
+        `[API HTML Response Error] Status: ${error.response.status} | ` +
+        `URL: ${error.config?.baseURL}${error.config?.url}`
+      );
     } else {
-      const data = error.response?.data as Record<string, any>;
+      const data = error.response.data as Record<string, any>;
       errorMessage = 
         data?.message || 
         data?.error ||
-        (typeof error.response?.data === 'string' ? error.response.data : null) ||
+        (typeof error.response.data === 'string' ? error.response.data : null) ||
         error.message || 
         'Erro desconhecido na API';
+      
+      // Log detalhado para debugging
+      console.error(
+        `[API Error] Message: ${errorMessage} | Status: ${error.response.status} | ` +
+        `URL: ${error.config?.url || 'N/A'} | ` +
+        `Method: ${error.config?.method?.toUpperCase() || 'N/A'}`
+      );
     }
 
     const apiError: IApiError = {
@@ -98,13 +125,6 @@ class BankingApiService {
       status: error.response?.status,
       data: error.response?.data,
     };
-
-    // Log detalhado para debugging
-    console.error(
-      `API Error: ${apiError.message} | Status: ${apiError.status} | ` +
-      `URL: ${error.config?.url || 'N/A'} | ` +
-      `Método: ${error.config?.method?.toUpperCase() || 'N/A'}`
-    );
 
     // Se token expirou (401), limpar token e sugerir re-login
     if (error.response?.status === 401) {
@@ -263,3 +283,5 @@ class BankingApiService {
 // Exportar instância singleton
 export const bankingApi = new BankingApiService();
 export default BankingApiService;
+
+

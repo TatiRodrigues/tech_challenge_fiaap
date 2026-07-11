@@ -2,6 +2,19 @@
 
 Uma aplicação front-end desenvolvida em **Next.js** para gerenciamento de transações financeiras com interface moderna e intuitiva. Integrada com a **API Bancária Tech Challenge 2** para operações reais.
 
+---
+
+## 🗺️ Documentação Rápida
+
+| Você quer... | Veja |
+|-------------|------|
+| **Iniciar o projeto** | [QUICK_START.md](QUICK_START.md) ⭐ |
+| **Encontrar um guia específico** | [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) 📚 |
+| **Resolver um erro** | [DOCKER_SETUP.md](DOCKER_SETUP.md#-diagnosticando-erros) 🐛 |
+| **Ver o que mudou** | [MUDANCAS_REALIZADAS.md](MUDANCAS_REALIZADAS.md) 📝 |
+
+---
+
 ## ✨ Funcionalidades
 
 ### Interface
@@ -25,38 +38,25 @@ Uma aplicação front-end desenvolvida em **Next.js** para gerenciamento de tran
 
 ## 🚀 Início Rápido
 
-### Pré-requisitos
+> 👉 Para um guia visual com indicadores de sucesso, veja **[QUICK_START.md](QUICK_START.md)** ⭐
 
-- Node.js 18+
-- npm ou yarn
-- *(Opcional)* API Bancária rodando localmente (tech-challenge-2) na porta 3000
+### Com Docker (Recomendado)
+```powershell
+.\check-setup.ps1     # Verificar pré-requisitos
+.\run-stack.ps1       # Iniciar Frontend + Backend + MongoDB
+# Acesse: http://localhost:3001
+```
 
-### Instalação e Execução
-
-#### 1. Clonar e instalar
+### Local (sem Docker)
 ```bash
-# Clone o repositório
-git clone https://github.com/TatiRodrigues/tech_challenge_fiaap.git
-cd tech_challenge_fiaap
-
-# Instale as dependências
+# Terminal 1: Backend
+cd ../tech-challenge-2
 npm install
-```
+npm run dev          # http://localhost:3000
 
-#### 2. Configurar variáveis de ambiente
-```bash
-# Copie o arquivo de exemplo
-cp .env.example .env.local
-
-# Edite conforme necessário (veja seção de Configuração)
-```
-
-#### 3. Iniciar a aplicação
-```bash
-# Modo desenvolvimento
-npm run dev
-
-# A aplicação estará em http://localhost:3000
+# Terminal 2: Frontend
+npm install
+npm run dev          # http://localhost:3001
 ```
 
 ### 🔐 Credenciais de Acesso
@@ -68,11 +68,22 @@ Senha: 1234
 ```
 
 #### Modo com API Bancária
-Crie um novo usuário ou use:
 ```
 Email: teste@gmail.com
 Senha: testes
 Username: Aluno Carequinha
+```
+
+### ✅ Verificar se Funciona
+```bash
+# 1. Frontend
+curl http://localhost:3001
+
+# 2. Backend  
+curl http://localhost:3000/health
+
+# 3. Docker
+docker-compose ps
 ```
 
 ## � Integração com API Bancária
@@ -365,11 +376,14 @@ A API estará disponível em `http://localhost:3000`
 
 ## 🐛 Troubleshooting
 
+> 📚 Para troubleshooting avançado, veja **[DOCKER_SETUP.md](DOCKER_SETUP.md#-diagnosticando-erros)**
+
 ### Problema: "Erro ao carregar conta"
 **Solução**: 
 - Verifique se a API bancária está rodando em `http://localhost:3000`
 - Confirme `NEXT_PUBLIC_API_URL` nas variáveis de ambiente
 - Tente fazer login novamente
+- Veja logs com: `docker-compose logs -f bff`
 
 ### Problema: "Token inválido"
 **Solução**:
@@ -381,7 +395,7 @@ A API estará disponível em `http://localhost:3000`
 **Solução**:
 - Aumente `NEXT_PUBLIC_API_TIMEOUT` para 15000 ou mais
 - Verifique a conexão de rede
-- Confirme que a API está respondendo
+- Confirme que a API está respondendo: `curl http://localhost:3000/health`
 
 ### Problema: Upload de arquivo falha
 **Solução**:
@@ -394,6 +408,9 @@ A API estará disponível em `http://localhost:3000`
 - Certifique-se que as transações foram carregadas
 - Tente limpar os filtros
 - Atualize a página
+
+### 🆘 Ainda precisa de ajuda?
+Veja a seção completa de troubleshooting em [DOCKER_SETUP.md - Diagnosticando Erros](DOCKER_SETUP.md#-diagnosticando-erros)
 
 ## 📊 Estado do Redux
 

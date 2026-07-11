@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useAppDispatch } from '@/store/hooks';
 import { loginUser } from '@/store/thunks';
 import { AlecrimLogo } from '@/componentes/AlecrimLogo';
+import { healthCheckService } from '@/app/servicos/health-check';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,6 +21,18 @@ export default function LoginPage() {
     setEmail('');
     setPassword('');
     setError('');
+
+    // Verificar conectividade com a API ao montar
+    const checkConnectivity = async () => {
+      console.log('[LoginPage] Verificando conectividade com a API...');
+      const health = await healthCheckService.checkApiHealth();
+      if (!health.isOnline) {
+        console.warn('[LoginPage] API não está acessível:', health.error);
+        setError(`⚠️ Servidor indisponível: ${health.error || 'Não foi possível conectar ao servidor'}`);
+      }
+    };
+
+    checkConnectivity();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

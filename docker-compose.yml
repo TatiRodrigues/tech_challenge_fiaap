@@ -1,106 +1,7 @@
-version: '3.8'
-
 services:
-  # Backend BFF
-  bff:
-    build:
-      context: ../tech-challenge-2
-      dockerfile: Dockerfile
-    container_name: tech-challenge-bff
-    ports:
-      - "3001:3000"
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - MONGODB_URI=mongodb://mongo:27017/tech-challenge
-    depends_on:
-      - mongo
-    restart: unless-stopped
-    networks:
-      - tech-challenge-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # Frontend Next.js - Produção
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: tech-challenge-app
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - NEXT_PUBLIC_API_URL=http://bff:3000
-    depends_on:
-      - bff
-    restart: unless-stopped
-    networks:
-      - tech-challenge-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
-  # Frontend Next.js - Desenvolvimento
-  app-dev:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    container_name: tech-challenge-app-dev
-    ports:
-      - "3002:3000"
-    environment:
-      - NODE_ENV=development
-      - PORT=3000
-      - NEXT_PUBLIC_API_URL=http://bff-dev:3000
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
-    depends_on:
-      - bff-dev
-    restart: unless-stopped
-    networks:
-      - tech-challenge-network
-    profiles:
-      - dev
-    command: npm run dev
-
-  # Backend BFF - Desenvolvimento
-  bff-dev:
-    build:
-      context: ../tech-challenge-2
-      dockerfile: Dockerfile
-    container_name: tech-challenge-bff-dev
-    ports:
-      - "3003:3000"
-    environment:
-      - NODE_ENV=development
-      - PORT=3000
-      - MONGODB_URI=mongodb://mongo:27017/tech-challenge-dev
-    volumes:
-      - ../tech-challenge-2:/usr/src/app
-      - /usr/src/app/node_modules
-    depends_on:
-      - mongo
-    restart: unless-stopped
-    networks:
-      - tech-challenge-network
-    profiles:
-      - dev
-    command: npm run dev
-
   # Banco de dados MongoDB
   mongo:
-    image: mongo:6.0-alpine
+    image: mongo:7.0
     container_name: tech-challenge-mongo
     ports:
       - "27017:27017"
@@ -117,6 +18,50 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  # Backend BFF - Desenvolvimento (Porta 3000)
+  bff:
+    build:
+      context: ../tech-challenge-2
+      dockerfile: Dockerfile.dev
+    container_name: tech-challenge-bff
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MONGODB_URI=mongodb://admin:senha123@mongo:27017/tech-challenge?authSource=admin
+    volumes:
+      - ../tech-challenge-2:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    networks:
+      - tech-challenge-network
+    command: npm run dev
+
+  # Frontend Next.js - Desenvolvimento (Porta 3001)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: tech-challenge-app
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - bff
+    restart: unless-stopped
+    networks:
+      - tech-challenge-network
+    command: npm run dev
 
 networks:
   tech-challenge-network:

@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
 
   // Configuração para suportar microfrontends
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000",
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001",
   },
 
   // Strict mode para melhor detecção de bugs
