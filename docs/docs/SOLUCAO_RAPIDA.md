@@ -49,7 +49,7 @@ export default function Home() {
 Escolha uma opção:
 
 - **Explorar componentes**: [Guia Rápido →](./componentes/guia-rapido)
-- **Entender design**: [Design System →](./design-system/index)
+- **Entender design**: [Design System →](./design-system/)
 - **Saber mais**: [Leia Primeiro →](./LEIA_PRIMEIRO)
 - **Documentação completa**: [Sumário Executivo →](./SUMARIO_EXECUTIVO)
 

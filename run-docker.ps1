@@ -57,7 +57,7 @@ if ($Environment -eq "development") {
 }
 
 if ($?) {
-    Write-Log "✓ Containers iniciados com sucesso!" $SuccessColor
+    Write-Log "[OK] Containers iniciados com sucesso!" $SuccessColor
     
     # Aguardar um pouco para containers ficarem prontos
     Start-Sleep -Seconds 2
@@ -78,6 +78,6 @@ if ($?) {
         Write-Host "docker logs -f tech-challenge-app" -ForegroundColor Gray
     }
 } else {
-    Write-Log "✗ Erro ao iniciar containers" $ErrorColor
+    Write-Log "[ERRO] Falha ao iniciar containers" $ErrorColor
     exit 1
 }

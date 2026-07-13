@@ -42,4 +42,4 @@ lg:grid-cols-3    (desktop)
 
 ---
 
-[Voltar: Design System →](./index)
+[Voltar: Design System →](./)

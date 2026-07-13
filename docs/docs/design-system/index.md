@@ -69,7 +69,7 @@ xl:  32px (8×)
 ## 🚀 Próximos Passos
 
 1. Leia [Fundamentos](./fundamentos)
-2. Explore [Componentes](../componentes/index)
+2. Explore [Componentes](../componentes/)
 3. Veja [Padrões de Uso](./padroes-uso)
 
 ---

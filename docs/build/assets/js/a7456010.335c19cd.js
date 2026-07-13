@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktech_challenge_docs=self.webpackChunktech_challenge_docs||[]).push([[235],{8552:function(e){e.exports=JSON.parse('{"name":"docusaurus-plugin-content-pages","id":"default"}')}}]);

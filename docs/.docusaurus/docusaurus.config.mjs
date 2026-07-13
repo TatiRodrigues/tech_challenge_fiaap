@@ -41,7 +41,7 @@ export default {
       "title": "Tech Challenge",
       "logo": {
         "alt": "Tech Challenge Logo",
-        "src": "img/logo.svg"
+        "src": "img/logo.jpg"
       },
       "items": [
         {

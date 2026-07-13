@@ -145,7 +145,7 @@ npm run start
    → [Solução Rápida](./SOLUCAO_RAPIDA)
 
 3. **Entender design?**
-   → [Design System](./design-system/index)
+   → [Design System](./design-system/)
 
 4. **Usar componentes?**
    → [Guia Rápido](./componentes/guia-rapido)

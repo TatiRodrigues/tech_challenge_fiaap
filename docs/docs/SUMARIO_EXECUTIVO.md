@@ -78,8 +78,8 @@ Para contribuidores e mantenedores:
 ### Para Desenvolvedores
 1. **Setup**: [Solução Rápida](./SOLUCAO_RAPIDA) (5 min)
 2. **Entenda**: [Arquitetura](./arquitetura) (15 min)
-3. **Aprenda**: [Design System](./design-system/index) (30 min)
-4. **Implemente**: Use [Componentes](./componentes/index) (20 min por componente)
+3. **Aprenda**: [Design System](./design-system/) (30 min)
+4. **Implemente**: Use [Componentes](./componentes/) (20 min por componente)
 
 ### Para Contribuidores
 1. **Leia**: [Guia de Contribuição](./guia-contribuicao)

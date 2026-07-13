@@ -81,11 +81,11 @@ Acesse: http://localhost:3002
 
 ## 5️⃣ Próximas Etapas
 
-- ✅ Leia o [Design System](./design-system/index)
-- ✅ Explore os [Componentes](./componentes/index)
+- ✅ Leia o [Design System](./design-system/)
+- ✅ Explore os [Componentes](./componentes/)
 - ✅ Veja [Exemplos Práticos](./componentes/guia-rapido)
 - ✅ Contribua com [Guia de Contribuição](./guia-contribuicao)
 
 ---
 
-**Próximo:** [Design System](./design-system/index)
+**Próximo:** [Design System](./design-system/)

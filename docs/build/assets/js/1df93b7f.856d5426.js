@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktech_challenge_docs=self.webpackChunktech_challenge_docs||[]).push([[583],{6866:function(e,c,n){n.r(c),n.d(c,{default:function(){return r}});n(6540);var t=n(6347),u=n(4848);function r(){return(0,u.jsx)(t.rd,{to:"/docs/intro"})}}}]);

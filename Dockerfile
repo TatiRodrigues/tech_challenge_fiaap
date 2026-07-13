@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm config set fetch-timeout 120000 && npm config set fetch-retry-mintimeout 60000 && npm config set fetch-retry-maxtimeout 120000 && npm ci
+RUN npm config set fetch-timeout 520000 && npm config set fetch-retry-mintimeout 60000 && npm config set fetch-retry-maxtimeout 120000 && npm ci
 
 COPY . .
 
@@ -19,7 +19,7 @@ RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 
 COPY package*.json ./
 
-RUN npm config set fetch-timeout 120000 && npm config set fetch-retry-mintimeout 60000 && npm config set fetch-retry-maxtimeout 120000 && npm ci --omit=dev && npm cache clean --force
+RUN npm config set fetch-timeout 520000 && npm config set fetch-retry-mintimeout 60000 && npm config set fetch-retry-maxtimeout 120000 && npm ci --omit=dev && npm cache clean --force
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public

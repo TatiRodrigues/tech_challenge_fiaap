@@ -45,7 +45,7 @@ Documentação interativa de 7 componentes principais:
 1. **Novo por aqui?** → [Leia Primeiro](./LEIA_PRIMEIRO)
 2. **Quer começar rápido?** → [Solução Rápida em 5 min](./SOLUCAO_RAPIDA)
 3. **Explorar componentes?** → [Guia de Componentes](./componentes/guia-rapido)
-4. **Entender design?** → [Design System](./design-system/index)
+4. **Entender design?** → [Design System](./design-system/)
 
 ## 🌟 Destaques
 

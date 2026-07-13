@@ -1,7 +1,7 @@
 services:
   # Banco de dados MongoDB
   mongo:
-    image: mongo:7.0
+    image: mongo:4.4
     container_name: tech-challenge-mongo
     ports:
       - "27017:27017"
@@ -14,10 +14,11 @@ services:
     networks:
       - tech-challenge-network
     healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping').ok"]
+      test: ["CMD-SHELL", "mongosh --eval \"db.runCommand('ping').ok\" || mongo --eval \"db.runCommand('ping').ok\""]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 20s
 
   # Backend BFF - Desenvolvimento (Porta 3000)
   bff:
@@ -31,15 +32,23 @@ services:
       - NODE_ENV=development
       - PORT=3000
       - MONGODB_URI=mongodb://admin:senha123@mongo:27017/tech-challenge?authSource=admin
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - ../tech-challenge-2:/usr/src/app
       - /usr/src/app/node_modules
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - tech-challenge-network
-    command: npm run dev
+    command: npm run dev -- --legacy-watch
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://localhost:3000/health >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
   # Frontend Next.js - Desenvolvimento (Porta 3001)
   app:
@@ -52,12 +61,15 @@ services:
     environment:
       - NODE_ENV=development
       - NEXT_PUBLIC_API_URL=http://localhost:3000
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - .:/app
       - /app/node_modules
       - /app/.next
     depends_on:
-      - bff
+      bff:
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - tech-challenge-network

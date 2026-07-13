@@ -68,7 +68,7 @@ services:
 
   # Banco de dados MongoDB - Produção
   mongo:
-    image: mongo:6.0-alpine
+    image: mongo:4.4
     container_name: tech-challenge-mongo-prod
     ports:
       - "27017:27017"
@@ -81,7 +81,7 @@ services:
     networks:
       - tech-challenge-network
     healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping').ok"]
+      test: ["CMD-SHELL", "mongosh --eval \"db.runCommand('ping').ok\" || mongo --eval \"db.runCommand('ping').ok\""]
       interval: 10s
       timeout: 5s
       retries: 5
