@@ -3,8 +3,8 @@ Write-Host "================================" -ForegroundColor Cyan
 Write-Host "[SETUP DOCKER] Tech Challenge" -ForegroundColor Cyan
 Write-Host "================================`n" -ForegroundColor Cyan
 
-# Mudar para diretório do frontend
-$frontendDir = "C:\Users\tatir\OneDrive\Desktop\pos_graduacao\tech_challenge_fase_um"
+# Mudar para diretório do frontend (usa o diretório do próprio script)
+$frontendDir = $PSScriptRoot
 Set-Location $frontendDir
 
 # Verificar se Docker está rodando
