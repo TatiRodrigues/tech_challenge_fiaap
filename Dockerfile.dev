@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:20
 
 WORKDIR /app
 
@@ -6,6 +6,11 @@ COPY package*.json ./
 
 RUN npm ci
 
-EXPOSE 3000
+# Copia o código fonte para dentro da imagem.
+# Quando usado com volume mount (.:/app), o COPY é sobrescrito pelo volume.
+# Quando usado sem volume mount (docker-compose.override.yml), o código vem daqui.
+COPY . .
+
+EXPOSE 3001
 
 CMD ["npm", "run", "dev"]

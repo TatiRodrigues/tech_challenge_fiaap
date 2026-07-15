@@ -31,7 +31,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - MONGODB_URI=mongodb://admin:senha123@mongo:27017/tech-challenge?authSource=admin
+      - MONGO_URI=mongodb://admin:senha123@mongo:27017/tech-challenge?authSource=admin
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ../tech-challenge-2:/usr/src/app
@@ -60,7 +60,10 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=development
+      # Usado pelo browser (client-side): acessa o BFF via porta mapeada no host
       - NEXT_PUBLIC_API_URL=http://localhost:3000
+      # Usado pelo Next.js no servidor (SSR): acessa o BFF pelo nome do serviço interno
+      - API_URL=http://bff:3000
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
     volumes:

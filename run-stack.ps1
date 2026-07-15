@@ -30,14 +30,6 @@ if ($LASTEXITCODE -eq 0) {
     exit 1
 }
 
-# Parar containers anteriores e limpar orfaos
-Write-Host ""
-Write-Host "Limpando containers anteriores..." -ForegroundColor Yellow
-if ($composeCommand -eq "docker compose") {
-    docker compose down --remove-orphans
-} else {
-    docker-compose down --remove-orphans
-}
 
 # Iniciar stack
 Write-Host ""
