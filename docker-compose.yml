@@ -1,4 +1,4 @@
-services:
+﻿services:
   # Banco de dados MongoDB
   mongo:
     image: mongo:4.4
@@ -44,11 +44,11 @@ services:
       - tech-challenge-network
     command: npm run dev -- --legacy-watch
     healthcheck:
-      test: ["CMD-SHELL", "wget -q -O - http://localhost:3000/health >/dev/null 2>&1 || exit 1"]
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://localhost:3000/', (r) => process.exit(0)).on('error', () => process.exit(1))\""]
       interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 30s
+      timeout: 8s
+      retries: 15
+      start_period: 60s
 
   # Frontend Next.js - Desenvolvimento (Porta 3001)
   app:
@@ -60,10 +60,11 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=development
-      # Usado pelo browser (client-side): acessa o BFF via porta mapeada no host
+      - NODE_OPTIONS=--max-old-space-size=768
       - NEXT_PUBLIC_API_URL=http://localhost:3000
-      # Usado pelo Next.js no servidor (SSR): acessa o BFF pelo nome do serviço interno
       - API_URL=http://bff:3000
+      - NEXT_PUBLIC_MFE_TRANSACTIONS_URL=http://localhost:3002
+      - NEXT_PUBLIC_MFE_AUTH_URL=http://localhost:3003
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
     volumes:
@@ -72,7 +73,7 @@ services:
       - /app/.next
     depends_on:
       bff:
-        condition: service_healthy
+        condition: service_started
     restart: unless-stopped
     networks:
       - tech-challenge-network

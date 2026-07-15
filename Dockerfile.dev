@@ -4,11 +4,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci
+# Instala dependências e força o binário SWC para Debian/glibc
+RUN npm ci && npm install --no-save @next/swc-linux-x64-gnu 2>/dev/null || true
 
-# Copia o código fonte para dentro da imagem.
-# Quando usado com volume mount (.:/app), o COPY é sobrescrito pelo volume.
-# Quando usado sem volume mount (docker-compose.override.yml), o código vem daqui.
 COPY . .
 
 EXPOSE 3001
