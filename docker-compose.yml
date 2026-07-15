@@ -50,34 +50,12 @@
       retries: 15
       start_period: 60s
 
-  # Frontend Next.js - Desenvolvimento (Porta 3001)
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    container_name: tech-challenge-app
-    ports:
-      - "3001:3001"
-    environment:
-      - NODE_ENV=development
-      - NODE_OPTIONS=--max-old-space-size=768
-      - NEXT_PUBLIC_API_URL=http://localhost:3000
-      - API_URL=http://bff:3000
-      - NEXT_PUBLIC_MFE_TRANSACTIONS_URL=http://localhost:3002
-      - NEXT_PUBLIC_MFE_AUTH_URL=http://localhost:3003
-      - WATCHPACK_POLLING=true
-      - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
-    depends_on:
-      bff:
-        condition: service_started
-    restart: unless-stopped
-    networks:
-      - tech-challenge-network
-    command: npm run dev
+  # NOTA: O servico frontend (app) nao esta listado aqui intencionalmente.
+  # Em Windows, o volume mount .:/app quebra permissoes dos binarios Linux.
+  # Execute o frontend no host:
+  #   set NODE_OPTIONS=--max-old-space-size=512 && npm run dev
+  # Em Linux/macOS, adicione o servico app normalmente com:
+  #   docker compose --profile linux up
 
 networks:
   tech-challenge-network:
