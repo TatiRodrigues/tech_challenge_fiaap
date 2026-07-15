@@ -8,11 +8,6 @@
 # (--build) sempre que alterar o código.
 
 services:
-  app:
-    volumes:
-      - /app/node_modules
-      - /app/.next
-
   bff:
     volumes:
       - /usr/src/app/node_modules
