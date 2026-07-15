@@ -123,7 +123,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         />
 
         <div className="file-upload-icon mb-3">
-          <i className="fas fa-cloud-upload-alt fa-3x text-secondary"></i>
+          <i className="bi bi-cloud-upload" style={{ fontSize: '3rem' }}></i>
         </div>
 
         <p className="mb-2">
@@ -166,23 +166,35 @@ export const FileUpload: React.FC<FileUploadProps> = ({
             {attachments.map((attachment) => (
               <div key={attachment.id} className="list-group-item d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center gap-2">
-                  <i className="fas fa-file"></i>
+                  <i className="bi bi-file-earmark text-secondary"></i>
                   <div>
                     <div className="fw-bold">{attachment.nome}</div>
                     <small className="text-muted">{formatFileSize(attachment.tamanho)}</small>
                   </div>
                 </div>
 
-                {onRemoveAttachment && (
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline-danger"
-                    onClick={() => onRemoveAttachment(attachment.id)}
-                    aria-label={`Remover ${attachment.nome}`}
+                <div className="d-flex gap-1">
+                  <a
+                    href={attachment.url}
+                    download={attachment.nome}
+                    className="btn btn-sm btn-outline-primary"
+                    title={`Baixar ${attachment.nome}`}
+                    aria-label={`Baixar ${attachment.nome}`}
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <i className="fas fa-trash"></i>
-                  </button>
-                )}
+                    <i className="bi bi-download"></i>
+                  </a>
+                  {onRemoveAttachment && (
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-outline-danger"
+                      onClick={() => onRemoveAttachment(attachment.id)}
+                      aria-label={`Remover ${attachment.nome}`}
+                    >
+                      <i className="bi bi-trash"></i>
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>

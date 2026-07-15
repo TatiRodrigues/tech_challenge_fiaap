@@ -106,26 +106,23 @@ export default function ListarTransacoesClient() {
   useEffect(() => {
     const loadTransactions = async () => {
       try {
-        const savedTransactions = localStorage.getItem('transactions');
-        if (savedTransactions) {
-          setTransactions(JSON.parse(savedTransactions));
-        } else {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 3000);
-          try {
-            const res = await fetch('/transactions.json', { signal: controller.signal });
-            clearTimeout(timeoutId);
-            const data = await res.json();
-            const txs = data.transactions || [];
-            setTransactions(txs);
-            localStorage.setItem('transactions', JSON.stringify(txs));
-          } catch {
-            clearTimeout(timeoutId);
-            setTransactions([]);
-          }
-        }
+        // Sempre busca o JSON base (seed data)
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        const res = await fetch('/transactions.json', { signal: controller.signal });
+        clearTimeout(timeoutId);
+        const data = await res.json();
+        const seedTxs: Transaction[] = data.transactions || [];
+
+        // Mescla com transações adicionadas pelo usuário (chave separada)
+        const userTxsRaw = localStorage.getItem('user_transactions');
+        const userTxs: Transaction[] = userTxsRaw ? JSON.parse(userTxsRaw) : [];
+
+        setTransactions([...seedTxs, ...userTxs]);
       } catch {
-        setTransactions([]);
+        // Fallback: só user transactions se o fetch falhar
+        const userTxsRaw = localStorage.getItem('user_transactions');
+        setTransactions(userTxsRaw ? JSON.parse(userTxsRaw) : []);
       }
       setIsLoading(false);
     };
@@ -206,7 +203,10 @@ export default function ListarTransacoesClient() {
     };
     const updated = [...transactions, transaction];
     setTransactions(updated);
-    localStorage.setItem('transactions', JSON.stringify(updated));
+    // Persiste apenas as adicionadas pelo usuário
+    const userTxsRaw = localStorage.getItem('user_transactions');
+    const userTxs: Transaction[] = userTxsRaw ? JSON.parse(userTxsRaw) : [];
+    localStorage.setItem('user_transactions', JSON.stringify([...userTxs, transaction]));
     setShowModal(false);
     resetModal();
   };
@@ -220,7 +220,6 @@ export default function ListarTransacoesClient() {
     if (!selectedTransaction) return;
     const updated = transactions.map(t => t.id === selectedTransaction.id ? { ...t, ...updatedData } : t);
     setTransactions(updated);
-    localStorage.setItem('transactions', JSON.stringify(updated));
     setShowEditModal(false);
     setSelectedTransaction(null);
   };
@@ -231,13 +230,36 @@ export default function ListarTransacoesClient() {
     if (transactionToDelete !== null) {
       const updated = transactions.filter(t => t.id !== transactionToDelete);
       setTransactions(updated);
-      localStorage.setItem('transactions', JSON.stringify(updated));
+      // Remove da lista de user_transactions se for transação do usuário
+      const userTxsRaw = localStorage.getItem('user_transactions');
+      if (userTxsRaw) {
+        const userTxs: Transaction[] = JSON.parse(userTxsRaw).filter((t: Transaction) => t.id !== transactionToDelete);
+        localStorage.setItem('user_transactions', JSON.stringify(userTxs));
+      }
       setShowDeleteConfirmModal(false);
       setTransactionToDelete(null);
     }
   };
 
   const clearFilters = () => setFilters({ searchTerm: '', type: '', status: '', dateFrom: '', dateTo: '', sortBy: 'date', sortOrder: 'desc' });
+
+  const handleRemoveAttachment = (transactionId: number, attachmentId: string) => {
+    const updated = transactions.map(t =>
+      t.id === transactionId
+        ? { ...t, attachments: t.attachments?.filter(a => a.id !== attachmentId) }
+        : t
+    );
+    setTransactions(updated);
+    const userTxsRaw = localStorage.getItem('user_transactions');
+    if (userTxsRaw) {
+      const userTxs = JSON.parse(userTxsRaw).map((t: Transaction) =>
+        t.id === transactionId
+          ? { ...t, attachments: t.attachments?.filter((a: IAttachment) => a.id !== attachmentId) }
+          : t
+      );
+      localStorage.setItem('user_transactions', JSON.stringify(userTxs));
+    }
+  };
 
   const formatCurrency = (value: number) =>
     new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
@@ -431,7 +453,11 @@ export default function ListarTransacoesClient() {
             </div>
 
             <div className="app-card-body p-4">
-              {filteredTransactions.length === 0 ? (
+              <div aria-live="polite" aria-atomic="true" className="visually-hidden">
+          {filteredTransactions.length} resultado(s) encontrado(s), página {currentPage} de {paginationState.totalPages}
+        </div>
+
+        {filteredTransactions.length === 0 ? (
                 <div className="text-center py-5" role="status">
                   <i className="bi bi-inbox text-muted" style={{ fontSize: '2.5rem' }} aria-hidden="true"></i>
                   <p className="text-muted mt-3">
@@ -463,14 +489,37 @@ export default function ListarTransacoesClient() {
                             <td className="cell">
                               <span className={`badge bg-${badge.color}`}>{badge.label}</span>
                             </td>
-                            <td className="cell"><span>{transaction.description}</span></td>
+                            <td className="cell">
+                              <span>{transaction.description}</span>
+                              {transaction.attachments && transaction.attachments.length > 0 && (
+                                <div className="mt-1">
+                                  {transaction.attachments.map(att => (
+                                    <div key={att.id} className="d-flex align-items-center gap-1 mt-1 flex-wrap">
+                                      <i className="bi bi-paperclip text-muted" style={{ fontSize: '0.75rem' }}></i>
+                                      <small className="text-muted text-truncate" style={{ maxWidth: '140px' }} title={att.nome}>{att.nome}</small>
+                                      <a href={att.url} download={att.nome}
+                                        className="btn btn-sm p-0 px-1 text-primary" title="Baixar"
+                                        aria-label={`Baixar ${att.nome}`}>
+                                        <i className="bi bi-download" style={{ fontSize: '0.75rem' }}></i>
+                                      </a>
+                                      <button type="button"
+                                        className="btn btn-sm p-0 px-1 text-danger" title="Remover anexo"
+                                        aria-label={`Remover ${att.nome}`}
+                                        onClick={() => handleRemoveAttachment(transaction.id, att.id)}>
+                                        <i className="bi bi-x-circle" style={{ fontSize: '0.75rem' }}></i>
+                                      </button>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </td>
                             <td className="cell">
                               <span className={transaction.type === 'saque' || transaction.type === 'transferencia' ? 'text-danger' : 'text-success'}>
                                 {transaction.type === 'saque' || transaction.type === 'transferencia' ? '-' : '+'} {formatCurrency(transaction.value)}
                               </span>
                             </td>
                             <td className="cell">
-                              <span className={`badge ${transaction.status === 'Concluído' ? 'bg-success' : transaction.status === 'Pendente' ? 'bg-warning' : 'bg-danger'}`}>
+                              <span className={`badge ${transaction.status === 'Concluído' ? 'bg-success text-white' : transaction.status === 'Pendente' ? 'bg-warning text-dark' : 'bg-danger text-white'}`}>
                                 {transaction.status}
                               </span>
                             </td>
@@ -504,14 +553,35 @@ export default function ListarTransacoesClient() {
                           <div className="card-body">
                             <div className="d-flex justify-content-between align-items-start mb-3">
                               <span className={`badge bg-${badge.color}`}>{badge.label}</span>
-                              <span className={`badge ${transaction.status === 'Concluído' ? 'bg-success' : transaction.status === 'Pendente' ? 'bg-warning' : 'bg-danger'}`}>
+                              <span className={`badge ${transaction.status === 'Concluído' ? 'bg-success text-white' : transaction.status === 'Pendente' ? 'bg-warning text-dark' : 'bg-danger text-white'}`}>
                                 {transaction.status}
                               </span>
                             </div>
                             <h3 className="h6 card-title mb-1">{transaction.description}</h3>
-                            <small className="text-muted d-block mb-3">
+                            <small className="text-muted d-block mb-2">
                               <time dateTime={transaction.date}>{formatDate(transaction.date)}</time> às {formatTime12h(transaction.date)}
                             </small>
+                            {transaction.attachments && transaction.attachments.length > 0 && (
+                              <div className="mb-3">
+                                {transaction.attachments.map(att => (
+                                  <div key={att.id} className="d-flex align-items-center gap-1 mt-1">
+                                    <i className="bi bi-paperclip text-muted small"></i>
+                                    <small className="text-muted text-truncate" style={{ maxWidth: '140px' }} title={att.nome}>{att.nome}</small>
+                                    <a href={att.url} download={att.nome}
+                                      className="btn btn-sm p-0 px-1 text-primary" title="Baixar"
+                                      aria-label={`Baixar ${att.nome}`}>
+                                      <i className="bi bi-download small"></i>
+                                    </a>
+                                    <button type="button"
+                                      className="btn btn-sm p-0 px-1 text-danger" title="Remover anexo"
+                                      aria-label={`Remover ${att.nome}`}
+                                      onClick={() => handleRemoveAttachment(transaction.id, att.id)}>
+                                      <i className="bi bi-x-circle small"></i>
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                             <div className="d-flex justify-content-between align-items-center mb-3">
                               <span className="text-muted">Valor:</span>
                               <span className={`h5 mb-0 ${transaction.type === 'saque' || transaction.type === 'transferencia' ? 'text-danger' : 'text-success'}`}>

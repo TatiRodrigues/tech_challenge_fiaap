@@ -97,9 +97,9 @@ export default function RegisterPage() {
                 <AlecrimLogo size={60} />
                 <div className="mt-2">
                   <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0, fontSize: '1.1rem' }}>
-                    Alecrim wallet
+                    Alecrim Wallet
                   </h3>
-                  <p style={{ fontSize: '0.75rem', color: '#666', margin: '0.15rem 0 0 0' }}>
+                  <p style={{ fontSize: '0.75rem', color: '#595959', margin: '0.15rem 0 0 0' }}>
                     Seu gerenciador de transações
                   </p>
                 </div>
@@ -108,101 +108,118 @@ export default function RegisterPage() {
             <h2 className="auth-heading text-center mb-3">Criar Conta</h2>
 
             <div className="auth-form-container text-start">
-              <form className="auth-form register-form" onSubmit={handleSubmit}>
+              <form
+                className="auth-form register-form"
+                method="post"
+                onSubmit={handleSubmit}
+                aria-label="Formulário de cadastro"
+                noValidate
+              >
                 {/* Nome */}
-                <div className="name mb-3">
-                  <label className="sr-only" htmlFor="signup-name">
+                <div className="mb-3">
+                  <label className="form-label fw-500" htmlFor="signup-name">
                     Nome Completo
                   </label>
                   <input
                     id="signup-name"
                     name="name"
                     type="text"
-                    className="form-control signup-name"
-                    placeholder="Nome Completo"
+                    className="form-control"
+                    placeholder="Seu nome completo"
                     value={formData.name}
                     onChange={handleChange}
                     disabled={isLoading}
+                    autoComplete="name"
                     required
+                    aria-required="true"
                     suppressHydrationWarning
                   />
                 </div>
 
                 {/* Email */}
-                <div className="email mb-3">
-                  <label className="sr-only" htmlFor="signup-email">
+                <div className="mb-3">
+                  <label className="form-label fw-500" htmlFor="signup-email">
                     Email
                   </label>
                   <input
                     id="signup-email"
                     name="email"
                     type="email"
-                    className="form-control signup-email"
-                    placeholder="Email"
+                    className="form-control"
+                    placeholder="seu@email.com"
                     value={formData.email}
                     onChange={handleChange}
                     disabled={isLoading}
-                    autoComplete="off"
+                    autoComplete="email"
                     required
+                    aria-required="true"
                     suppressHydrationWarning
                   />
                 </div>
 
                 {/* Password */}
-                <div className="password mb-3">
-                  <label className="sr-only" htmlFor="signup-password">
+                <div className="mb-3">
+                  <label className="form-label fw-500" htmlFor="signup-password">
                     Senha
                   </label>
                   <input
                     id="signup-password"
                     name="password"
                     type="password"
-                    className="form-control signup-password"
-                    placeholder="Senha (mín. 6 caracteres)"
+                    className="form-control"
+                    placeholder="Mínimo 6 caracteres"
                     value={formData.password}
                     onChange={handleChange}
                     disabled={isLoading}
-                    autoComplete="off"
+                    autoComplete="new-password"
                     required
+                    aria-required="true"
+                    aria-describedby="password-hint"
                     suppressHydrationWarning
                   />
+                  <small id="password-hint" className="text-muted">Mínimo 6 caracteres</small>
                 </div>
 
                 {/* Confirm Password */}
-                <div className="password mb-3">
-                  <label className="sr-only" htmlFor="signup-password-confirm">
+                <div className="mb-3">
+                  <label className="form-label fw-500" htmlFor="signup-password-confirm">
                     Confirmar Senha
                   </label>
                   <input
                     id="signup-password-confirm"
                     name="passwordConfirm"
                     type="password"
-                    className="form-control signup-password-confirm"
-                    placeholder="Confirme a Senha"
+                    className="form-control"
+                    placeholder="Repita a senha"
                     value={formData.passwordConfirm}
                     onChange={handleChange}
                     disabled={isLoading}
-                    autoComplete="off"
+                    autoComplete="new-password"
                     required
+                    aria-required="true"
                     suppressHydrationWarning
                   />
                 </div>
 
                 {/* Error Alert */}
-                {error && (
-                  <div className="alert alert-danger alert-dismissible fade show mb-3" role="alert">
-                    <i className="bi bi-exclamation-circle me-2"></i>
-                    {error}
-                  </div>
-                )}
+                <div aria-live="assertive" aria-atomic="true">
+                  {error && (
+                    <div className="alert alert-danger mb-3" role="alert">
+                      <i className="bi bi-exclamation-circle me-2" aria-hidden="true"></i>
+                      {error}
+                    </div>
+                  )}
+                </div>
 
                 {/* Success Alert */}
-                {success && (
-                  <div className="alert alert-success alert-dismissible fade show mb-3" role="alert">
-                    <i className="bi bi-check-circle me-2"></i>
-                    {success}
-                  </div>
-                )}
+                <div aria-live="polite" aria-atomic="true">
+                  {success && (
+                    <div className="alert alert-success mb-3" role="status">
+                      <i className="bi bi-check-circle me-2" aria-hidden="true"></i>
+                      {success}
+                    </div>
+                  )}
+                </div>
 
                 {/* Submit Button */}
                 <div className="text-center">
@@ -210,8 +227,14 @@ export default function RegisterPage() {
                     type="submit"
                     className="btn app-btn-primary w-100 theme-btn mx-auto"
                     disabled={isLoading || !!error}
+                    aria-busy={isLoading}
                   >
-                    {isLoading ? 'Criando conta...' : 'Criar Conta'}
+                    {isLoading ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Criando conta...
+                      </>
+                    ) : 'Criar Conta'}
                   </button>
                 </div>
               </form>

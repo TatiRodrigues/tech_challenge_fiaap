@@ -141,7 +141,7 @@ export const thunkLoggingMiddleware: Middleware<{}, RootState> =
     } else if (action.type?.includes('/fulfilled')) {
       console.log(`✅ Success: ${action.type.replace('/fulfilled', '')}`);
     } else if (action.type?.includes('/rejected')) {
-      console.error(`❌ Failed: ${action.type.replace('/rejected', '')}`);
+      console.warn(`❌ Failed: ${action.type.replace('/rejected', '')}`);
     }
 
     return next(action);

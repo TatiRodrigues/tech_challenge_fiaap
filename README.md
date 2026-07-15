@@ -48,6 +48,94 @@ Username: Aluno Carequinha
 
 ---
 
+## 🐳 Executar com Docker (stack completa)
+
+O `docker-compose.yml` orquestra os três serviços: **MongoDB**, **BFF (Node.js)** e **Frontend (Next.js)**.
+
+### Pré-requisitos
+
+| Ferramenta | Versão mínima | Download |
+|-----------|--------------|---------|
+| **Docker Desktop** | 24+ | https://www.docker.com/products/docker-desktop |
+| **Git** | 2+ | https://git-scm.com |
+
+### Estrutura de pastas esperada
+
+Os dois repositórios devem ficar lado a lado na mesma pasta:
+
+```
+/dev/
+├── tech_challenge_fiaap/   ← este repositório (frontend)
+└── tech-challenge-2/       ← BFF (backend)
+```
+
+### Clone os dois repositórios
+
+```bash
+# Frontend (este repo)
+git clone https://github.com/TatiRodrigues/tech_challenge_fiaap.git
+
+# BFF
+git clone https://github.com/israelmeinert/tech-challenge-2.git
+```
+
+### Subir os containers
+
+```bash
+cd tech_challenge_fiaap
+
+# Sobe MongoDB + BFF (frontend roda fora do Docker — ver nota abaixo)
+docker compose up -d mongo bff
+
+# Aguardar BFF ficar healthy (~30s) e então iniciar o frontend
+npm install
+npm run dev
+```
+
+Acesse: **http://localhost:3001**
+
+> **Nota:** O frontend é executado diretamente no host Windows/macOS em vez de dentro do container, pois o Docker Alpine usa binários musl incompatíveis com o SWC nativo requerido pelo Next.js 16. O `docker-compose.yml` inclui o serviço `app` para ambientes Linux onde esta limitação não existe.
+
+### Verificar status dos containers
+
+```bash
+docker compose ps
+docker logs tech-challenge-bff --tail 20
+```
+
+---
+
+## ☁️ Deploy em Cloud (Vercel)
+
+### Deploy do Frontend (Vercel)
+
+O projeto já inclui `vercel.json` com configurações de segurança (headers HTTP) e build.
+
+1. Acesse [vercel.com](https://vercel.com) e importe o repositório `tech_challenge_fiaap`
+2. Configure a variável de ambiente:
+
+```
+NEXT_PUBLIC_API_URL = https://URL_DO_SEU_BFF
+```
+
+3. Clique em **Deploy**
+
+A Vercel detecta automaticamente o Next.js e aplica SSR/SSG corretamente.
+
+### Deploy do BFF
+
+O BFF (`tech-challenge-2`) pode ser deployado em qualquer plataforma que suporte Node.js (Railway, Render, Heroku, etc.) ou como container Docker em AWS ECS / Azure Container Apps.
+
+Variáveis necessárias no BFF em produção:
+
+```env
+MONGO_URI=mongodb+srv://USER:PASS@cluster.mongodb.net/tech-challenge
+NODE_ENV=production
+PORT=3000
+```
+
+---
+
 ## ✨ Funcionalidades
 
 - **Dashboard** — Gráficos financeiros: donut chart, barras diárias e tendência mensal
@@ -144,16 +232,22 @@ store/
 └── hooks.ts                         ← useAppDispatch, useAppSelector (tipados)
 ```
 
-### Acessibilidade (WCAG 2.1)
+### Acessibilidade (WCAG 2.1 AA)
 
-- Skip link (`Pular para o conteúdo`) antes de todo o conteúdo
-- Modais com `role="dialog"`, `aria-modal`, `aria-labelledby`
-- Todos os modais fecham com `Escape` e recebem foco automaticamente ao abrir
+- **Skip link** "Pular para o conteúdo principal" visível ao pressionar Tab
+- **Landmarks semânticos**: `<header role="banner">`, `<nav aria-label>`, `<main>`, `<footer role="contentinfo">`
+- **Labels visíveis** em todos os formulários (Login, Cadastro, Nova/Editar Transação)
+- `aria-current="page"` no menu lateral — leitor de tela anuncia a página ativa
+- Modais com `role="dialog"`, `aria-modal="true"`, `aria-labelledby`, foco automático e fechamento com `Escape`
+- `aria-live="assertive"` em erros de formulário; `aria-live="polite"` em sucesso e contagem de resultados
+- `aria-busy` nos botões de submit durante carregamento
+- `aria-hidden="true"` em todos os ícones decorativos
+- **Contraste** corrigido: badge "Pendente" usa `text-dark` sobre amarelo (contraste 12:1, WCAG AA ✅)
 - `scope="col"` nos cabeçalhos de tabela
 - `aria-label` descritivo nos botões de ação por transação
 - `aria-pressed` nos botões de alternância tabela/cards
-- `aria-hidden="true"` em ícones decorativos
-- `aria-live="polite"` no resumo de filtros
+- `prefers-reduced-motion` e `prefers-contrast` respeitados via CSS
+- Mínimo de 44×44px nas áreas clicáveis (WCAG 2.5.5)
 
 ---
 

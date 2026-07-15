@@ -56,7 +56,7 @@ class HealthCheckService {
         ? 'Conexão recusada - servidor pode estar desligado'
         : error.message || 'Erro ao verificar conectividade';
 
-      console.error(`[HealthCheck] Erro: ${errorMessage}`);
+      console.warn(`[HealthCheck] API indisponível: ${errorMessage}`);
 
       const result: HealthCheckResult = {
         isOnline: false,

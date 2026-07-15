@@ -87,9 +87,16 @@ export default function DashboardCustomizer({
       try {
         setWidgets(JSON.parse(saved));
       } catch (error) {
-        console.error('Error loading dashboard widgets:', error);
+        console.warn('Error loading dashboard widgets:', error);
       }
     }
+  }, []);
+
+  // Abrir via evento do header (engrenagem)
+  useEffect(() => {
+    const handler = () => setShowCustomizer(true);
+    window.addEventListener('open-dashboard-customizer', handler);
+    return () => window.removeEventListener('open-dashboard-customizer', handler);
   }, []);
 
   const toggleWidget = (widgetId: string) => {

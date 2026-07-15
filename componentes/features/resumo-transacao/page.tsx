@@ -16,6 +16,7 @@ interface Transaction {
 
 interface User {
   name?: string;
+  username?: string;
   email?: string;
 }
 
@@ -27,37 +28,27 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 	const [transactions, setTransactions] = useState<Transaction[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [selectedMonth, setSelectedMonth] = useState<string>(
-		new Date().toISOString().slice(0, 7) // YYYY-MM
+		new Date().toISOString().slice(0, 7)
 	);
 	const [, setEnabledWidgets] = useState<DashboardWidget[]>([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const PAGE_SIZE = 5;
 
 	useEffect(() => {
-		try {
-			const savedTransactions = localStorage.getItem('transactions');
-			if (savedTransactions) {
-				setTransactions(JSON.parse(savedTransactions));
-			} else {
-				// Carregar do arquivo JSON public/transactions.json
-				fetch('/transactions.json')
-					.then(res => res.json())
-					.then(data => {
-						const transactions = data.transactions || [];
-						setTransactions(transactions);
-						localStorage.setItem('transactions', JSON.stringify(transactions));
-					})
-					.catch(err => {
-						console.error('Erro ao carregar transações do arquivo:', err);
-						setTransactions([]);
-					});
-			}
-		} catch (error) {
-			console.error('Erro ao carregar transações:', error);
-			setTransactions([]);
-		}
-		setIsLoading(false);
+		fetch('/transactions.json')
+			.then(res => res.json())
+			.then(data => {
+				setTransactions(data.transactions || []);
+			})
+			.catch(err => {
+				console.warn('Erro ao carregar transações:', err);
+				setTransactions([]);
+			})
+			.finally(() => setIsLoading(false));
 	}, []);
 
 	const { monthlyData, monthlyTransactions } = useMemo(() => {
+		setCurrentPage(1); // resetar paginação ao trocar mês
 		const filtered = transactions.filter(t => {
 			const transDate = new Date(t.date).toISOString().slice(0, 7);
 			return transDate === selectedMonth;
@@ -96,6 +87,12 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 			currency: 'BRL',
 		}).format(value);
 	};
+
+	const totalPages = Math.max(1, Math.ceil(monthlyTransactions.length / PAGE_SIZE));
+	const pagedTransactions = monthlyTransactions.slice(
+		(currentPage - 1) * PAGE_SIZE,
+		currentPage * PAGE_SIZE
+	);
 
 	const formatDate = (dateStr: string) => {
 		return new Date(dateStr).toLocaleDateString('pt-BR', {
@@ -154,7 +151,7 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 	return (
 		<div className="container-xl">
 			{/* Título */}
-			<p className="app-page-title text-muted mb-4">Bem-vindo(a), <span className="text-success">{(user?.name || 'Usuário').charAt(0).toUpperCase() + (user?.name || 'Usuário').slice(1)}</span>!<br/>Aqui está o resumo de suas transações</p>
+			<p className="app-page-title text-muted mb-4">Bem-vindo(a), <span className="text-success">{(user?.name || user?.username || 'Usuário').replace(/^./, c => c.toUpperCase())}</span>!<br/>Aqui está o resumo de suas transações</p>
 
 			{/* Cards de Resumo */}
 			<CardsResumo transactions={transactions} />
@@ -263,8 +260,9 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 									</p>
 								</div>
 							) : (
+								<>
 								<div className="timeline">
-									{monthlyTransactions.map((transaction, index) => {
+									{pagedTransactions.map((transaction, index) => {
 										const badge = getTypeBadge(transaction.type);
 										return (
 											<div key={transaction.id} className="timeline-item mb-4">
@@ -277,7 +275,7 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 														>
 															<i className={`bi ${badge.icon}`}></i>
 														</div>
-														{index < monthlyTransactions.length - 1 && (
+														{index < pagedTransactions.length - 1 && (
 															<div
 																style={{
 																	height: '30px',
@@ -308,7 +306,7 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 																	{' '}
 																	{formatCurrency(transaction.value)}
 																</p>
-																<small className={`badge ${transaction.status === 'Concluído' ? 'bg-success' : 'bg-warning'}`}>
+																<small className={`badge ${transaction.status === 'Concluído' ? 'bg-success text-white' : 'bg-warning text-dark'}`}>
 																	{transaction.status}
 																</small>
 															</div>
@@ -319,6 +317,37 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 										);
 									})}
 								</div>
+
+									{/* Paginação */}
+									{totalPages > 1 && (
+										<div className="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+											<small className="text-muted">
+												Mostrando {(currentPage - 1) * PAGE_SIZE + 1}–{Math.min(currentPage * PAGE_SIZE, monthlyTransactions.length)} de {monthlyTransactions.length} transações
+											</small>
+											<nav>
+												<ul className="pagination pagination-sm mb-0">
+													<li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+														<button className="page-link" onClick={() => setCurrentPage(p => p - 1)}>
+															<i className="bi bi-chevron-left"></i>
+														</button>
+													</li>
+													{Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+														<li key={page} className={`page-item ${page === currentPage ? 'active' : ''}`}>
+															<button className="page-link" onClick={() => setCurrentPage(page)}>
+																{page}
+															</button>
+														</li>
+													))}
+													<li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+														<button className="page-link" onClick={() => setCurrentPage(p => p + 1)}>
+															<i className="bi bi-chevron-right"></i>
+														</button>
+													</li>
+												</ul>
+											</nav>
+										</div>
+									)}
+									</>
 							)}
 						</div>
 					</div>

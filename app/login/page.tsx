@@ -61,14 +61,17 @@ export default function LoginPage() {
       
       if (loginUser.fulfilled.match(resultAction)) {
         console.log('[LoginPage] Login successful, redirecting to /resumo-transacao');
-        // Se chegou aqui, login foi bem-sucedido
         router.push('/resumo-transacao');
       } else {
-        throw new Error(resultAction.payload?.message || 'Erro ao fazer login');
+        // payload é string quando vem de rejectWithValue(string)
+        const errorMsg = typeof resultAction.payload === 'string'
+          ? resultAction.payload
+          : (resultAction.payload as any)?.message || 'Erro ao fazer login';
+        throw new Error(errorMsg);
       }
     } catch (err: any) {
-      setError(err || 'Erro ao fazer login. Verifique suas credenciais.');
-      console.error(err);
+      setError(err?.message || 'Erro ao fazer login. Verifique suas credenciais.');
+      console.warn('[LoginPage] Falha no login:', err?.message || err);
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +90,7 @@ export default function LoginPage() {
                   <h3 style={{ fontWeight: 'bold', color: '#2D7A3E', margin: 0, fontSize: '1.1rem' }}>
                     Alecrim Wallet
                   </h3>
-                  <p style={{ fontSize: '0.75rem', color: '#666', margin: '0.15rem 0 0 0' }}>
+                  <p style={{ fontSize: '0.75rem', color: '#595959', margin: '0.15rem 0 0 0' }}>
                     Seu gerenciador de transações
                   </p>
                 </div>
@@ -96,43 +99,49 @@ export default function LoginPage() {
             <h2 className="auth-heading text-center mb-3">Login</h2>
 
             <div className="auth-form-container text-start">
-              <form className="auth-form login-form" onSubmit={handleSubmit}>
+              <form
+                className="auth-form login-form"
+                method="post"
+                onSubmit={handleSubmit}
+                aria-label="Formulário de login"
+                noValidate
+              >
                 {/* Email */}
-                <div className="email mb-3">
-                  <label className="sr-only" htmlFor="signin-email">
+                <div className="mb-3">
+                  <label className="form-label fw-500" htmlFor="signin-email">
                     Email
                   </label>
                   <input
                     id="signin-email"
-                    name="signin-email"
                     type="email"
-                    className="form-control signin-email"
-                    placeholder="Email"
+                    className="form-control"
+                    placeholder="seu@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isLoading}
-                    autoComplete="off"
+                    autoComplete="email"
                     required
+                    aria-required="true"
                     suppressHydrationWarning
                   />
                 </div>
 
                 {/* Password */}
-                <div className="password mb-3">
-                  <label className="sr-only" htmlFor="signin-password">
+                <div className="mb-3">
+                  <label className="form-label fw-500" htmlFor="signin-password">
                     Senha
                   </label>
                   <input
                     id="signin-password"
-                    name="signin-password"
                     type="password"
-                    className="form-control signin-password"
-                    placeholder="Senha"
+                    className="form-control"
+                    placeholder="Sua senha"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isLoading}
-                    autoComplete="off"
+                    autoComplete="current-password"
                     required
+                    aria-required="true"
                     suppressHydrationWarning
                   />
                   <div className="extra mt-3 row justify-content-between">
@@ -157,12 +166,14 @@ export default function LoginPage() {
                 </div>
 
                 {/* Error Alert */}
-                {error && (
-                  <div className="alert alert-danger alert-dismissible fade show mb-3" role="alert">
-                    <i className="bi bi-exclamation-circle me-2"></i>
-                    {error}
-                  </div>
-                )}
+                <div aria-live="assertive" aria-atomic="true">
+                  {error && (
+                    <div className="alert alert-danger mb-3" role="alert">
+                      <i className="bi bi-exclamation-circle me-2" aria-hidden="true"></i>
+                      {error}
+                    </div>
+                  )}
+                </div>
 
                 {/* Submit Button */}
                 <div className="text-center">
@@ -170,8 +181,14 @@ export default function LoginPage() {
                     type="submit"
                     className={`btn w-100 theme-btn mx-auto ${isLoading ? 'app-btn-secondary' : 'app-btn-primary'}`}
                     disabled={isLoading}
+                    aria-busy={isLoading}
                   >
-                    {isLoading ? 'Entrando...' : 'Entrar'}
+                    {isLoading ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Entrando...
+                      </>
+                    ) : 'Entrar'}
                   </button>
                 </div>
               </form>

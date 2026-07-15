@@ -45,7 +45,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="header fixed-top">
+    <header className="header fixed-top" role="banner">
       <div className="header-inner">
         <div className="container-fluid py-2">
           <div className="header-content">
@@ -129,8 +129,15 @@ export default function Header() {
                 </div>
 
                 {/* Settings */}
-                <div className="app-utility-item">
-                  <a href="#" title="Configurações">
+                <div className="app-utility-item dropdown" style={{ position: 'relative' }}>
+                  <a
+                    href="#"
+                    title="Configurações"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    className="dropdown-toggle no-toggle-arrow"
+                    role="button"
+                  >
                     <svg
                       width="1em"
                       height="1em"
@@ -143,6 +150,17 @@ export default function Header() {
                       <path fillRule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z" />
                     </svg>
                   </a>
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => window.dispatchEvent(new CustomEvent('open-dashboard-customizer'))}
+                      >
+                        <i className="bi bi-sliders me-2"></i>
+                        Personalizar Dashboard
+                      </button>
+                    </li>
+                  </ul>
                 </div>
 
                 {/* User Dropdown */}

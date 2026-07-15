@@ -88,7 +88,7 @@ class BankingApiService {
         `(Detalhes: ${error.code || error.message})`;
       
       // Log detalhado do erro de rede
-      console.error(
+      console.warn(
         `[API Network Error] URL: ${baseURL}${url} | ` +
         `Código: ${error.code} | ` +
         `Mensagem: ${error.message}`
@@ -99,7 +99,7 @@ class BankingApiService {
       errorMessage = `Erro ${error.response.status || 'desconhecido'}: API Backend não respondeu corretamente. ` +
         `Verifique se o servidor está rodando em ${error.config?.baseURL}`;
       
-      console.error(
+      console.warn(
         `[API HTML Response Error] Status: ${error.response.status} | ` +
         `URL: ${error.config?.baseURL}${error.config?.url}`
       );
@@ -113,7 +113,7 @@ class BankingApiService {
         'Erro desconhecido na API';
       
       // Log detalhado para debugging
-      console.error(
+      console.warn(
         `[API Error] Message: ${errorMessage} | Status: ${error.response.status} | ` +
         `URL: ${error.config?.url || 'N/A'} | ` +
         `Method: ${error.config?.method?.toUpperCase() || 'N/A'}`
@@ -126,10 +126,13 @@ class BankingApiService {
       data: error.response?.data,
     };
 
-    // Se token expirou (401), limpar token e sugerir re-login
+    // Se 401: só sobrescrever mensagem com "Sessão expirada" se havia token ativo.
+    // Se não havia token, é erro de credenciais — manter mensagem original da API.
     if (error.response?.status === 401) {
-      this.clearTokenFromStorage();
-      apiError.message = 'Sessão expirada. Por favor, faça login novamente.';
+      if (this.token) {
+        this.clearTokenFromStorage();
+        apiError.message = 'Sessão expirada. Por favor, faça login novamente.';
+      }
     }
 
     // Se servidor não disponível (503, etc)

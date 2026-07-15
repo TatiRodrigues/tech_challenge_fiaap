@@ -29,6 +29,7 @@ export default function MenuLateral() {
       <button
         id="sidepanel-close"
         className="sidepanel-close d-xl-none"
+        aria-label="Fechar menu lateral"
         style={{
           background: 'none',
           border: 'none',
@@ -45,13 +46,13 @@ export default function MenuLateral() {
           }
         }}
       >
-        ×
+        <span aria-hidden="true">×</span>
       </button>
 
       {/* Logo */}
       <div className="app-branding">
-        <a className="app-logo" href="/">
-          <i className="bi bi-wallet2 me-2" style={{ fontSize: '1.5rem', color: '#667eea' }}></i>
+        <a className="app-logo" href="/" aria-label="Alecrim Wallet - página inicial">
+          <i className="bi bi-wallet2 me-2" style={{ fontSize: '1.5rem', color: '#667eea' }} aria-hidden="true"></i>
           <span className="logo-text" style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#667eea' }}>
             Transações
           </span>
@@ -59,38 +60,41 @@ export default function MenuLateral() {
       </div>
 
       {/* Navigation Menu */}
-      <nav id="app-nav-main" className="app-nav app-nav-main flex-grow-1">
-        <ul className="app-menu list-unstyled accordion">
-          <li className="nav-item">
+      <nav id="app-nav-main" className="app-nav app-nav-main flex-grow-1" aria-label="Navegação principal">
+        <ul className="app-menu list-unstyled accordion" role="list">
+          <li className="nav-item" role="listitem">
             <a
               className={`nav-link ${isActive('resumo-transacao') ? 'active' : ''}`}
               href="/resumo-transacao"
+              aria-current={isActive('resumo-transacao') ? 'page' : undefined}
             >
-              <span className="nav-icon">
+              <span className="nav-icon" aria-hidden="true">
                 <i className="bi bi-graph-up"></i>
               </span>
               <span className="nav-link-text">Resumo</span>
             </a>
           </li>
 
-          <li className="nav-item">
+          <li className="nav-item" role="listitem">
             <a
               className={`nav-link ${isActive('listar-transacoes') ? 'active' : ''}`}
               href="/listar-transacoes"
+              aria-current={isActive('listar-transacoes') ? 'page' : undefined}
             >
-              <span className="nav-icon">
+              <span className="nav-icon" aria-hidden="true">
                 <i className="bi bi-list-check"></i>
               </span>
               <span className="nav-link-text">Transações</span>
             </a>
           </li>
 
-          <li className="nav-item">
+          <li className="nav-item" role="listitem">
             <a
               className={`nav-link ${isActive('nova-transacao') ? 'active' : ''}`}
               href="/nova-transacao"
+              aria-current={isActive('nova-transacao') ? 'page' : undefined}
             >
-              <span className="nav-icon">
+              <span className="nav-icon" aria-hidden="true">
                 <i className="bi bi-plus-circle"></i>
               </span>
               <span className="nav-link-text">Nova Transação</span>
@@ -101,13 +105,17 @@ export default function MenuLateral() {
 
       {/* Footer */}
       <div className="app-sidepanel-footer">
-        <nav className="app-nav app-nav-footer">
+        <nav className="app-nav app-nav-footer" aria-label="Ações do usuário">
           <ul className="app-menu footer-menu list-unstyled">
             <li className="nav-item">
-              <a className="nav-link" onClick={handleLogout}>
-                <i className="bi bi-box-arrow-right me-2"></i>
+              <button
+                className="nav-link btn btn-link w-100 text-start"
+                onClick={handleLogout}
+                style={{ textDecoration: 'none' }}
+              >
+                <i className="bi bi-box-arrow-right me-2" aria-hidden="true"></i>
                 Sair
-              </a>
+              </button>
             </li>
           </ul>
         </nav>

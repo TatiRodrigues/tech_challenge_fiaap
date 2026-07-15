@@ -182,8 +182,6 @@ function DailyBarChart({ byDay }: { byDay: Record<string, { income: number; expe
 export default function FinancialCharts({ transactions }: FinancialChartProps) {
   const [period, setPeriod] = useState<PeriodFilter>('month');
 
-  const now = new Date();
-
   const periodLabel: Record<PeriodFilter, string> = {
     month: 'Este mês',
     '3months': 'Últimos 3 meses',

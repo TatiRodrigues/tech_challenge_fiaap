@@ -63,9 +63,19 @@ export default function LayoutAutenticado({
 
   return (
     <div className="app">
+      {/* Skip navigation — visível ao receber foco via teclado */}
+      <a href="#main-content" className="skip-to-content">
+        Pular para o conteúdo principal
+      </a>
+
       <Header />
 
-      <div id="app-sidepanel" className="app-sidepanel sidepanel-visible">
+      <div
+        id="app-sidepanel"
+        className="app-sidepanel sidepanel-visible"
+        role="navigation"
+        aria-label="Menu lateral"
+      >
         <div id="sidepanel-drop" className="sidepanel-drop"></div>
         <MenuLateral />
       </div>
@@ -73,11 +83,11 @@ export default function LayoutAutenticado({
       <div className="app-wrapper">
         <div className="app-content pt-3 p-md-3 p-lg-4">
           <div className="container-xl">
-            <main id="main-content" tabIndex={-1}>{children}</main>
+            <main id="main-content" tabIndex={-1} aria-label="Conteúdo principal">{children}</main>
           </div>
         </div>
 
-        <footer className="app-footer">
+        <footer className="app-footer" role="contentinfo">
           <div className="container text-center py-3">
             <Rodape />
           </div>
