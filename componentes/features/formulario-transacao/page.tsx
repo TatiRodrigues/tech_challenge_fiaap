@@ -8,6 +8,7 @@ import {
   ValidationError,
 } from '@/utils/transactionValidation';
 import { FileUpload } from '../file-upload/FileUpload';
+import { MicrofrontendBus, MFEEvents } from '@/config/microfrontend-advanced';
 
 interface IAttachment {
   id: string;
@@ -152,9 +153,18 @@ export default function FormularioTransacao() {
         status: 'Concluído',
       };
 
-      // Save with existing transactions
+      // Salvar transação
       transactions.push(newTransaction);
       localStorage.setItem('transactions', JSON.stringify(transactions));
+
+      // Emitir evento para outros microfrontends via MFE Bus
+      MicrofrontendBus.getInstance().emit({
+        source: 'alecrim_wallet_transactions',
+        target: 'broadcast',
+        type: MFEEvents.TRANSACTION_CREATED,
+        payload: { id: newTransaction.id, type: newTransaction.type, value: newTransaction.value },
+        timestamp: Date.now(),
+      });
 
       setSuccess('Transação criada com sucesso! Redirecionando...');
 

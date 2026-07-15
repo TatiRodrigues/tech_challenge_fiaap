@@ -1,45 +1,62 @@
 ---
 sidebar_position: 1
 title: Arquitetura
-description: Arquitetura da aplicação
+description: Arquitetura técnica da aplicação
 ---
 
 # 🏛️ Arquitetura
 
-Arquitetura geral do Alecrim Wallet - seu gerenciador de transações inteligente.
-
 ## Stack Tecnológico
 
-- **Frontend**: Next.js 16 + React 19 + TypeScript
-- **Styling**: Tailwind CSS + Bootstrap 5
-- **Design System**: Baseado em [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley, com customizações para Alecrim Wallet
-- **Documentação**: Docusaurus 3
-- **Runtime**: Node.js 18+
-
-## Estrutura de Diretórios
-
-```
-alecrim-wallet/
-├── app/              # Next.js App Router
-├── componentes/      # Componentes reutilizáveis
-├── hooks/            # Custom React hooks
-├── docs/             # Documentação (Docusaurus)
-└── public/           # Arquivos estáticos
-```
+| Tecnologia | Versão | Papel |
+|-----------|--------|-------|
+| **Next.js** | 16 | Framework (SSR/SSG, App Router) |
+| **React** | 19 | UI Library |
+| **TypeScript** | 5 | Tipagem estática |
+| **Redux Toolkit** | 2 | Gestão de estado global |
+| **Redux Persist** | 6 | Persistência de estado |
+| **Bootstrap** | 5 | Estilos e responsividade |
+| **Webpack** | 5 | Bundler (Module Federation) |
+| **Docusaurus** | 3 | Documentação |
+| **Node.js** | 20 | Runtime |
 
 ## Fluxo de Dados
 
 ```
-Pages → Components → Hooks → Services
+Pages (Server) → Client Components → Redux Store → localStorage
+                                   ↓
+                              API Bancária (opcional)
 ```
 
 ## Camadas
 
-1. **Pages**: Rotas e layouts
-2. **Components**: UI reutilizáveis
-3. **Hooks**: Lógica compartilhada
-4. **Services**: Integração com API
+1. **Server Components** — `page.tsx` / `layout.tsx`: SSR + Metadata para SEO
+2. **Client Components** — `client.tsx`: lógica interativa, hooks, estado local
+3. **Redux Store** — estado global: autenticação, transações
+4. **Serviços** — integração com API bancária (opcional)
+5. **localStorage** — persistência de transações e autenticação local
+
+## Padrão SSR + Client
+
+Cada rota usa o padrão `page.tsx` (server) + `client.tsx` (client):
+
+```
+app/(autenticado)/listar-transacoes/
+├── page.tsx     ← export metadata (SSR) + renderiza <ListarTransacoesClient />
+└── client.tsx   ← 'use client' — toda a lógica interativa
+```
+
+## Acessibilidade (WCAG 2.1 AA)
+
+- Skip link (`Pular para o conteúdo`) antes do header
+- Todos os modais: `role="dialog"`, `aria-modal`, `aria-labelledby`, fecham com `Escape`
+- Foco automático ao abrir modais via `ref.focus()`
+- Tabelas: `scope="col"` nos `<th>`
+- Botões de ação: `aria-label` descritivo por transação
+- Alternância tabela/cards: `aria-pressed`
+- Ícones decorativos: `aria-hidden="true"`
+- Filtros ativos: `aria-live="polite"`
 
 ---
 
-[Próximo: API e Serviços →](./api-servicos)
+[Microfrontends →](./microfrontends) | [Estado Redux →](./estado-redux) | [SSR & SSG →](./ssr-ssg)

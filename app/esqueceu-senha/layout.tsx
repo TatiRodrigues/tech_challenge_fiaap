@@ -1,4 +1,9 @@
-export const dynamic = 'force-dynamic';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Recuperar Senha — Alecrim Wallet',
+  description: 'Recupere o acesso à sua conta Alecrim Wallet.',
+};
 
 export default function EsqueceuSenhaLayout({
   children,
@@ -11,3 +16,4 @@ export default function EsqueceuSenhaLayout({
     </div>
   );
 }
+

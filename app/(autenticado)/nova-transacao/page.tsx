@@ -1,7 +1,12 @@
-'use client';
+import type { Metadata } from 'next';
+import NovaTransacaoClient from './client';
 
-import FormularioTransacao from '@/componentes/features/formulario-transacao/page';
+export const metadata: Metadata = {
+  title: 'Nova Transação — Alecrim Wallet',
+  description: 'Registre uma nova transação financeira com validação avançada, sugestões de categoria e upload de comprovantes.',
+};
 
 export default function PaginaNovaTransacao() {
-  return <FormularioTransacao />;
+  return <NovaTransacaoClient />;
 }
+

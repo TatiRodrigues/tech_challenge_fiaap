@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { logoutUser } from '@/store/thunks';
 import { AlecrimLogo } from '@/componentes/AlecrimLogo';
+import { MicrofrontendBus, MFEEvents } from '@/config/microfrontend-advanced';
 
 export default function Header() {
   const dispatch = useAppDispatch();
@@ -15,9 +16,15 @@ export default function Header() {
 
   const handleLogout = async () => {
     try {
-      // Dispatch Redux Thunk para logout
+      // Notificar outros microfrontends antes do logout
+      MicrofrontendBus.getInstance().emit({
+        source: 'alecrim_wallet_host',
+        target: 'broadcast',
+        type: MFEEvents.AUTH_LOGOUT,
+        payload: { userId: user?.id },
+        timestamp: Date.now(),
+      });
       await (dispatch as any)(logoutUser());
-      // Redireciona para login
       router.push('/login');
     } catch (error) {
       console.error('Erro ao fazer logout:', error);

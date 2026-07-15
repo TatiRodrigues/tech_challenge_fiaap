@@ -1,91 +1,80 @@
 ---
 sidebar_position: 1
 title: Primeiro Uso
-description: Guia de primeiro uso da Alecrim Wallet
+description: Como executar o projeto localmente
 ---
 
 # 📚 Primeiro Uso
 
-Seu guia para começar com o Alecrim Wallet - seu gerenciador de transações inteligente.
+## Pré-requisitos
 
-## 1️⃣ Instalação
+| Ferramenta | Versão mínima | Download |
+|-----------|--------------|---------|
+| **Node.js** | 20 LTS | https://nodejs.org |
+| **npm** | 10+ | (incluso no Node.js) |
 
-### Pré-requisitos
-- Node.js 18+
-- npm ou yarn
-
-### Setup
+## Executar localmente
 
 ```bash
-# Clone o repositório
+# 1. Clone
 git clone https://github.com/TatiRodrigues/tech_challenge_fiaap.git
-cd alecrim-wallet
+cd tech_challenge_fiaap
 
-# Instale dependências
+# 2. Instale dependências
 npm install
 
-# Inicie o desenvolvimento
+# 3. Inicie o servidor
 npm run dev
 ```
 
-## 2️⃣ Estrutura do Projeto
+Acesse: **http://localhost:3001**
+
+### Credenciais padrão
 
 ```
-alecrim-wallet/
-├── app/                      # Aplicação Next.js
-│   ├── (autenticado)/       # Rotas protegidas
-│   ├── login/               # Página de login
-│   ├── cadastro/            # Página de cadastro
-│   └── layout.tsx           # Layout raiz
-├── componentes/             # Componentes reutilizáveis
-├── hooks/                   # Custom hooks
-├── docs/                    # Documentação (Docusaurus)
-└── public/                  # Arquivos estáticos
+Email: teste@gmail.com
+Senha: testes
+Username: Aluno Carequinha
 ```
 
-## 3️⃣ Primeiros Passos
+## Estrutura do Projeto
 
-### Criar um Novo Componente
-
-```tsx
-// componentes/meu-componente/index.tsx
-import React from 'react';
-
-export const MeuComponente: React.FC = () => {
-  return <div>Meu Componente</div>;
-};
+```
+├── app/                   # Rotas Next.js (App Router)
+│   ├── (autenticado)/     # Rotas protegidas
+│   ├── login/
+│   ├── cadastro/
+│   └── layout.tsx
+├── componentes/           # Componentes reutilizáveis
+├── store/                 # Redux store
+├── config/                # Microfrontend config
+├── utils/                 # Utilitários
+├── docs/                  # Documentação (Docusaurus)
+└── public/                # Arquivos estáticos
 ```
 
-### Usar um Componente
+## Scripts disponíveis
 
-```tsx
-import { Button } from '@/componentes/ui/Button';
+| Comando | Descrição |
+|---------|-----------|
+| `npm run dev` | Inicia em modo desenvolvimento (porta 3001) |
+| `npm run build` | Gera build de produção |
+| `npm run start` | Inicia a build de produção |
+| `npm run lint` | Executa o linter |
 
-export default function MinhaPage() {
-  return (
-    <Button onClick={() => alert('Clicado!')}>
-      Clique aqui
-    </Button>
-  );
-}
-```
+## Acessar a Documentação
 
-## 4️⃣ Acessar a Documentação
-
-### Local
 ```bash
 cd docs
+npm install
 npm run start
 ```
-Acesse: http://localhost:3002
 
-## 5️⃣ Próximas Etapas
+Acesse: **http://localhost:3002**
 
-- ✅ Leia o [Design System](./design-system/)
-- ✅ Explore os [Componentes](./componentes/)
-- ✅ Veja [Exemplos Práticos](./componentes/guia-rapido)
-- ✅ Contribua com [Guia de Contribuição](./guia-contribuicao)
+## Próximas Etapas
 
----
-
-**Próximo:** [Design System](./design-system/)
+- [Arquitetura](./arquitetura) — Entender a estrutura técnica
+- [Microfrontends](./microfrontends) — Module Federation
+- [Estado Redux](./estado-redux) — Gestão de estado
+- [Design System](./design-system/) — Componentes visuais

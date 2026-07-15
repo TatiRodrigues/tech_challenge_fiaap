@@ -73,7 +73,7 @@ export default function LayoutAutenticado({
       <div className="app-wrapper">
         <div className="app-content pt-3 p-md-3 p-lg-4">
           <div className="container-xl">
-            <main>{children}</main>
+            <main id="main-content" tabIndex={-1}>{children}</main>
           </div>
         </div>
 

@@ -21,6 +21,9 @@ export default function RootLayout({
       </head>
 
       <body>
+        <a href="#main-content" className="skip-to-content">
+          Pular para o conteúdo principal
+        </a>
         <ReduxProvider>
           {children}
         </ReduxProvider>

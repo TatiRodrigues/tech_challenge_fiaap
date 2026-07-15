@@ -4,91 +4,53 @@ sidebar_position: 1
 
 # 👋 Bem-vindo à Alecrim Wallet
 
-Bem-vindo à documentação oficial da **Alecrim Wallet** - seu gerenciador de transações inteligente.
+Bem-vindo à documentação oficial da **Alecrim Wallet** — aplicação de gerenciamento financeiro pessoal desenvolvida como **Tech Challenge Fase 2** da FIAP.
 
 ## 🎯 O que é Alecrim Wallet?
 
-Alecrim Wallet é seu gerenciador de transações inteligente para:
-- ✅ Registrar e categorizar transações
-- ✅ Visualizar resumos e análises
-- ✅ Gerenciar múltiplas contas
-- ✅ Acompanhar orçamentos
+- ✅ Dashboard com gráficos financeiros (donut chart, barras diárias, tendência mensal)
+- ✅ Listagem de transações com filtros avançados, busca e paginação
+- ✅ Criar/editar transações com validação, sugestões de categoria e upload de recibos
+- ✅ Autenticação (login, cadastro, recuperação de senha)
+- ✅ Arquitetura microfrontend (Module Federation)
+- ✅ Server-Side Rendering com Metadata para SEO
+- ✅ Gestão de estado com Redux Toolkit
+- ✅ Acessibilidade WCAG 2.1 AA
 
-## 📖 O que você encontrará aqui
+## 📖 Documentação
 
-### 🚀 Para Começar Rápido
-- [Primeiro Uso](./primeiro-uso) - Setup e configuração básica
-- [Solução Rápida](./SOLUCAO_RAPIDA) - Comece em 5 minutos
-- [Sumário Executivo](./SUMARIO_EXECUTIVO) - Visão geral completa
+### 🚀 Comece Aqui
+- [Primeiro Uso](./primeiro-uso) — Setup e execução local
+
+### 🏗️ Arquitetura Técnica
+- [Arquitetura](./arquitetura) — Stack, SSR, fluxo de dados
+- [Microfrontends](./microfrontends) — Module Federation e comunicação
+- [Estado Redux](./estado-redux) — Slices, thunks, seletores
+- [SSR & SSG](./ssr-ssg) — Server Components e Metadata
 
 ### 🎨 Design System
-- Fundamentos (cores, tipografia, espaçamento)
-- Componentes básicos e avançados
-- Padrões de design e acessibilidade
+- [Design System](./design-system/) — Fundamentos e componentes
 
 ### 📦 Componentes
-Documentação interativa de 7 componentes principais:
-- Button, Input, Card, Alert, Modal, Form, Table
+- [Componentes](./componentes/) — Documentação interativa
 
-### 📚 Documentação Técnica
-- Arquitetura da aplicação
-- APIs e serviços
-- Boas práticas e padrões
+### 📚 Técnico
+- [API e Serviços](./api-servicos) — Integração e endpoints
+- [Boas Práticas](./boas-praticas) — Padrões de código
 
-### 🤝 Contribuindo
-- Guias para contribuidores
-- Processo de pull requests
-- Governança do projeto
+## 🚀 Início Rápido
 
-## 🚀 Comece Agora
-
-1. **Novo por aqui?** → [Leia Primeiro](./LEIA_PRIMEIRO)
-2. **Quer começar rápido?** → [Solução Rápida em 5 min](./SOLUCAO_RAPIDA)
-3. **Explorar componentes?** → [Guia de Componentes](./componentes/guia-rapido)
-4. **Entender design?** → [Design System](./design-system/)
-
-## 🌟 Destaques
-
-### Documentação Interativa
-Cada componente tem um **Configurador** onde você pode:
-- Ajustar propriedades em tempo real
-- Ver o código gerado
-- Copiar e colar nos seus projetos
-
-### 100% Acessível
-Todos os componentes seguem WCAG 2.1 AA:
-- ✅ Navegação por teclado
-- ✅ Suporte a leitores de tela
-- ✅ Contraste adequado
-- ✅ ARIA labels
-
-### TypeScript First
-Documentação completa com tipos:
-```tsx
-import { Button, ButtonProps } from '@/components/ui/Button';
+```bash
+git clone https://github.com/TatiRodrigues/tech_challenge_fiaap.git
+cd tech_challenge_fiaap
+npm install
+npm run dev
 ```
 
-### 🎨 Design Baseado e Customizado
-Utilizamos o template [Portal](https://themes.3rdwavemedia.com/demo/portal/) de Xiaoying Riley como referência técnica, adaptando a estrutura HTML/CSS e customizando o design das páginas para a Alecrim Wallet.
-
-## 📊 Estrutura da Documentação
+Acesse: **http://localhost:3001**
 
 ```
-📖 Alecrim Wallet Docs
-├── 🚀 Comece Aqui
-├── 🎨 Design System
-├── 📦 Componentes (com Configuradores)
-├── 📚 Documentação Técnica
-└── 🤝 Comunidade & Contribuições
+Email: teste@gmail.com
+Senha: testes
+Username: Aluno Carequinha
 ```
-
-## 💬 Dúvidas?
-
-- 📖 Leia a [documentação completa](./SUMARIO_EXECUTIVO)
-- 💡 Veja [exemplos práticos](./componentes/guia-rapido)
-- 🆘 Abra uma issue no repositório
-- 🤝 Contribua com melhorias!
-
----
-
-**Próximo:** [Leia Primeiro](./LEIA_PRIMEIRO) | [Solução Rápida](./SOLUCAO_RAPIDA)

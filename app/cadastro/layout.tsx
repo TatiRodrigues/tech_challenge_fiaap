@@ -1,4 +1,9 @@
-export const dynamic = 'force-dynamic';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Cadastro — Alecrim Wallet',
+  description: 'Crie sua conta Alecrim Wallet gratuitamente e comece a controlar suas finanças.',
+};
 
 export default function CadastroLayout({
   children,
@@ -11,3 +16,4 @@ export default function CadastroLayout({
     </div>
   );
 }
+

@@ -1,30 +1,27 @@
-/**
- * Creating a sidebar enables you to:
- - create an ordered group of docs
- - render a sidebar for each doc of that group
- - provide next/previous navigation
-
- The sidebars can be generated from the filesystem, or explicitly defined here.
-
- Create as many sidebars as you want.
- */
-
 // @ts-check
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   tutorialSidebar: [
     'intro',
-    
+
     {
       type: 'category',
       label: '🚀 Comece Aqui',
+      items: ['primeiro-uso'],
+      collapsed: false,
+    },
+
+    {
+      type: 'category',
+      label: '🏗️ Arquitetura Técnica',
       items: [
-        'primeiro-uso',
-        'LEIA_PRIMEIRO',
-        'SOLUCAO_RAPIDA',
+        'arquitetura',
+        'microfrontends',
+        'estado-redux',
+        'ssr-ssg',
       ],
-      collapsed: true,
+      collapsed: false,
     },
 
     {
@@ -39,7 +36,7 @@ const sidebars = {
         'design-system/acessibilidade',
         'design-system/grid-layout',
       ],
-      collapsed: false,
+      collapsed: true,
     },
 
     {
@@ -79,32 +76,16 @@ const sidebars = {
         'componentes/melhores-praticas',
         'componentes/mapa-visual',
       ],
-      collapsed: false,
+      collapsed: true,
     },
 
     {
       type: 'category',
       label: '📚 Documentação Técnica',
       items: [
-        'arquitetura',
         'api-servicos',
         'boas-praticas',
-        'REFERENCIA_CODIGO',
-        'componentes-layout',
-        'componentes-recursos',
-      ],
-      collapsed: true,
-    },
-
-    {
-      type: 'category',
-      label: '🤝 Contribuir',
-      items: [
-        'contribuicoes',
-        'guia-contribuicao',
-        'governanca',
         'changelog',
-        'versionamento',
       ],
       collapsed: true,
     },
