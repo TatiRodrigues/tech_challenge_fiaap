@@ -2,6 +2,12 @@
 
 Aplicação de gerenciamento financeiro pessoal desenvolvida como **Tech Challenge Fase 2** da FIAP Pós-Graduação em Arquitetura de Software.
 
+## 🌐 Acesso em Produção
+
+| Ambiente | URL |
+|----------|-----|
+| **Frontend (Vercel)** | [https://techchallengefiaap.vercel.app/login](https://techchallengefiaap.vercel.app/login) |
+
 ---
 
 ## 🚀 Executar localmente
