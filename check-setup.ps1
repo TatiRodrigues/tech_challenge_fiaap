@@ -145,7 +145,7 @@ else {
     Write-Host ""
     Write-Host "Ha problemas a resolver antes de comecar" -ForegroundColor Red
     Write-Host ""
-    Write-Host "Veja as instrucoes em DOCKER_SETUP.md" -ForegroundColor Yellow
+    Write-Host "Veja as instrucoes no README.md" -ForegroundColor Yellow
     Write-Host ""
 }
 

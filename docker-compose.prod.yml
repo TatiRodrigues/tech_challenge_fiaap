@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     container_name: tech-challenge-bff-prod
     ports:
-      - "3001:3000"
+      - "3000:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
@@ -41,11 +41,11 @@ services:
       dockerfile: Dockerfile
     container_name: tech-challenge-app-prod
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - NEXT_PUBLIC_API_URL=http://bff:3000
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
     depends_on:
       - bff
     restart: on-failure

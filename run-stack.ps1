@@ -31,12 +31,28 @@ if ($LASTEXITCODE -eq 0) {
 }
 
 
+# Detectar se esta rodando a partir do OneDrive (pode causar erros EIO nos volumes)
+$isOneDrive = $PSScriptRoot -match "OneDrive"
+$overrideFile = Join-Path $PSScriptRoot "docker-compose.override.yml"
+$useOverride = $isOneDrive -and (Test-Path $overrideFile)
+
+if ($useOverride) {
+    Write-Host "[AVISO] Projeto detectado no OneDrive - usando override sem volume mounts (sem hot-reload)" -ForegroundColor Yellow
+    Write-Host ""
+}
+
 # Iniciar stack
 Write-Host ""
 Write-Host "Iniciando containers..." -ForegroundColor Yellow
 Write-Host ""
 
-if ($composeCommand -eq "docker compose") {
+if ($useOverride) {
+    if ($composeCommand -eq "docker compose") {
+        docker compose -f docker-compose.yml -f docker-compose.override.yml up --build
+    } else {
+        docker-compose -f docker-compose.yml -f docker-compose.override.yml up --build
+    }
+} elseif ($composeCommand -eq "docker compose") {
     docker compose up --build
 } else {
     docker-compose up --build
