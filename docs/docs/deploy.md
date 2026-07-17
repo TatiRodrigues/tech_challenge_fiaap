@@ -18,11 +18,15 @@ A Vercel é a plataforma recomendada pela integração nativa com Next.js.
 
 ### Variáveis de Ambiente (Vercel)
 
-| Variável | Valor | Descrição |
-|----------|-------|-----------|
-| `NEXT_PUBLIC_API_URL` | URL do BFF | Ex: `https://seu-bff.railway.app` |
-| `NEXT_PUBLIC_MFE_TRANSACTIONS_URL` | URL MFE Transactions | `https://transactions.vercel.app` |
-| `NEXT_PUBLIC_MFE_AUTH_URL` | URL MFE Auth | `https://auth.vercel.app` |
+| Variável | Tipo | Descrição |
+|----------|------|-----------|
+| `API_BACKEND_URL` | **Server-side** (sem `NEXT_PUBLIC_`) | URL do BFF Railway. Ex: `https://web-production-xxx.up.railway.app` |
+| `NEXT_PUBLIC_MFE_TRANSACTIONS_URL` | Client-side | URL MFE Transactions |
+| `NEXT_PUBLIC_MFE_AUTH_URL` | Client-side | URL MFE Auth |
+
+> ⚠️ **Não use `NEXT_PUBLIC_API_URL`** para a URL do BFF.  
+> O Next.js usa um **proxy reverso server-side**: chamadas do browser para `/api/bff/*` são reescritas pelo servidor Vercel para `API_BACKEND_URL/*`.  
+> Isso garante que a URL do BFF nunca seja exposta no bundle JavaScript e elimina problemas de CORS e DNS resolution no browser.
 
 ### Headers de Segurança
 

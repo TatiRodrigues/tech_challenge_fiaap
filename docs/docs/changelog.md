@@ -6,6 +6,35 @@ description: Histórico de versões
 
 # 📋 Changelog
 
+## [2.2.0] - 2026-07-17
+
+### Correções de Produção (Sessão de testes completa)
+
+#### Adicionado
+- ✨ **Proxy reverso server-side** no Next.js (`/api/bff/*` → Railway) — browser não resolve mais o host do BFF diretamente
+- ✨ **MongoDB nativo Railway** adicionado ao projeto BFF (Railway dashboard)
+- ✨ `API_BACKEND_URL` (server-side, sem `NEXT_PUBLIC_`) como variável de ambiente no Vercel
+- ✨ Transações **isoladas por usuário** via `user_transactions_${userId}` no localStorage
+- ✨ Decode do JWT no login para obter `userId` estável (MongoDB ObjectId) — elimina IDs `temp-*` que mudavam a cada login
+
+#### Corrigido
+- 🐛 `ERR_NAME_NOT_RESOLVED` no browser — URL do Railway tinha espaço extra (`%20`) e era resolvida client-side
+- 🐛 `ECONNABORTED` no login — método `auth()` do BFF sem `try/catch` travava 13s sem MongoDB
+- 🐛 `bufferCommands=true` no Mongoose — queries ficavam em buffer infinito sem conexão com banco
+- 🐛 `MONGO_URI` ausente no Railway — backend subia sem banco, rotas travavam
+- 🐛 Formulário salvava em `localStorage('transactions')` mas lista lia `'user_transactions'` — chave diferente, transações novas não apareciam
+- 🐛 `Transaction.id` tipado como `number` em 4 componentes, mas formulário gerava `string` — editar/deletar transações do usuário falhava silenciosamente
+- 🐛 `handleSaveEdit` não persistia edições no localStorage — edições sumiam após reload
+- 🐛 `transactionToDelete` tipado como `number | null` — impossível deletar transações com ID string
+- 🐛 Z-index do menu lateral mobile menor que o `fixed-top` header (10 vs 1030) — botão "×" inacessível
+- 🐛 Usuário novo via cadastro via dados zerados, mas ao relogar mostrava dados do seed (`transactions.json`) de outros usuários
+
+#### Segurança
+- 🔒 `NEXT_PUBLIC_API_URL` removido do Vercel — URL do backend não é mais exposta no bundle JS client-side
+- 🔒 Rotas protegidas redirecionam para `/login` sem autenticação (verificado em `/resumo-transacao`, `/listar-transacoes`, `/nova-transacao`)
+
+---
+
 ## [2.1.0] - 2026-07-15
 
 ### Tech Challenge Fase 2 — Correções e Melhorias

@@ -7,6 +7,11 @@ Aplicação de gerenciamento financeiro pessoal desenvolvida como **Tech Challen
 | Ambiente | URL |
 |----------|-----|
 | **Frontend (Vercel)** | [https://alecrimwallet.vercel.app/login](https://alecrimwallet.vercel.app/login) |
+| **BFF (Railway)** | `https://web-production-4bc8e.up.railway.app` (server-side — não acessado diretamente pelo browser) |
+
+> **Arquitetura de produção:** o browser nunca resolve o endereço do BFF diretamente.  
+> O Next.js atua como proxy reverso — chamadas `/api/bff/*` são reescritas pelo servidor Vercel para o Railway.  
+> Isso elimina problemas de CORS, DNS e exposição da URL do backend no bundle client-side.
 
 ---
 
@@ -118,13 +123,15 @@ docker logs tech-challenge-bff --tail 20
 O projeto já inclui `vercel.json` com configurações de segurança (headers HTTP) e build.
 
 1. Acesse [vercel.com](https://vercel.com) e importe o repositório `tech_challenge_fiaap`
-2. Configure a variável de ambiente:
+2. Configure as variáveis de ambiente:
 
 ```
-NEXT_PUBLIC_API_URL = https://URL_DO_SEU_BFF
+API_BACKEND_URL = https://URL_DO_SEU_BFF   ← server-side (sem NEXT_PUBLIC_)
 ```
 
 3. Clique em **Deploy**
+
+> ⚠️ **Não use `NEXT_PUBLIC_API_URL`** — isso expõe a URL do backend no bundle JS e causa `ERR_NAME_NOT_RESOLVED` no browser se a URL tiver algum espaço. Use `API_BACKEND_URL` (server-side only).
 
 A Vercel detecta automaticamente o Next.js e aplica SSR/SSG corretamente.
 
