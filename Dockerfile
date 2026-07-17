@@ -23,6 +23,7 @@ RUN npm config set fetch-timeout 520000 && npm config set fetch-retry-mintimeout
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/next.config.ts ./next.config.ts
 
 # Mudar para usuário não-root
 USER nextjs
@@ -37,4 +38,5 @@ ENV PORT=3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
-CMD ["npm", "start"]
+# Usar next diretamente para respeitar PORT env var (evita -p 3001 hardcoded no package.json)
+CMD ["./node_modules/.bin/next", "start"]

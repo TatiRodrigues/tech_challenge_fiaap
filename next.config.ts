@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
 
   // Variáveis públicas (compartilhadas entre host e remotes)
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000",
+    NEXT_PUBLIC_API_URL: (process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000").trim(),
     NEXT_PUBLIC_MFE_TRANSACTIONS_URL: process.env.NEXT_PUBLIC_MFE_TRANSACTIONS_URL || "http://localhost:3001",
     NEXT_PUBLIC_MFE_AUTH_URL: process.env.NEXT_PUBLIC_MFE_AUTH_URL || "http://localhost:3002",
   },

@@ -50,12 +50,29 @@
       retries: 15
       start_period: 60s
 
-  # NOTA: O servico frontend (app) nao esta listado aqui intencionalmente.
-  # Em Windows, o volume mount .:/app quebra permissoes dos binarios Linux.
-  # Execute o frontend no host:
-  #   set NODE_OPTIONS=--max-old-space-size=512 && npm run dev
-  # Em Linux/macOS, adicione o servico app normalmente com:
-  #   docker compose --profile linux up
+  # Frontend Next.js - Desenvolvimento (Porta 3001)
+  # Sem volume mounts para evitar problemas de permissao no Windows
+  # Hot-reload nao disponivel; use --build para recompilar apos mudancas
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: tech-challenge-app
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+      - CHOKIDAR_USEPOLLING=true
+    restart: unless-stopped
+    networks:
+      - tech-challenge-network
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://localhost:3001', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))\""]
+      interval: 15s
+      timeout: 8s
+      retries: 10
+      start_period: 90s
 
 networks:
   tech-challenge-network:

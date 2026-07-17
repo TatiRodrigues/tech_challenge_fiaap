@@ -6,7 +6,7 @@ Aplicação de gerenciamento financeiro pessoal desenvolvida como **Tech Challen
 
 | Ambiente | URL |
 |----------|-----|
-| **Frontend (Vercel)** | [https://techchallengefiaap.vercel.app/login](https://techchallengefiaap.vercel.app/login) |
+| **Frontend (Vercel)** | [https://alecrimwallet.vercel.app/login](https://alecrimwallet.vercel.app/login) |
 
 ---
 
