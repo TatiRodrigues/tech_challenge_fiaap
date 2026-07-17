@@ -45,7 +45,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - NEXT_PUBLIC_API_URL=http://localhost:3000
+      # URL interna do container bff (server-side; sem NEXT_PUBLIC_)
+      - API_BACKEND_URL=http://bff:3000
     depends_on:
       - bff
     restart: on-failure

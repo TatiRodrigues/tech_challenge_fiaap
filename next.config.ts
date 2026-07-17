@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
+  // Proxy reverso server-side — o browser nunca resolve o host do backend diretamente.
+  // Em produção (Vercel): defina API_BACKEND_URL=<url-do-railway> (sem NEXT_PUBLIC_).
+  // Em dev local / Docker: usa NEXT_PUBLIC_API_URL como fallback.
+  rewrites: async () => [
+    {
+      source: '/api/bff/:path*',
+      destination: `${(process.env.API_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000').replace(/\s/g, '')}/:path*`,
+    },
+  ],
+
   // Headers de segurança e performance
   headers: async () => {
     return [

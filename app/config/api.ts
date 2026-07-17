@@ -4,7 +4,9 @@
  */
 
 export const API_CONFIG = {
-  BASE_URL: (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000').trim(),
+  // Sempre relativo: o Next.js reescreve /api/bff/* para o backend (server-side).
+  // Isso evita que o browser resolva o host do backend diretamente.
+  BASE_URL: '/api/bff',
   ENDPOINTS: {
     // Autenticação
     USER_CREATE: '/user',
