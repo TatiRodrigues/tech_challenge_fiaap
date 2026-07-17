@@ -39,9 +39,12 @@ export const loginUser = createAsyncThunk(
       
       console.log('[loginUser thunk] Storing user:', user);
       
-      // Salvar user em localStorage
+      // Salvar user e token em localStorage + cookie (lido pelo middleware Edge)
       if (typeof window !== 'undefined' && user) {
         localStorage.setItem('currentUser', JSON.stringify(user));
+        // Cookie lido pelo middleware para proteção server-side de rotas
+        const maxAge = 12 * 60 * 60; // 12h — mesmo TTL do JWT
+        document.cookie = `auth_token=${token}; path=/; max-age=${maxAge}; SameSite=Strict`;
       }
       
       return {
@@ -82,6 +85,10 @@ export const logoutUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await bankingApi.logout();
+      // Remove o cookie de autenticação
+      if (typeof document !== 'undefined') {
+        document.cookie = 'auth_token=; path=/; max-age=0; SameSite=Strict';
+      }
       return null;
     } catch (error: any) {
       return rejectWithValue(error.message || "Erro ao fazer logout");
