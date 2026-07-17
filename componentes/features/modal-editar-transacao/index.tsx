@@ -13,7 +13,7 @@ interface IAttachment {
 }
 
 interface Transaction {
-  id: number;
+  id: number | string;
   date: string;
   type: string;
   description: string;
