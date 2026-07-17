@@ -44,6 +44,20 @@ body {
     max-width: 250px;
 }
 
+/* Fix z-index: sidepanel must appear above fixed header on mobile */
+@media (max-width: 1199.98px) {
+    .app-sidepanel.sidepanel-visible .sidepanel-inner {
+        z-index: 1050 !important;
+    }
+    .app-sidepanel.sidepanel-visible .sidepanel-close {
+        z-index: 1051 !important;
+        top: 60px;
+    }
+    .sidepanel-visible .sidepanel-drop {
+        z-index: 1045 !important;
+    }
+}
+
 /* Fix dropdown menu sizing */
 .app-notifications-dropdown .dropdown-menu {
     max-width: 90vw;

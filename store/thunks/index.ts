@@ -16,15 +16,25 @@ export const loginUser = createAsyncThunk(
       const response = await bankingApi.login(payload);
       const token = response.result.token;
       
-      // User pode não estar na resposta, então criar um object básico
+      // Decodifica o JWT para obter o ID real do usuário (estável entre logins)
       let user = response.result.user;
       if (!user) {
-        user = {
-          id: 'temp-' + Date.now(),
-          email: payload.email,
-          username: payload.email.split('@')[0],
-          password: '',
-        };
+        try {
+          const jwtPayload = JSON.parse(atob(token.split('.')[1]));
+          user = {
+            id: jwtPayload.id || jwtPayload._id || jwtPayload.sub || payload.email,
+            email: jwtPayload.email || payload.email,
+            username: jwtPayload.username || payload.email.split('@')[0],
+            password: '',
+          };
+        } catch {
+          user = {
+            id: payload.email, // email como fallback estável
+            email: payload.email,
+            username: payload.email.split('@')[0],
+            password: '',
+          };
+        }
       }
       
       console.log('[loginUser thunk] Storing user:', user);
