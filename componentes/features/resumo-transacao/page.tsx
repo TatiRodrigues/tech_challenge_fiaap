@@ -35,16 +35,12 @@ export default function ResumoTransacao({ user }: ResumoTransacaoProps) {
 	const PAGE_SIZE = 5;
 
 	useEffect(() => {
-		fetch('/transactions.json')
-			.then(res => res.json())
-			.then(data => {
-				setTransactions(data.transactions || []);
-			})
-			.catch(err => {
-				console.warn('Erro ao carregar transações:', err);
-				setTransactions([]);
-			})
-			.finally(() => setIsLoading(false));
+		const userRaw = localStorage.getItem('currentUser');
+		const userId = userRaw ? JSON.parse(userRaw)?.id : null;
+		const key = userId ? `user_transactions_${userId}` : 'user_transactions';
+		const stored = localStorage.getItem(key);
+		setTransactions(stored ? JSON.parse(stored) : []);
+		setIsLoading(false);
 	}, []);
 
 	const { monthlyData, monthlyTransactions } = useMemo(() => {

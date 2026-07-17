@@ -104,26 +104,12 @@ export default function ListarTransacoesClient() {
 
   // Carregar transações ao iniciar
   useEffect(() => {
-    const loadTransactions = async () => {
-      try {
-        // Sempre busca o JSON base (seed data)
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000);
-        const res = await fetch('/transactions.json', { signal: controller.signal });
-        clearTimeout(timeoutId);
-        const data = await res.json();
-        const seedTxs: Transaction[] = data.transactions || [];
-
-        // Mescla com transações adicionadas pelo usuário (chave separada)
-        const userTxsRaw = localStorage.getItem('user_transactions');
-        const userTxs: Transaction[] = userTxsRaw ? JSON.parse(userTxsRaw) : [];
-
-        setTransactions([...seedTxs, ...userTxs]);
-      } catch {
-        // Fallback: só user transactions se o fetch falhar
-        const userTxsRaw = localStorage.getItem('user_transactions');
-        setTransactions(userTxsRaw ? JSON.parse(userTxsRaw) : []);
-      }
+    const loadTransactions = () => {
+      const userRaw = localStorage.getItem('currentUser');
+      const userId = userRaw ? JSON.parse(userRaw)?.id : null;
+      const key = userId ? `user_transactions_${userId}` : 'user_transactions';
+      const stored = localStorage.getItem(key);
+      setTransactions(stored ? JSON.parse(stored) : []);
       setIsLoading(false);
     };
     loadTransactions();
@@ -192,6 +178,9 @@ export default function ListarTransacoesClient() {
     const [year, month, day] = newTransaction.date.split('-');
     const now = new Date();
     const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), now.getHours(), now.getMinutes(), now.getSeconds());
+    const userRaw = localStorage.getItem('currentUser');
+    const userId = userRaw ? JSON.parse(userRaw)?.id : null;
+    const TX_KEY = userId ? `user_transactions_${userId}` : 'user_transactions';
     const transaction: Transaction = {
       id: transactions.length > 0 ? Math.max(...transactions.map(t => typeof t.id === 'number' ? t.id : 0)) + 1 : 1,
       date: date.toISOString(),
@@ -204,9 +193,9 @@ export default function ListarTransacoesClient() {
     const updated = [...transactions, transaction];
     setTransactions(updated);
     // Persiste apenas as adicionadas pelo usuário
-    const userTxsRaw = localStorage.getItem('user_transactions');
+    const userTxsRaw = localStorage.getItem(TX_KEY);
     const userTxs: Transaction[] = userTxsRaw ? JSON.parse(userTxsRaw) : [];
-    localStorage.setItem('user_transactions', JSON.stringify([...userTxs, transaction]));
+    localStorage.setItem(TX_KEY, JSON.stringify([...userTxs, transaction]));
     setShowModal(false);
     resetModal();
   };
@@ -220,13 +209,16 @@ export default function ListarTransacoesClient() {
     if (!selectedTransaction) return;
     const updated = transactions.map(t => t.id === selectedTransaction.id ? { ...t, ...updatedData } : t);
     setTransactions(updated);
-    // Persiste edição em user_transactions
-    const userTxsRaw = localStorage.getItem('user_transactions');
+    // Persiste edição em user_transactions por usuário
+    const userRaw = localStorage.getItem('currentUser');
+    const userId = userRaw ? JSON.parse(userRaw)?.id : null;
+    const TX_KEY = userId ? `user_transactions_${userId}` : 'user_transactions';
+    const userTxsRaw = localStorage.getItem(TX_KEY);
     if (userTxsRaw) {
       const userTxs: Transaction[] = JSON.parse(userTxsRaw).map((t: Transaction) =>
         t.id === selectedTransaction.id ? { ...t, ...updatedData } : t
       );
-      localStorage.setItem('user_transactions', JSON.stringify(userTxs));
+      localStorage.setItem(TX_KEY, JSON.stringify(userTxs));
     }
     setShowEditModal(false);
     setSelectedTransaction(null);
@@ -238,11 +230,13 @@ export default function ListarTransacoesClient() {
     if (transactionToDelete !== null) {
       const updated = transactions.filter(t => t.id !== transactionToDelete);
       setTransactions(updated);
-      // Remove da lista de user_transactions se for transação do usuário
-      const userTxsRaw = localStorage.getItem('user_transactions');
+      const userRaw = localStorage.getItem('currentUser');
+      const userId = userRaw ? JSON.parse(userRaw)?.id : null;
+      const TX_KEY = userId ? `user_transactions_${userId}` : 'user_transactions';
+      const userTxsRaw = localStorage.getItem(TX_KEY);
       if (userTxsRaw) {
         const userTxs: Transaction[] = JSON.parse(userTxsRaw).filter((t: Transaction) => t.id !== transactionToDelete);
-        localStorage.setItem('user_transactions', JSON.stringify(userTxs));
+        localStorage.setItem(TX_KEY, JSON.stringify(userTxs));
       }
       setShowDeleteConfirmModal(false);
       setTransactionToDelete(null);
