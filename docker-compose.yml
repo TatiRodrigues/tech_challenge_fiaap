@@ -1,82 +1,72 @@
-﻿services:
-  # Banco de dados MongoDB
+services:
+  # MongoDB
   mongo:
-    image: mongo:4.4
-    container_name: tech-challenge-mongo
+    image: mongo:6
+    container_name: alecrim-mongo
     ports:
-      - "27017:27017"
+      - '27017:27017'
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=senha123
+      - MONGO_INITDB_DATABASE=tech-challenge
     volumes:
       - mongo-data:/data/db
     restart: unless-stopped
     networks:
-      - tech-challenge-network
+      - alecrim-network
     healthcheck:
-      test: ["CMD-SHELL", "mongosh --eval \"db.runCommand('ping').ok\" || mongo --eval \"db.runCommand('ping').ok\""]
+      test: ["CMD-SHELL", "mongosh --quiet --eval \"db.adminCommand('ping').ok\" || mongo --quiet --eval \"db.adminCommand('ping').ok\""]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 20s
 
-  # Backend BFF - Desenvolvimento (Porta 3000)
+  # BFF Node.js
   bff:
     build:
       context: ../tech-challenge-2
       dockerfile: Dockerfile.dev
-    container_name: tech-challenge-bff
+    container_name: alecrim-bff
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=development
       - PORT=3000
       - MONGO_URI=mongodb://admin:senha123@mongo:27017/tech-challenge?authSource=admin
-      - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - ../tech-challenge-2:/usr/src/app
-      - /usr/src/app/node_modules
     depends_on:
       mongo:
         condition: service_healthy
     restart: unless-stopped
     networks:
-      - tech-challenge-network
-    command: npm run dev -- --legacy-watch
+      - alecrim-network
     healthcheck:
-      test: ["CMD-SHELL", "node -e \"require('http').get('http://localhost:3000/', (r) => process.exit(0)).on('error', () => process.exit(1))\""]
-      interval: 10s
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://localhost:3000/health',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))\""]
+      interval: 15s
       timeout: 8s
-      retries: 15
+      retries: 10
       start_period: 60s
 
-  # Frontend Next.js - Desenvolvimento (Porta 3001)
-  # Sem volume mounts para evitar problemas de permissao no Windows
-  # Hot-reload nao disponivel; use --build para recompilar apos mudancas
+  # Frontend Next.js
   app:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: tech-challenge-app
+    container_name: alecrim-app
     ports:
-      - "3001:3001"
+      - '3001:3001'
     environment:
       - NODE_ENV=development
-      # URL interna do container bff (server-side; sem NEXT_PUBLIC_)
+      - PORT=3001
       - API_BACKEND_URL=http://bff:3000
-      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      bff:
+        condition: service_healthy
     restart: unless-stopped
     networks:
-      - tech-challenge-network
-    healthcheck:
-      test: ["CMD-SHELL", "node -e \"require('http').get('http://localhost:3001', (r) => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))\""]
-      interval: 15s
-      timeout: 8s
-      retries: 10
-      start_period: 90s
+      - alecrim-network
 
 networks:
-  tech-challenge-network:
+  alecrim-network:
     driver: bridge
 
 volumes:
