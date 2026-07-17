@@ -123,7 +123,7 @@ export default function FormularioTransacao() {
       }
 
       // Fetch existing transactions
-      const existing = localStorage.getItem('transactions');
+      const existing = localStorage.getItem('user_transactions');
       const transactions: Transaction[] = existing ? JSON.parse(existing) : [];
 
       // Create new transaction
@@ -155,7 +155,7 @@ export default function FormularioTransacao() {
 
       // Salvar transação
       transactions.push(newTransaction);
-      localStorage.setItem('transactions', JSON.stringify(transactions));
+      localStorage.setItem('user_transactions', JSON.stringify(transactions));
 
       // Emitir evento para outros microfrontends via MFE Bus
       MicrofrontendBus.getInstance().emit({

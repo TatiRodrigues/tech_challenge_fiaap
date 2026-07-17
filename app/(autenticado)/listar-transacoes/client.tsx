@@ -18,7 +18,7 @@ interface IAttachment {
 }
 
 interface Transaction {
-  id: number;
+  id: number | string;
   date: string;
   type: string;
   description: string;
@@ -44,7 +44,7 @@ export default function ListarTransacoesClient() {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
-  const [transactionToDelete, setTransactionToDelete] = useState<number | null>(null);
+  const [transactionToDelete, setTransactionToDelete] = useState<number | string | null>(null);
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
   const [filters, setFilters] = useState<Filters>({
@@ -193,7 +193,7 @@ export default function ListarTransacoesClient() {
     const now = new Date();
     const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), now.getHours(), now.getMinutes(), now.getSeconds());
     const transaction: Transaction = {
-      id: transactions.length > 0 ? Math.max(...transactions.map(t => t.id)) + 1 : 1,
+      id: transactions.length > 0 ? Math.max(...transactions.map(t => typeof t.id === 'number' ? t.id : 0)) + 1 : 1,
       date: date.toISOString(),
       type: newTransaction.type,
       description: newTransaction.description,
@@ -211,7 +211,7 @@ export default function ListarTransacoesClient() {
     resetModal();
   };
 
-  const editTransactions = (id: number) => {
+  const editTransactions = (id: number | string) => {
     const transaction = transactions.find(t => t.id === id);
     if (transaction) { setSelectedTransaction(transaction); setShowEditModal(true); }
   };
@@ -220,11 +220,19 @@ export default function ListarTransacoesClient() {
     if (!selectedTransaction) return;
     const updated = transactions.map(t => t.id === selectedTransaction.id ? { ...t, ...updatedData } : t);
     setTransactions(updated);
+    // Persiste edição em user_transactions
+    const userTxsRaw = localStorage.getItem('user_transactions');
+    if (userTxsRaw) {
+      const userTxs: Transaction[] = JSON.parse(userTxsRaw).map((t: Transaction) =>
+        t.id === selectedTransaction.id ? { ...t, ...updatedData } : t
+      );
+      localStorage.setItem('user_transactions', JSON.stringify(userTxs));
+    }
     setShowEditModal(false);
     setSelectedTransaction(null);
   };
 
-  const deleteTransactions = (id: number) => { setTransactionToDelete(id); setShowDeleteConfirmModal(true); };
+  const deleteTransactions = (id: number | string) => { setTransactionToDelete(id); setShowDeleteConfirmModal(true); };
 
   const confirmDelete = () => {
     if (transactionToDelete !== null) {
@@ -243,7 +251,7 @@ export default function ListarTransacoesClient() {
 
   const clearFilters = () => setFilters({ searchTerm: '', type: '', status: '', dateFrom: '', dateTo: '', sortBy: 'date', sortOrder: 'desc' });
 
-  const handleRemoveAttachment = (transactionId: number, attachmentId: string) => {
+  const handleRemoveAttachment = (transactionId: number | string, attachmentId: string) => {
     const updated = transactions.map(t =>
       t.id === transactionId
         ? { ...t, attachments: t.attachments?.filter(a => a.id !== attachmentId) }
