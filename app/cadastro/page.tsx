@@ -74,7 +74,11 @@ export default function RegisterPage() {
           router.push('/resumo-transacao');
         }, 1500);
       } else {
-        throw new Error(resultAction.payload?.message || 'Erro ao realizar cadastro');
+        const payload = resultAction.payload;
+        const msg = typeof payload === 'string'
+          ? payload
+          : (payload as any)?.message || 'Erro ao realizar cadastro';
+        throw new Error(msg);
       }
     } catch (err: any) {
       const errorMessage = err?.message || err?.toString() || 'Erro ao realizar cadastro. Tente novamente.';
