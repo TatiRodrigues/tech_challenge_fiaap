@@ -62,15 +62,19 @@ function addSecurityHeaders(response: NextResponse): NextResponse {
   }
 
   // Content Security Policy
+  // Todos os assets estáticos (Bootstrap, Bootstrap Icons) são servidos localmente.
+  // connect-src inclui * para permitir chamadas à API externa (Railway, etc.)
+  const apiBackendUrl = (process.env.API_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || '').trim();
+  const connectSrc = ['self', apiBackendUrl].filter(Boolean).map(u => u === 'self' ? "'self'" : u).join(' ');
   h.set(
     'Content-Security-Policy',
     [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // unsafe-* necessário para Next.js/React
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
-      "connect-src 'self'",
+      `connect-src ${connectSrc}`,
       "frame-ancestors 'none'",
     ].join('; ')
   );

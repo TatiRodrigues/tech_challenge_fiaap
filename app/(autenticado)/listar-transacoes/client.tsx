@@ -209,17 +209,15 @@ export default function ListarTransacoesClient() {
     if (!selectedTransaction) return;
     const updated = transactions.map(t => t.id === selectedTransaction.id ? { ...t, ...updatedData } : t);
     setTransactions(updated);
-    // Persiste edição em user_transactions por usuário
     const userRaw = localStorage.getItem('currentUser');
     const userId = userRaw ? JSON.parse(userRaw)?.id : null;
     const TX_KEY = userId ? `user_transactions_${userId}` : 'user_transactions';
     const userTxsRaw = localStorage.getItem(TX_KEY);
-    if (userTxsRaw) {
-      const userTxs: Transaction[] = JSON.parse(userTxsRaw).map((t: Transaction) =>
-        t.id === selectedTransaction.id ? { ...t, ...updatedData } : t
-      );
-      localStorage.setItem(TX_KEY, JSON.stringify(userTxs));
-    }
+    const userTxs: Transaction[] = userTxsRaw ? JSON.parse(userTxsRaw) : transactions;
+    const updatedTxs = userTxs.map((t: Transaction) =>
+      t.id === selectedTransaction.id ? { ...t, ...updatedData } : t
+    );
+    localStorage.setItem(TX_KEY, JSON.stringify(updatedTxs));
     setShowEditModal(false);
     setSelectedTransaction(null);
   };
