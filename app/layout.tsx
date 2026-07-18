@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         <title>Alecrim Wallet - o seu gerenciador de transações</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
+        <link rel="stylesheet" href="/bootstrap-icons.css" />
         <link rel="stylesheet" href="/responsive-fix.css" />
       </head>
 
